@@ -6,7 +6,9 @@ public class Mortar : MonoBehaviour
 {
     public GameObject target;
     public Transform pivot;
-    public Animation attack_anim;
+    public Animator anim;
+    public float delay;
+    public float cooldown;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,12 +18,15 @@ public class Mortar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target == null)
+        if (target != null && delay <= 0)
+        {
+            Attack(target);
+        }
+        else
         {
             Idle();
-        }
-        else {
-            //Attack(target);
+            delay -= Time.deltaTime;
+            anim.SetBool("Attack", false);
         }
     }
     public void Idle() {
@@ -29,7 +34,8 @@ public class Mortar : MonoBehaviour
     }
 
     public void Attack(GameObject target) {
-        attack_anim.Play();
+        anim.SetBool("Attack", true);
+        delay = cooldown;
     }
     private void OnTriggerEnter(Collider other)
     {
