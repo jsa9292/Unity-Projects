@@ -60,8 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\UImanager.cs" />
-    <Compile Include="Assets\followMouse.cs" />
+    <Compile Include="Assets\FollowMouse.cs" />
     <Compile Include="Assets\StartAnimation.cs" />
+    <Compile Include="Assets\Italicizable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

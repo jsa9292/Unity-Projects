@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class followMouse : MonoBehaviour
+public class FollowMouse : MonoBehaviour
 {
     public float depth;
     // Start is called before the first frame update

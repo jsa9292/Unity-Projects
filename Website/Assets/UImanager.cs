@@ -5,60 +5,48 @@ using UnityEngine.UI;
 
 public class UImanager : MonoBehaviour
 {
-    public Transform EmptyText;
+    public RectTransform EmptyText;
     public Text currentDisplay;
     public Text prevDisplay;
     public Color invis;
     public Color vis;
-    private float time_interact;
+    private float lerp_val;
     public float display_delay;
+    public float vis_speed;
+    public float invis_speed;
 
-
-    private RectTransform this_rt;
-    public float tilt_speed;
-    public float tilt_scale_speed;
-    public bool italic_select;
-    public Vector3 italic_rot;
-    public Vector3 italic_scale;
-    private float italic_progress;
     // Start is called before the first frame update
     void Start()
     {
-        this_rt = GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        time_interact += Time.deltaTime;
-        if (currentDisplay != null) currentDisplay.color = Color.Lerp(invis, vis, time_interact);
-        //if (prevDisplay != null) prevDisplay.color = Color.Lerp(vis, invis, time_interact);
-
-        if (italic_select)
+        lerp_val += Time.deltaTime;
+        EmptyText.sizeDelta = new Vector2(364, (Screen.height - 200) - 196*3);
+        if (currentDisplay != null) currentDisplay.color = Color.Lerp(invis, vis, lerp_val*vis_speed);
+        if (prevDisplay != null)
         {
-            italic_progress += Time.deltaTime;
-            this_rt.eulerAngles = Vector3.Lerp(Vector3.zero, italic_rot, italic_progress * tilt_speed);
-            this_rt.localScale = Vector3.Lerp(Vector3.one, italic_scale, italic_progress * tilt_scale_speed);
-        }
-        else
-        {
-            italic_progress += Time.deltaTime;
-            this_rt.eulerAngles = Vector3.Lerp(italic_rot, Vector3.zero, italic_progress * tilt_speed);
-            this_rt.localScale = Vector3.Lerp(italic_scale, Vector3.one, italic_progress * tilt_scale_speed);
+            prevDisplay.color = Color.Lerp(vis, invis, lerp_val*invis_speed);
+            if(lerp_val > 1f) prevDisplay.enabled = false;
         }
     }
     public void MenuButtonClicked(Text targetText) {
+        if (targetText == currentDisplay) return;
         int text_index = targetText.transform.GetSiblingIndex();
         EmptyText.SetSiblingIndex(text_index + 1);
         prevDisplay = currentDisplay;
+        if (prevDisplay != null)
+        {
+            prevDisplay.raycastTarget = false;
+        }
         currentDisplay = targetText;
-        if (prevDisplay != null) prevDisplay.enabled=false;
-        currentDisplay.enabled = true;
-        time_interact = -display_delay;
-    }
-    public void italicUpdate()
-    {
-        italic_progress = 0;
-        italic_select = true;
+        if (currentDisplay != null)
+        {
+            currentDisplay.enabled = true;
+            currentDisplay.raycastTarget = true;
+        }
+        lerp_val = -display_delay;
     }
 }
