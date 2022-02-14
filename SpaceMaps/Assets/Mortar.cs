@@ -34,6 +34,7 @@ public class Mortar : MonoBehaviour
     }
 
     public void Attack(GameObject target) {
+        transform.LookAt(target.transform);
         anim.SetBool("Attack", true);
         delay = cooldown;
     }

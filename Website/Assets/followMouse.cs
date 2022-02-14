@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class followMouse : MonoBehaviour
 {
+    public float depth;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,7 @@ public class followMouse : MonoBehaviour
     void Update()
     {
         mousePosition = Input.mousePosition;
-        mousePosition += Vector3.forward * 5f;
+        mousePosition += Vector3.forward * depth;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         transform.position = mousePosition;
         transform.Rotate(Vector3.up * 50f * Time.deltaTime);
