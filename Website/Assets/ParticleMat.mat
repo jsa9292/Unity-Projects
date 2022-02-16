@@ -8,16 +8,14 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ParticleMat
-  m_Shader: {fileID: 211, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 10720, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _COLORCOLOR_ON _EMISSION _FADING_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
-  disabledShaderPasses:
-  - ALWAYS
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -64,9 +62,10 @@ Material:
     - _CameraFadingEnabled: 1
     - _CameraFarFadeDistance: 0.5
     - _CameraNearFadeDistance: 0
+    - _ColorMask: 15
     - _ColorMode: 4
     - _Cull: 2
-    - _Cutoff: 0.674
+    - _Cutoff: 0
     - _DetailNormalMapScale: 1
     - _DistortionBlend: 0.5
     - _DistortionEnabled: 0
@@ -89,12 +88,19 @@ Material:
     - _SoftParticlesNearFadeDistance: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
     - _UVSec: 0
+    - _UseUIAlphaClip: 0
     - _ZWrite: 0
     m_Colors:
     - _CameraFadeParams: {r: 0, g: 2, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorAddSubDiff: {r: -1, g: 0, b: 0, a: 0}
+    - _EmisColor: {r: 0.2, g: 0.2, b: 0.2, a: 0}
     - _EmissionColor: {r: 0.16301486, g: 0.16301486, b: 0.16301486, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
