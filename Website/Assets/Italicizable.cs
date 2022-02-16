@@ -10,15 +10,14 @@ public class Italicizable : MonoBehaviour
     public float tilt_speed;
     public Vector3 italic_scale;
     public float tilt_scale_speed;
-    private RectTransform this_rt;
+    public bool on;
 
     // Update is called once per frame
     void Update()
     {
-        if (this_rt == null) this_rt = GetComponent<RectTransform>();
         GameObject clicked = EventSystem.current.currentSelectedGameObject;
         //if (clicked != null && clicked.transform.parent.name == "UI_Graphics") {
-            if (EventSystem.current.currentSelectedGameObject == gameObject)
+            if (on)
             {
                 italic_progress += Time.deltaTime;
             }
@@ -29,7 +28,7 @@ public class Italicizable : MonoBehaviour
         //}
         italic_progress = Mathf.Clamp(italic_progress, 0f, 1f);
 
-        this_rt.eulerAngles = Vector3.Lerp(Vector3.zero, italic_rot, italic_progress * tilt_speed);
-        this_rt.localScale = Vector3.Lerp(Vector3.one, italic_scale, italic_progress * tilt_scale_speed);
+        transform.localEulerAngles = Vector3.Lerp(Vector3.zero, italic_rot, italic_progress);
+        transform.localScale = Vector3.Lerp(Vector3.one, italic_scale, 1-Mathf.Sin(Mathf.PI / 2 + Mathf.PI/2*italic_progress));
     }
 }
