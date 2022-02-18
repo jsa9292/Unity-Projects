@@ -29,7 +29,7 @@ public class UImanager : MonoBehaviour
     {
         //resizing screen scale elements
         if (canvas.sizeDelta != canvas_size) {
-            SnakeImage.sizeDelta = new Vector2(canvas.sizeDelta.x / 2, 664*canvas.sizeDelta.x/2/1501);
+            //SnakeImage.sizeDelta = new Vector2(canvas.sizeDelta.x / 2, 664*canvas.sizeDelta.x/2/1501);
             EmptyText.sizeDelta = new Vector2(364, (canvas.sizeDelta.y - 200) - (110 * 3));
             canvas_size = canvas.sizeDelta;
         }
