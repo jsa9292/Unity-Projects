@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class StartAnimation : MonoBehaviour
 {
-    public RectTransform target_rt;
     public float start_speed;
+    private RectTransform rt;
     // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        transform.position += (target_rt.position - transform.position) * start_speed * Time.deltaTime;
-        
+        rt = GetComponent<RectTransform>();
+    }
+    void FixedUpdate()
+    {
+        rt.localPosition /= 0.9f;
     }
 }

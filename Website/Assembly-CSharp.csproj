@@ -63,6 +63,10 @@
     <Compile Include="Assets\Italicizable.cs" />
     <Compile Include="Assets\StartAnimation.cs" />
     <Compile Include="Assets\FollowMouse.cs" />
+    <Compile Include="Assets\ParticleControl.cs" />
+    <Compile Include="Assets\SymbolAction.cs" />
+    <Compile Include="Assets\BuildingAction.cs" />
+    <Compile Include="Assets\EggsAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

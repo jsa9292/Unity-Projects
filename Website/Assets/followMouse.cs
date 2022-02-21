@@ -19,6 +19,5 @@ public class FollowMouse : MonoBehaviour
         mousePosition += Vector3.forward * depth;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         transform.position = mousePosition;
-        transform.Rotate(Vector3.up * 50f * Time.deltaTime);
     }
 }
