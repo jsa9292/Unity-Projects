@@ -61,6 +61,8 @@
     <Compile Include="Assets\EggsAction.cs" />
     <Compile Include="Assets\ParticleControl.cs" />
     <Compile Include="Assets\BuildingAction.cs" />
+    <Compile Include="Assets\CanvasControl.cs" />
+    <Compile Include="Assets\Cursor_Control.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
