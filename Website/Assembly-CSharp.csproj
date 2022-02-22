@@ -57,7 +57,7 @@
     <Compile Include="Assets\UImanager.cs" />
     <Compile Include="Assets\Italicizable.cs" />
     <Compile Include="Assets\StartAnimation.cs" />
-    <Compile Include="Assets\followMouse.cs" />
+    <Compile Include="Assets\FollowMouse.cs" />
     <Compile Include="Assets\EggsAction.cs" />
     <Compile Include="Assets\ParticleControl.cs" />
     <Compile Include="Assets\BuildingAction.cs" />

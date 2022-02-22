@@ -39,7 +39,7 @@ public class UImanager : MonoBehaviour
         if (prevDisplay != null)
         {
             prevDisplay.color = Color.Lerp(vis, invis, lerp_val * invis_speed);
-            if (lerp_val > 1f) prevDisplay.transform.parent.gameObject.SetActive(false);
+            if (lerp_val > 1f) prevDisplay.transform.parent.parent.gameObject.SetActive(false);
         }
         if (currentDisplay != null)
         {
