@@ -9,6 +9,7 @@ public class BuildingAction : MonoBehaviour
     public float mouse_rot_mag;
     private Vector3 initial_rot;
     private Vector3 initial_mouse;
+    public Vector3 start_pos;
     // Update is called once per frame
     void Update()
     {
