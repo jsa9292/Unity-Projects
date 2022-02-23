@@ -26,14 +26,16 @@ public class UImanager : MonoBehaviour
     {
         canvas_size = canvas.sizeDelta;
         Reset();
-        if (cursor != null)
-        {
-            Cursor.visible = false;
-        }
     }
+    public bool ThisIsMobile;
     // Update is called once per frame
     void Update()
     {
+        if (ThisIsMobile)
+        {
+            Cursor.visible = true;
+        }
+        else Cursor.visible = false;
         if (cursor != null) cursor.position = Input.mousePosition;
         //resizing screen scale elements
         if (canvas.sizeDelta != canvas_size) {
