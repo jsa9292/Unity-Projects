@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class BuildingAction : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class BuildingAction : MonoBehaviour
     private Vector3 initial_rot;
     private Vector3 initial_mouse;
     public Vector3 start_pos;
+    private bool rot_active;
     // Update is called once per frame
     void Update()
     {
@@ -18,13 +20,9 @@ public class BuildingAction : MonoBehaviour
             initial_rot = transform.localEulerAngles;
             initial_mouse = Input.mousePosition;
         }
-        if (Input.GetMouseButtonUp(0))
-        {
-            initial_rot = transform.localEulerAngles;
-            timer = 0f;
-
-        }
-        if (Input.GetMouseButton(0))
+        
+        GameObject current = EventSystem.current.currentSelectedGameObject;
+        if (Input.GetMouseButton(0) && current == null)
         {
             Vector3 delta_mouse = initial_mouse - Input.mousePosition;
             Vector3 rot_from_mouse = new Vector3(0f, delta_mouse.x / Screen.width, 0f);
@@ -32,8 +30,8 @@ public class BuildingAction : MonoBehaviour
         }
         else
         {
-            timer += Time.deltaTime;
-            transform.localEulerAngles = initial_rot + Vector3.up * timer * idle_rot_mag;
+            transform.localEulerAngles += Vector3.up* Time.deltaTime * idle_rot_mag;
         }
+        
     }
 }

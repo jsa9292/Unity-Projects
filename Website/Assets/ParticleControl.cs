@@ -25,8 +25,6 @@ public class ParticleControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ps_sm.mesh = mesh_list[scan_index];
-        ps_sm.texture = texture_list[scan_index];
         transform.localEulerAngles += Vector3.up * rotation_speed * Time.deltaTime;
         timer += Time.deltaTime;
         if (timer > particle_duration || particle_off)
@@ -42,6 +40,9 @@ public class ParticleControl : MonoBehaviour
             timer = 0;
             scan_index += 1;
             scan_index = scan_index % 4;
+            ps_sm.mesh = mesh_list[scan_index];
+            setTexture(texture_list[scan_index]);
+
         } 
         
 
@@ -50,5 +51,10 @@ public class ParticleControl : MonoBehaviour
         else ps_sm.normalOffset -= Time.deltaTime * change_speed;
 
         ps_sm.normalOffset = Mathf.Clamp(ps_sm.normalOffset, 0, change_duration * change_speed);
+    }
+    public void setTexture(Texture2D tex)
+    {
+        ps_sm.texture = tex;
+
     }
 }

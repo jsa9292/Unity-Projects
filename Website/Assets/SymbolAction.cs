@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SymbolAction : MonoBehaviour
 {
@@ -21,18 +22,17 @@ public class SymbolAction : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             initial_rot = transform.localEulerAngles;
-            timer = 0f;
 
         }
-        if (Input.GetMouseButton(0))
+        GameObject current = EventSystem.current.currentSelectedGameObject;
+        if (Input.GetMouseButton(0) && current == null)
         {
             Vector3 delta_mouse = initial_mouse - Input.mousePosition;
             Vector3 rot_from_mouse = new Vector3(-delta_mouse.y / Screen.height, delta_mouse.x / Screen.width, 0f);
             transform.localEulerAngles = initial_rot + rot_from_mouse * mouse_rot_mag;
         }
         else {
-            timer += Time.deltaTime;
-            transform.localEulerAngles = initial_rot + Vector3.up * Mathf.Sin(timer*idle_rot_freq) * idle_rot_mag;
+            transform.localEulerAngles +=  Vector3.up * Mathf.Sin(Time.realtimeSinceStartup*idle_rot_freq) * idle_rot_mag;
         }
     }
 }

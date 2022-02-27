@@ -9,13 +9,17 @@ public class EggsAction : MonoBehaviour
     public float noise_magnitude;
     private Rigidbody rb;
     private float timer;
+    private Vector3 initialPos;
+    private Vector3 initialRot;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         rb.centerOfMass -= Vector3.up * 0.5f;
         target_pos = transform.parent.position;
         timer = Random.Range(0f, 15f);
+        initialPos = transform.position;
+        initialRot = transform.localEulerAngles;
     }
 
     // Update is called once per frame
@@ -28,12 +32,12 @@ public class EggsAction : MonoBehaviour
         else direction = -Vector3.up;
         Vector3 noise = new Vector3 (Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
         Vector3 forceSum = direction * magnitude + noise * noise_magnitude;
-        if (transform.position.y < -4f) forceSum = Vector3.up;
-        if (transform.position.y > 4f) forceSum = -Vector3.up;
-        if (transform.position.x < -2f) forceSum = Vector3.left;
-        if (transform.position.x > 2f) forceSum = -Vector3.left;
 
         rb.AddForce(forceSum);
-        rb.drag = (Mathf.Sin(Time.realtimeSinceStartup/10f)+1)/2f;
+    }
+    private void OnEnable()
+    {
+        transform.position = initialPos;
+        transform.localEulerAngles = initialRot;
     }
 }
