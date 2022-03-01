@@ -334,6 +334,21 @@
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.5.7\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
+    <Reference Include="LZ4Sharp">
+      <HintPath>Assets\AzureKinectExamples\KinectScripts\LZ4Sharp\LZ4Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Intel.RealSense">
+      <HintPath>Assets\AzureKinectExamples\SDK\RealSenseSDK2.0\Plugins\Intel.RealSense.dll</HintPath>
+    </Reference>
+    <Reference Include="Kinect2UnityWrapper">
+      <HintPath>Assets\AzureKinectExamples\SDK\KinectSDK2.0\Plugins\Kinect2UnityWrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Kinect.Sensor">
+      <HintPath>Assets\AzureKinectExamples\SDK\Kinect4AzureSDK\Plugins\Microsoft.Azure.Kinect.Sensor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>Assets\AzureKinectExamples\SDK\Kinect4AzureSDK\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
