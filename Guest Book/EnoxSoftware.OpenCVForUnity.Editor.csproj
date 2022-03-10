@@ -53,8 +53,8 @@
     <UnityVersion>2021.1.9f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\OpenCVForUnity\Editor\OpenCVForUnityIOSBuildPostprocessor.cs" />
     <Compile Include="Assets\OpenCVForUnity\Editor\OpenCVForUnityResetDebugMode.cs" />
+    <Compile Include="Assets\OpenCVForUnity\Editor\OpenCVForUnityIOSBuildPostprocessor.cs" />
     <Compile Include="Assets\OpenCVForUnity\Editor\OpenCVForUnityMenuItem.cs" />
   </ItemGroup>
   <ItemGroup>

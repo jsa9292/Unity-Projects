@@ -54,90 +54,132 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\MultiScene\LoadFirstLevel.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Filters\JointVelocitiesFilter.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectNetTools.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\PhotoBoothController.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectManager.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\PoseDetectionDemo\Scripts\StaticPoseDetector.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\FittingRoomDemo\Scripts\ModelSelector.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\SceneMeshRendererGpu.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\InteractionDemo\Scripts\GrabDropScript.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalByDist.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundUserBodyImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundColorImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectEventManager.cs" />
     <Compile Include="Assets\FollowTransform.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Cameras\Scripts\ProtectCameraFromWallClip.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\Kinect4AzureSyncher.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\ForegroundBlendRenderer.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Scripts\ColorFade.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\AvatarScaler.cs" />
+    <Compile Include="Assets\FaceTrackerExample\FaceTracker\ShapeModel.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\UserSkeletonCollider.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\VariousDemos\Scripts\SimpleHolographicCamera.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecificContent.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\NetClientInterface.cs" />
+    <Compile Include="Assets\FaceTrackerExample\FaceTrackerARExample\FaceTrackerARExample.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectNetServer.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\GestureDemo\Scripts\CubeGestureListener.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\PoseDetectionDemo\Scripts\DynamicPoseDetector.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\FittingRoomDemo\Scripts\UserBodyBlender.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectUserBodyMerger.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\BackgroundRemovalDemo\Scripts\UserImageMover.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\ForegroundToRawImage.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\BallSpawner.cs" />
+    <Compile Include="Assets\FaceTrackerExample\FaceTrackerExample.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\BackgroundRemovalDemo\Scripts\ColorImageJointOverlayer.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\LinePainter.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\AvatarDemo\Scripts\OffsetNodeMover.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\MouseCameraOrbit.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Cameras\Scripts\PivotBasedCameraRig.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\DummyK4AInterface.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\DepthSpriteViewer.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalByBodyIndex.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\DepthIrFilterImage.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\MouseControl.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\SkeletonOverlayer.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\Kinect4AzureInterface.cs" />
+    <Compile Include="Assets\FaceTrackerExample\FaceTracker\FaceDetector.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\BlobDetectionDemo\Scripts\CollisionLogger.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\SensorPoseStartupEstimator.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundColorCamDepthImage.cs" />
+    <Compile Include="Assets\microbe generation demo\MeshExtrusion.cs" />
+    <Compile Include="Assets\FaceTrackerExample\WebCamTextureFaceTrackerExample\WebCamTextureFaceTrackerExample.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneUserControl2Axis.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundColorCamUserImage.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\KinectEventLogger.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\JointOrientationView.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\AvatarController.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\AvatarControllerClassic.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\MultiScene\RefreshGestureListeners.cs" />
+    <Compile Include="Assets\FaceTrackerExample\FaceTracker\FaceTracker.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectInterop.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundDepthImage.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalManager.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\SimpleGestureListener.cs" />
+    <Compile Include="Assets\FaceTrackerExample\ShowLicense.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\CubemanController.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\RecorderDemo\Scripts\PlayerDetectorController.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\RealSenseInterface.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Filters\JointPositionsFilter.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BodySlicer.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\UserMeshRenderer.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\Kinect2Interface.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Filters\MahonyAHRS.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\FollowUserJointPose.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Scripts\MeshTrailDrawer.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Filters\JointVelocitiesFilter.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectManager.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Cameras\Scripts\AbstractTargetFollower.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\PoseDetectionDemo\Scripts\StaticPoseDetector.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\FittingRoomDemo\Scripts\ModelSelector.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectScripts\SceneMeshRendererGpu.cs" />
+    <Compile Include="Assets\AzureKinectExamples\KinectDemos\InteractionDemo\Scripts\GrabDropScript.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneController.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\PhotoShooter.cs" />
     <Compile Include="Assets\FaceTrackerExample\Texture2DFaceTrackerExample\Texture2DFaceTrackerExample.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\DepthImageViewer.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\AvatarScaler.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\MocapAnimatorDemo\Scripts\MocapPlayer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\GestureDemo\Scripts\ModelGestureListener.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTracker\ShapeModel.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Vehicles\Aircraft\Scripts\JetParticleEffect.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\JointPositionView.cs" />
     <Compile Include="Assets\FaceTrackerExample\FaceTracker\PatchModels.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\UserSkeletonCollider.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\VariousDemos\Scripts\SimpleHolographicCamera.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\PointCloudTarget.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\HandOverlayer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\BlobDetectionDemo\Scripts\BlobDetector.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\InteractionManager.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Filters\BoneOrientationConstraints.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\KinectFloorDetector.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\NetClientInterface.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTrackerARExample\FaceTrackerARExample.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Scripts\TrailShape.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\JointAngleCalculator.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Scripts\CustomAPI.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\SkeletonCollider.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Cameras\Scripts\AutoCam.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\BallMover.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalByGreenScreen.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\HandColorOverlayer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\InteractionInputModule.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\GestureDemo\Scripts\CubePresentationScript.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectNetServer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BodyDataRecorderPlayer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundInfraredImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\AvatarDemo\Scripts\UserAvatarMatcher.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\GestureDemo\Scripts\CubeGestureListener.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\PortraitBackground.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\DepthSpriteViewerMulticam.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\PoseDetectionDemo\Scripts\DynamicPoseDetector.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\FittingRoomDemo\Scripts\UserBodyBlender.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectUserBodyMerger.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\JointOverlayer.cs" />
+    <Compile Include="Assets\LookAndFollowTransform.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\RawDataTexture.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\BackgroundRemovalDemo\Scripts\UserImageMover.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\ForegroundToRawImage.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\BallSpawner.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTrackerExample.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\SceneMeshRenderer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\FittingRoomDemo\Scripts\CategorySelector.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalByBodyBounds.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\BackgroundRemovalDemo\Scripts\ColorImageJointOverlayer.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\LinePainter.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\EggSpawner.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\AvatarDemo\Scripts\OffsetNodeMover.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\VariousDemos\Scripts\HeightEstimator.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\DepthSensorInterface.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\MouseCameraOrbit.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\MocapAnimatorDemo\Scripts\MocapRecorder.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\DummyK4AInterface.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\DepthSpriteViewer.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalByBodyIndex.cs" />
     <Compile Include="Assets\EmissionManager.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\DepthIrFilterImage.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\MouseControl.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\GestureDemo\Scripts\ModelPresentationScript.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\SkeletonOverlayer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\FollowSensorTransform.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\Kinect4AzureInterface.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTracker\FaceDetector.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\BlobDetectionDemo\Scripts\CollisionLogger.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\SensorPoseStartupEstimator.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundColorCamDepthImage.cs" />
+    <Compile Include="Assets\randomTeleport.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectGestureManager.cs" />
-    <Compile Include="Assets\FaceTrackerExample\WebCamTextureFaceTrackerExample\WebCamTextureFaceTrackerExample.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\RecorderDemo\Scripts\BodyDataPlayerController.cs" />
     <Compile Include="Assets\FaceTrackerExample\FaceTracker\PatchModel.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\PoseModelHelperClassic.cs" />
@@ -147,44 +189,31 @@
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\UserMeshRendererGpu.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\HmdHeadMover.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\InteractionDemo\Scripts\GrabRotateScript.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundColorCamUserImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectStatusChecker.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\PoseDetectionDemo\Scripts\MovingPoseManager.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\KinectEventLogger.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\JointOrientationView.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\AvatarController.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\AvatarControllerClassic.cs" />
     <Compile Include="Assets\NodeSystem.cs" />
     <Compile Include="Assets\FaceTrackerExample\FaceTracker\FaceTrackerParams.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\MultiScene\RefreshGestureListeners.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTracker\FaceTracker.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectInterop.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneAudio.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\MultiScene\LoadLevelWithDelay.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundDepthImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\MultiCameraSetup\MultiCameraSetup.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalManager.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\EggMover.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\ScenePointCoordinates.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\MultiCameraSyncher.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\SensorSkeletonView.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\SimpleGestureListener.cs" />
-    <Compile Include="Assets\FaceTrackerExample\ShowLicense.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\CubemanController.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectDemos\RecorderDemo\Scripts\PlayerDetectorController.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Vehicles\Aircraft\Scripts\LandingGear.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Utility\ObjectResetter.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundColorCamInfraredImage.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\RealSenseInterface.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Filters\JointPositionsFilter.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\BodySlicer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\BlobDetectionDemo\Scripts\Blob.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\UserMeshRenderer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundDepthCamColorImage.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\Kinect2Interface.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\ForegroundToRenderer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\JumpTrigger.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\Filters\MahonyAHRS.cs" />
     <Compile Include="Assets\FaceTrackerExample\FaceTracker\MiniJSON.cs" />
-    <Compile Include="Assets\AzureKinectExamples\KinectScripts\FollowUserJointPose.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\AvatarDemo\Scripts\CameraPitchCorrector.cs" />
+    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\DepthSensorDescriptor.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\PoseModelHelper.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundStaticImage.cs" />
@@ -204,6 +233,7 @@
     <None Include="Assets\AzureKinectExamples\Resources\DilateShader.shader" />
     <None Include="Assets\AzureKinectExamples\Resources\UserMeshShader.shader" />
     <None Include="Assets\AzureKinectExamples\Resources\ColorBodyIndexShaderK2.compute" />
+    <None Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\AzureKinectExamples\SDK\Kinect4AzureSDK\Plugins\System.Runtime.CompilerServices.Unsafe.dll" />
     <None Include="Assets\AzureKinectExamples\KinectDemos\PointCloudDemo\VFX\DownloadMoreVFX.txt" />
     <None Include="Assets\AzureKinectExamples\_Readme\致盗版使用者-ToPiracyUsers.txt" />
@@ -863,8 +893,17 @@
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualEffectGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
@@ -872,8 +911,8 @@
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    <Reference Include="Unity.VisualEffectGraph.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
@@ -887,8 +926,20 @@
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.HighDefinition.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.HighDefinition.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="VSSettingsProvider">
       <HintPath>Library\ScriptAssemblies\VSSettingsProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.HighDefinition.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.HighDefinition.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
@@ -902,47 +953,44 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.State">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualEffectGraph.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualEffectGraph.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualEffectGraph.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Searcher.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.HighDefinition.Config.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.HighDefinition.Config.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.HighDefinition.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.HighDefinition.Runtime.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.HighDefinition.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.HighDefinition.Editor.dll</HintPath>
+    <Reference Include="Unity.VisualScripting.State">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
