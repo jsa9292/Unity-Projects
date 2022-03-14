@@ -56,65 +56,59 @@
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\MultiScene\LoadFirstLevel.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectNetTools.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\PhotoBoothController.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalByDist.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundUserBodyImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundColorImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectEventManager.cs" />
     <Compile Include="Assets\FollowTransform.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Cameras\Scripts\ProtectCameraFromWallClip.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\Kinect4AzureSyncher.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\ForegroundBlendRenderer.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Scripts\ColorFade.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\AvatarScaler.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTracker\ShapeModel.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleSower.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\MeshProcessing\SourceMesh.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\UserSkeletonCollider.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\VariousDemos\Scripts\SimpleHolographicCamera.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecificContent.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\NetClientInterface.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTrackerARExample\FaceTrackerARExample.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Bezier\SplineNode.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectNetServer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\GestureDemo\Scripts\CubeGestureListener.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\PoseDetectionDemo\Scripts\DynamicPoseDetector.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\FittingRoomDemo\Scripts\UserBodyBlender.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleFollowSpline.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectUserBodyMerger.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\BackgroundRemovalDemo\Scripts\UserImageMover.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\ForegroundToRawImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\BallSpawner.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTrackerExample.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\BackgroundRemovalDemo\Scripts\ColorImageJointOverlayer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\LinePainter.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Utils\MeshUtility.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\AvatarDemo\Scripts\OffsetNodeMover.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\MouseCameraOrbit.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Cameras\Scripts\PivotBasedCameraRig.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleGrowingRoot.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\MeshProcessing\SplineMeshTiling.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\DummyK4AInterface.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\DepthSpriteViewer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalByBodyIndex.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\DepthIrFilterImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\MouseControl.cs" />
+    <Compile Include="Assets\SplineScaler.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\SkeletonOverlayer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\Kinect4AzureInterface.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTracker\FaceDetector.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\BlobDetectionDemo\Scripts\CollisionLogger.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\SensorPoseStartupEstimator.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundColorCamDepthImage.cs" />
-    <Compile Include="Assets\microbe generation demo\MeshExtrusion.cs" />
-    <Compile Include="Assets\FaceTrackerExample\WebCamTextureFaceTrackerExample\WebCamTextureFaceTrackerExample.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneUserControl2Axis.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundColorCamUserImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\KinectEventLogger.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\JointOrientationView.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\AvatarController.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\AvatarControllerClassic.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Utils\CameraUtility.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\MultiScene\RefreshGestureListeners.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTracker\FaceTracker.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectInterop.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundDepthImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalManager.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Bezier\CurveSample.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\SimpleGestureListener.cs" />
-    <Compile Include="Assets\FaceTrackerExample\ShowLicense.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\CubemanController.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\RecorderDemo\Scripts\PlayerDetectorController.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\RealSenseInterface.cs" />
@@ -124,100 +118,91 @@
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\Kinect2Interface.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Filters\MahonyAHRS.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\FollowUserJointPose.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Scripts\MeshTrailDrawer.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Bezier\SplineSmoother.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\MeshProcessing\SplineExtrusion.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Filters\JointVelocitiesFilter.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectManager.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Cameras\Scripts\AbstractTargetFollower.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\PoseDetectionDemo\Scripts\StaticPoseDetector.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\FittingRoomDemo\Scripts\ModelSelector.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\SceneMeshRendererGpu.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\InteractionDemo\Scripts\GrabDropScript.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneController.cs" />
+    <Compile Include="Assets\X_button.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\PhotoShooter.cs" />
-    <Compile Include="Assets\FaceTrackerExample\Texture2DFaceTrackerExample\Texture2DFaceTrackerExample.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\DepthImageViewer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\MocapAnimatorDemo\Scripts\MocapPlayer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\GestureDemo\Scripts\ModelGestureListener.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Vehicles\Aircraft\Scripts\JetParticleEffect.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\JointPositionView.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTracker\PatchModels.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\PointCloudTarget.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\HandOverlayer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\BlobDetectionDemo\Scripts\BlobDetector.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\InteractionManager.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Filters\BoneOrientationConstraints.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\KinectFloorDetector.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Scripts\TrailShape.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\JointAngleCalculator.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Scripts\CustomAPI.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\SkeletonCollider.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Cameras\Scripts\AutoCam.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\BallMover.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalByGreenScreen.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\HandColorOverlayer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\InteractionInputModule.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\GestureDemo\Scripts\CubePresentationScript.cs" />
+    <Compile Include="Assets\flockGuiding.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BodyDataRecorderPlayer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundInfraredImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\AvatarDemo\Scripts\UserAvatarMatcher.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\PortraitBackground.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\DepthSpriteViewerMulticam.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Utils\UOUtility.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\OverlayDemo\Scripts\JointOverlayer.cs" />
     <Compile Include="Assets\LookAndFollowTransform.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\RawDataTexture.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleContortAlong.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\SceneMeshRenderer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\FittingRoomDemo\Scripts\CategorySelector.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundRemovalByBodyBounds.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\EggSpawner.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\VariousDemos\Scripts\HeightEstimator.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\DepthSensorInterface.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Bezier\CubicBezierCurve.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\MocapAnimatorDemo\Scripts\MocapRecorder.cs" />
-    <Compile Include="Assets\EmissionManager.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\MeshProcessing\MeshVertex.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\MeshProcessing\ExtrusionSegment.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\GestureDemo\Scripts\ModelPresentationScript.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\FollowSensorTransform.cs" />
     <Compile Include="Assets\randomTeleport.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\RopeBuilder.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectGestureManager.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\RecorderDemo\Scripts\BodyDataPlayerController.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTracker\PatchModel.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\PoseModelHelperClassic.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\FragmentLighting.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectUserManager.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\DepthSensorBase.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleTrack.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\UserMeshRendererGpu.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\HmdHeadMover.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\InteractionDemo\Scripts\GrabRotateScript.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\KinectStatusChecker.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\PoseDetectionDemo\Scripts\MovingPoseManager.cs" />
     <Compile Include="Assets\NodeSystem.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTracker\FaceTrackerParams.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneAudio.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Bezier\Spline.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\MeshProcessing\MeshBender.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\MultiScene\LoadLevelWithDelay.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\MultiCameraSetup\MultiCameraSetup.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\EggMover.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\ScenePointCoordinates.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\MultiCameraSyncher.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Samples\SensorSkeletonView.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Vehicles\Aircraft\Scripts\LandingGear.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\Utility\ObjectResetter.cs" />
+    <Compile Include="Assets\SplineMesh\Scripts\Example\ExampleTentacle.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundColorCamInfraredImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\BlobDetectionDemo\Scripts\Blob.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundDepthCamColorImage.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\ForegroundToRenderer.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\ColliderDemo\Scripts\JumpTrigger.cs" />
-    <Compile Include="Assets\FaceTrackerExample\FaceTracker\MiniJSON.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectDemos\AvatarDemo\Scripts\CameraPitchCorrector.cs" />
-    <Compile Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\Interfaces\DepthSensorDescriptor.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\PoseModelHelper.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\BackgroundStaticImage.cs" />
     <Compile Include="Assets\AzureKinectExamples\KinectScripts\SceneBlendRenderer.cs" />
+    <Compile Include="Assets\InitializeSphere.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AzureKinectExamples\Resources\UserHistImageShader.shader" />
@@ -233,7 +218,6 @@
     <None Include="Assets\AzureKinectExamples\Resources\DilateShader.shader" />
     <None Include="Assets\AzureKinectExamples\Resources\UserMeshShader.shader" />
     <None Include="Assets\AzureKinectExamples\Resources\ColorBodyIndexShaderK2.compute" />
-    <None Include="Assets\UnicoMeshTrail\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\AzureKinectExamples\SDK\Kinect4AzureSDK\Plugins\System.Runtime.CompilerServices.Unsafe.dll" />
     <None Include="Assets\AzureKinectExamples\KinectDemos\PointCloudDemo\VFX\DownloadMoreVFX.txt" />
     <None Include="Assets\AzureKinectExamples\_Readme\致盗版使用者-ToPiracyUsers.txt" />
@@ -286,6 +270,7 @@
     <None Include="Assets\Third-Party-Notices.txt" />
     <None Include="Assets\StreamingAssets\haarcascade_frontalface_alt.xml" />
     <None Include="Assets\AzureKinectExamples\Resources\ErodeShader.shader" />
+    <None Include="Assets\SplineMesh\Doc.txt" />
     <None Include="Assets\AzureKinectExamples\Resources\GradientShader.shader" />
     <None Include="Assets\AzureKinectExamples\Resources\MedianShader.shader" />
   </ItemGroup>
@@ -526,9 +511,6 @@
     </Reference>
     <Reference Include="Microsoft.Azure.Kinect.Sensor">
       <HintPath>Assets\AzureKinectExamples\SDK\Kinect4AzureSDK\Plugins\Microsoft.Azure.Kinect.Sensor.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenCVForUnityCSharpDLL">
-      <HintPath>Assets\OpenCVForUnity\org\OpenCVForUnityCSharpDLL.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Assets\AzureKinectExamples\SDK\Kinect4AzureSDK\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
@@ -994,14 +976,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="EnoxSoftware.OpenCVForUnity.Editor.csproj">
-      <Project>{9576887D-293C-061D-4E0C-918DC375AF19}</Project>
-      <Name>EnoxSoftware.OpenCVForUnity.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="EnoxSoftware.OpenCVForUnity.csproj">
-      <Project>{02C7C062-511F-4DA9-4DB2-B6CD2F265813}</Project>
-      <Name>EnoxSoftware.OpenCVForUnity</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

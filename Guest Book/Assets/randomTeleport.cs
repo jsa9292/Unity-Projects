@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class randomTeleport : MonoBehaviour
 {
-    private float timer = 0;
+    public float timer = 0;
     public float interval;
     public float distance;
     // Update is called once per frame
@@ -17,7 +17,7 @@ public class randomTeleport : MonoBehaviour
         }
     }
     void Teleport() {
-        Vector3 newDir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 1);
+        Vector3 newDir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
         transform.localPosition = newDir.normalized * distance;
     }
 }
