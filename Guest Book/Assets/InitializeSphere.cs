@@ -23,23 +23,19 @@ public class InitializeSphere : MonoBehaviour
         }
         if (vertices.Count == spline.nodes.Count-1)
         {
-            for (int i = 0; i < vertices.Count; i++)
+            int v_end = 0;
+            int v_start = 1;
+            spline.nodes[0].Position = vertices[v_start];
+            spline.nodes[0].Direction = vertices[v_end];
+            spline.nodes[0].Up = -Vector3.up;
+            for (int i = vertices.Count-1; i >= 0 ; i--)
             {
-                int v_start = i;
-                int v_end = (i + 1) % vertices.Count;
+                v_end = i;
+                v_start = (i + 1) % vertices.Count;
                 spline.nodes[i].Position = vertices[v_start];
                 spline.nodes[i].Direction = vertices[v_end];
                 spline.nodes[i].Up = offset;
             }
-            for (int i = 0; i < 1; i++)
-            {
-                int v_start = i;
-                int v_end = (i + 1) % vertices.Count;
-                spline.nodes[i].Position = vertices[v_start];
-                spline.nodes[i].Direction = vertices[v_end];
-                spline.nodes[i].Up = -Vector3.up;
-            }
-
         }
     }
     

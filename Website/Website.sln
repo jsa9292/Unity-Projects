@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmplifyShaderEditor.Samples.BuiltIn", "AmplifyShaderEditor.Samples.BuiltIn.csproj", "{BDFC1DBC-024A-C627-893D-B787D7A750CE}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{A27DEAAA-75DF-CAE3-3EEE-D785001AD828}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextMeshProEffect", "TextMeshProEffect.csproj", "{6A3B246F-12FB-9268-0DCE-70CFE83CC013}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmplifyShaderEditor", "AmplifyShaderEditor.csproj", "{D6FA3521-6875-657A-AC66-263DC4243B41}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextMeshProEffect.Editor", "TextMeshProEffect.Editor.csproj", "{41C2C1A1-5575-3FDE-F580-3CD57E246275}"
 EndProject
@@ -13,6 +17,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDFC1DBC-024A-C627-893D-B787D7A750CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDFC1DBC-024A-C627-893D-B787D7A750CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDFC1DBC-024A-C627-893D-B787D7A750CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDFC1DBC-024A-C627-893D-B787D7A750CE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A27DEAAA-75DF-CAE3-3EEE-D785001AD828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A27DEAAA-75DF-CAE3-3EEE-D785001AD828}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A27DEAAA-75DF-CAE3-3EEE-D785001AD828}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -21,6 +29,10 @@ Global
 		{6A3B246F-12FB-9268-0DCE-70CFE83CC013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A3B246F-12FB-9268-0DCE-70CFE83CC013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A3B246F-12FB-9268-0DCE-70CFE83CC013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6FA3521-6875-657A-AC66-263DC4243B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6FA3521-6875-657A-AC66-263DC4243B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6FA3521-6875-657A-AC66-263DC4243B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6FA3521-6875-657A-AC66-263DC4243B41}.Release|Any CPU.Build.0 = Release|Any CPU
 		{41C2C1A1-5575-3FDE-F580-3CD57E246275}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{41C2C1A1-5575-3FDE-F580-3CD57E246275}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41C2C1A1-5575-3FDE-F580-3CD57E246275}.Release|Any CPU.ActiveCfg = Release|Any CPU
