@@ -729,10 +729,6 @@
       <Project>{6A3B246F-12FB-9268-0DCE-70CFE83CC013}</Project>
       <Name>TextMeshProEffect</Name>
     </ProjectReference>
-    <ProjectReference Include="AmplifyShaderEditor.Samples.BuiltIn.csproj">
-      <Project>{BDFC1DBC-024A-C627-893D-B787D7A750CE}</Project>
-      <Name>AmplifyShaderEditor.Samples.BuiltIn</Name>
-    </ProjectReference>
     <ProjectReference Include="TextMeshProEffect.Editor.csproj">
       <Project>{41C2C1A1-5575-3FDE-F580-3CD57E246275}</Project>
       <Name>TextMeshProEffect.Editor</Name>

@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmplifyShaderEditor.Samples.BuiltIn", "AmplifyShaderEditor.Samples.BuiltIn.csproj", "{BDFC1DBC-024A-C627-893D-B787D7A750CE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{A27DEAAA-75DF-CAE3-3EEE-D785001AD828}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextMeshProEffect", "TextMeshProEffect.csproj", "{6A3B246F-12FB-9268-0DCE-70CFE83CC013}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BDFC1DBC-024A-C627-893D-B787D7A750CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDFC1DBC-024A-C627-893D-B787D7A750CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDFC1DBC-024A-C627-893D-B787D7A750CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDFC1DBC-024A-C627-893D-B787D7A750CE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A27DEAAA-75DF-CAE3-3EEE-D785001AD828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A27DEAAA-75DF-CAE3-3EEE-D785001AD828}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A27DEAAA-75DF-CAE3-3EEE-D785001AD828}.Release|Any CPU.ActiveCfg = Release|Any CPU
