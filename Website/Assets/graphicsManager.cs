@@ -8,6 +8,7 @@ public class graphicsManager : MonoBehaviour
     public ParticleControl pc;
     public Texture2D easter_egg;
     public List<GameObject> ui_Images;
+    public List<GameObject> GOs;
 
     public void uiImagePosition(int target_i) {
         for (int i = 0; i < ui_Images.Count; i++) {
@@ -18,6 +19,18 @@ public class graphicsManager : MonoBehaviour
         for (int i = 0; i < graphicAssets.childCount; i++)
         {
             graphicAssets.GetChild(i).gameObject.SetActive(i==target_i);
+        }
+    }
+    public void ActivateGO(int target_i) {
+        for (int i = 0; i < GOs.Count; i++) {
+            if(i== target_i) GOs[i].SetActive(true);
+        }
+    }
+    public void DeactivateGO(int target_i)
+    {
+        for (int i = 0; i < GOs.Count; i++)
+        {
+            if (i == target_i) GOs[i].SetActive(false);
         }
     }
     public void ParticleToggle(int t) {

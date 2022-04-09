@@ -28,7 +28,7 @@ public class UImanager : MonoBehaviour
     void Start()
     {
         canvas_size = canvas.sizeDelta;
-        Reset();
+        //Reset();
         if(cursor != null) cursorSet(cursor);
     }
     void cursorSet(Texture2D tex)
@@ -77,7 +77,7 @@ public class UImanager : MonoBehaviour
     private string ActiveButton;
     private void OnDisable()
     {
-        Reset();
+        //Reset();
     }
     public void Reset()
     {
