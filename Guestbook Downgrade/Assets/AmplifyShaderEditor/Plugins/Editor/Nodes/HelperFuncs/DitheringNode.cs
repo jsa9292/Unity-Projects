@@ -28,21 +28,13 @@ namespace AmplifyShaderEditor
 
 		private UpperLeftWidgetHelper m_upperLeftWidget = new UpperLeftWidgetHelper();
 
-		private InputPort m_texPort;
-		private InputPort m_ssPort;
-
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
 			AddInputPort( WirePortDataType.FLOAT, false, Constants.EmptyPortValue );
 			AddInputPort( WirePortDataType.SAMPLER2D, false, "Pattern");
 			m_inputPorts[ 1 ].CreatePortRestrictions( WirePortDataType.SAMPLER2D );
-			m_texPort = m_inputPorts[ 1 ];
 			AddInputPort( WirePortDataType.FLOAT4, false, "Screen Position" );
-
-			AddInputPort( WirePortDataType.SAMPLERSTATE, false, "SS" );
-			m_inputPorts[ 3 ].CreatePortRestrictions( WirePortDataType.SAMPLERSTATE );
-			m_ssPort = m_inputPorts[ 3 ];
 
 			AddOutputPort( WirePortDataType.FLOAT, Constants.EmptyPortValue );
 			m_textLabelWidth = 110;
@@ -56,9 +48,8 @@ namespace AmplifyShaderEditor
 		{
 			base.Destroy();
 			m_upperLeftWidget = null;
-			m_texPort = null;
-			m_ssPort = null;
 		}
+
 
 		public override void AfterCommonInit()
 		{
@@ -74,9 +65,9 @@ namespace AmplifyShaderEditor
 		public override void OnConnectedOutputNodeChanges( int outputPortId, int otherNodeId, int otherPortId, string name, WirePortDataType type )
 		{
 			base.OnConnectedOutputNodeChanges( outputPortId, otherNodeId, otherPortId, name, type );
-			if( !m_texPort.CheckValidType( type ) )
+			if( !m_inputPorts[ 1 ].CheckValidType( type ) )
 			{
-				m_texPort.FullDeleteConnections();
+				m_inputPorts[ 1 ].FullDeleteConnections();
 				UIUtils.ShowMessage( UniqueId, "Dithering node only accepts SAMPLER2D input type.\nTexture Object connected changed to " + type + ", connection was lost, please review and update accordingly.", MessageSeverity.Warning );
 			}
 		}
@@ -111,8 +102,7 @@ namespace AmplifyShaderEditor
 
 		private void UpdatePorts()
 		{
-			m_texPort.Visible = ( m_selectedPatternInt == 2 );
-			m_ssPort.Visible = ( m_selectedPatternInt == 2 );
+			m_inputPorts[ 1 ].Visible = ( m_selectedPatternInt == 2 );
 			m_inputPorts[ 2 ].Visible = m_customScreenPos;
 			m_sizeIsDirty = true;
 		}
@@ -235,7 +225,7 @@ namespace AmplifyShaderEditor
 				break;
 				case 2:
 				{
-					if( !m_texPort.IsConnected )
+					if( !m_inputPorts[ 1 ].IsConnected )
 					{
 						m_showErrorMessage = true;
 						m_errorMessageTypeIsError = NodeMessageType.Warning;
@@ -244,7 +234,7 @@ namespace AmplifyShaderEditor
 					} else
 					{
 						ParentGraph outsideGraph = UIUtils.CurrentWindow.OutsideGraph;
-						noiseTex = m_texPort.GeneratePortInstructions( ref dataCollector );
+						noiseTex = m_inputPorts[ 1 ].GeneratePortInstructions( ref dataCollector );
 						//GeneratePattern( ref dataCollector );
 						dataCollector.AddToUniforms( UniqueId, "float4 " + noiseTex + "_TexelSize;", dataCollector.IsSRP );
 #if UNITY_2018_1_OR_NEWER
@@ -253,15 +243,7 @@ namespace AmplifyShaderEditor
 						if( outsideGraph.SamplingMacros && !outsideGraph.IsStandardSurface )
 #endif
 						{
-							string sampler = string.Empty;
-							if( m_ssPort.IsConnected )
-							{
-								sampler = m_ssPort.GeneratePortInstructions( ref dataCollector );
-							}
-							else
-							{
-								sampler = GeneratorUtils.GenerateSamplerState( ref dataCollector, UniqueId, noiseTex, VariableMode.Create );
-							}
+							string sampler = GeneratorUtils.GenerateSamplerState( ref dataCollector, UniqueId, noiseTex );
 							//if( outsideGraph.IsSRP )
 							//	functionResult = dataCollector.AddFunctions( m_functionHeader, m_functionBody, varName, noiseTex + ", " + sampler, noiseTex + "_TexelSize" );
 							//else

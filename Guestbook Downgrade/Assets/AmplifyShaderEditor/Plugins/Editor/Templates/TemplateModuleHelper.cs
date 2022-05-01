@@ -70,9 +70,6 @@ namespace AmplifyShaderEditor
 		private TemplateAdditionalDirectivesHelper m_additionalDirectives = new TemplateAdditionalDirectivesHelper(" Additional Directives");
 
 		[SerializeField]
-		private RenderingPlatformOpHelper m_renderingPlatforms = new RenderingPlatformOpHelper();
-
-		[SerializeField]
 		private bool m_hasValidData = false;
 
 		[SerializeField]
@@ -332,14 +329,6 @@ namespace AmplifyShaderEditor
 			{
 				m_hasValidData = true;
 			}
-
-
-			if( module.RenderPlatformHelper.IsValid )
-			{
-				m_renderingPlatforms.SetupFromTemplate( module.RenderPlatformHelper );
-				m_hasValidData = true;
-			}
-
 		}
 
 		public void OnLogicUpdate( TemplateModulesData currentModule )
@@ -440,11 +429,6 @@ namespace AmplifyShaderEditor
 				m_additionalDirectives.Draw( owner , false);
 			}
 
-			if( currentModule.RenderPlatformHelper.IsValid )
-			{
-				m_renderingPlatforms.DrawNested( owner );
-			}
-
 			m_isDirty = m_isDirty ||
 						//m_additionalDefines.IsDirty ||
 						//m_additionalIncludes.IsDirty ||
@@ -481,8 +465,6 @@ namespace AmplifyShaderEditor
 			m_additionalPragmas = null;
 			m_additionalDirectives.Destroy();
 			m_additionalDirectives = null;
-			m_renderingPlatforms.Destroy();
-			m_renderingPlatforms = null;
 		}
 
 		public string GenerateAllModulesString( bool isSubShader )
@@ -500,6 +482,7 @@ namespace AmplifyShaderEditor
 
 				if( BlendOpHelper.BlendOpActive )
 					moduleBody += BlendOpHelper.CurrentBlendOp + "\n";
+
 			}
 
 			if( !AlphaToMaskHelper.IndependentModule )
@@ -528,7 +511,7 @@ namespace AmplifyShaderEditor
 			return moduleBody;
 		}
 
-		public void ReadFromString( TemplateModulesData modulesData, ref uint index, ref string[] nodeParams )
+		public void ReadFromString( ref uint index, ref string[] nodeParams )
 		{
 			try
 			{
@@ -589,7 +572,6 @@ namespace AmplifyShaderEditor
 			{
 				Debug.LogException( e );
 			}
-
 			if( UIUtils.CurrentShaderVersion() > 18103 )
 			{
 				try
@@ -641,27 +623,15 @@ namespace AmplifyShaderEditor
 			{
 				Debug.LogException( e );
 			}
-
 			try
 			{
-				m_shaderModelHelper.ReadFromString( modulesData, ref index, ref nodeParams );
+				m_shaderModelHelper.ReadFromString( ref index, ref nodeParams );
 			}
 			catch( Exception e )
 			{
 				Debug.LogException( e );
 			}
 
-			if( UIUtils.CurrentShaderVersion() > 18910 )
-			{
-				try
-				{
-					m_renderingPlatforms.ReadFromStringTemplate( ref index , ref nodeParams );
-				}
-				catch(Exception e)
-				{
-					Debug.Log( e );
-				}
-			}
 
 			if( UIUtils.CurrentShaderVersion() < 15312 )
 			{
@@ -706,7 +676,6 @@ namespace AmplifyShaderEditor
 					Debug.LogException( e );
 				}
 			}
-
 		}
 
 		public void WriteToString( ref string nodeInfo )
@@ -725,7 +694,6 @@ namespace AmplifyShaderEditor
 			m_depthOphelper.WriteToString( ref nodeInfo );
 			m_tagsHelper.WriteToString( ref nodeInfo );
 			m_shaderModelHelper.WriteToString( ref nodeInfo );
-			m_renderingPlatforms.WriteToStringTemplate( ref nodeInfo );
 
 			//m_additionalDefines.WriteToString( ref nodeInfo );
 			//m_additionalPragmas.WriteToString( ref nodeInfo );
@@ -752,7 +720,6 @@ namespace AmplifyShaderEditor
 		//public TemplateAdditionalDefinesHelper AdditionalDefines { get { return m_additionalDefines; } }
 		//public TemplateAdditionalPragmasHelper AdditionalPragmas { get { return m_additionalPragmas; } }
 		public TemplateAdditionalDirectivesHelper AdditionalDirectives { get { return m_additionalDirectives; } }
-		public RenderingPlatformOpHelper RenderingPlatforms { get { return m_renderingPlatforms; } }
 		public bool AllModulesMode { get { return m_allModulesMode; } }
 		public bool HasValidData { get { return m_hasValidData; } }
 		public bool IsDirty

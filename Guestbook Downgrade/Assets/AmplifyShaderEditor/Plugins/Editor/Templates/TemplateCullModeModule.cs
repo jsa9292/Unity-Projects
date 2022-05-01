@@ -62,13 +62,11 @@ namespace AmplifyShaderEditor
 			{
 				m_inlineCullMode.IntValue = (int)m_cullMode;
 				m_isDirty = true;
-				CustomEdited = true;
 			}
 		}
 
 		public override void ReadFromString( ref uint index, ref string[] nodeParams )
 		{
-			base.ReadFromString( ref index, ref  nodeParams );
 			bool validDataOnMeta = m_validData;
 			if( UIUtils.CurrentShaderVersion() > TemplatesManager.MPShaderVersion )
 			{
@@ -92,7 +90,6 @@ namespace AmplifyShaderEditor
 
 		public override void WriteToString( ref string nodeInfo )
 		{
-			base.WriteToString( ref nodeInfo );
 			IOUtils.AddFieldValueToString( ref nodeInfo, m_validData );
 			if( m_validData )
 			{

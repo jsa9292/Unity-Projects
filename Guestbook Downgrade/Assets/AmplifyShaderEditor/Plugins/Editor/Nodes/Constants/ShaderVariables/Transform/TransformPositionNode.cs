@@ -57,8 +57,7 @@ namespace AmplifyShaderEditor
 		///////////////////////////////////////////////////////////
 		private const string AseObjectToClipPosVarName = "objectToClip";
 		private const string AseObjectToClipPosFormat = "UnityObjectToClipPos({0})";
-		//private const string AseSRPObjectToClipPosFormat = "TransformWorldToHClip(TransformObjectToWorld({0}))";
-		private const string AseSRPObjectToClipPosFormat = "TransformObjectToHClip({0})";
+		private const string AseSRPObjectToClipPosFormat = "TransformWorldToHClip(TransformObjectToWorld({0}))";
 
 		private const string AseWorldToClipPosVarName = "worldToClip";
 		private const string AseWorldToClipPosFormat = "mul(UNITY_MATRIX_VP, float4({0}, 1.0))";
@@ -295,13 +294,7 @@ namespace AmplifyShaderEditor
 						break;
 						case TransformSpaceTo.World:
 						{
-							result = string.Format( AseViewToWorldPosFormat, result ); 
-							if( dataCollector.IsTemplate && 
-								dataCollector.TemplateDataCollectorInstance.CurrentSRPType == TemplateSRPType.HD &&
-								m_absoluteWorldPos )
-							{
-								result = string.Format( ASEHDAbsoluteWordPos , result );
-							}
+							result = string.Format( AseViewToWorldPosFormat, result );
 							varName = AseViewToWorldPosVarName + OutputId;
 						}
 						break;

@@ -79,23 +79,17 @@ public static class WindowHelper
 		{
 #if UNITY_2018_3_OR_NEWER
 			var method = m_type.GetMethod( "AddTab", BindingFlags.Instance | BindingFlags.Public, null, new System.Type[] { typeof( EditorWindow ), typeof( bool ) }, null );
-			if( method != null )
-				method.Invoke( m_instance, new object[] { pane, true } );
+			method.Invoke( m_instance, new object[] { pane, true } );
 #else
 			var method = m_type.GetMethod( "AddTab", BindingFlags.Instance | BindingFlags.Public, null, new System.Type[] { typeof( EditorWindow ) }, null );
-			if( method != null )
-				method.Invoke( m_instance, new object[] { pane } );
+			method.Invoke( m_instance, new object[] { pane } );
 #endif
 		}
 
 		public void RemoveTab( EditorWindow pane )
 		{
-			if( !pane.maximized )
-			{
-				var method = m_type.GetMethod( "RemoveTab", BindingFlags.Instance | BindingFlags.Public, null, new System.Type[] { typeof( EditorWindow ) }, null );
-				if( method != null )
-					method.Invoke( m_instance, new object[] { pane } );
-			}
+			var method = m_type.GetMethod( "RemoveTab", BindingFlags.Instance | BindingFlags.Public, null, new System.Type[] { typeof( EditorWindow ) }, null );
+			method.Invoke( m_instance, new object[] { pane } );
 		}
 	}
 
@@ -177,12 +171,8 @@ public static class WindowHelper
 
 	public static bool IsDocked( this EditorWindow wnd )
 	{
-#if UNITY_2020_2_OR_NEWER
-		return wnd.docked;
-#else
 		var parent = new R_EditorWindow( wnd );
 		return (bool)parent.Docked;
-#endif
 	}
 
 	public static void Undock( this EditorWindow wnd )

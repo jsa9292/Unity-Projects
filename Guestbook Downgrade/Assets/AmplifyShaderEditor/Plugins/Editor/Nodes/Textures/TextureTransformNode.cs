@@ -75,22 +75,19 @@ namespace AmplifyShaderEditor
 
 			SetPreviewInputs();
 
-			if( !Preferences.GlobalDisablePreviews )
-			{
-				RenderTexture temp = RenderTexture.active;
+			RenderTexture temp = RenderTexture.active;
 
-				RenderTexture.active = m_outputPorts[ 0 ].OutputPreviewTexture;
-				PreviewMaterial.SetInt( "_PreviewID" , 0 );
-				Graphics.Blit( null , m_outputPorts[ 0 ].OutputPreviewTexture , PreviewMaterial , m_previewMaterialPassId );
+			RenderTexture.active = m_outputPorts[ 0 ].OutputPreviewTexture;
+			PreviewMaterial.SetInt( "_PreviewID", 0 );
+			Graphics.Blit( null, m_outputPorts[ 0 ].OutputPreviewTexture, PreviewMaterial, m_previewMaterialPassId );
 
-				RenderTexture.active = m_outputPorts[ 1 ].OutputPreviewTexture;
-				PreviewMaterial.SetInt( "_PreviewID" , 1 );
-				Graphics.Blit( null , m_outputPorts[ 1 ].OutputPreviewTexture , PreviewMaterial , m_previewMaterialPassId );
-				RenderTexture.active = temp;
-
-			}
+			RenderTexture.active = m_outputPorts[ 1 ].OutputPreviewTexture;
+			PreviewMaterial.SetInt( "_PreviewID", 1 );
+			Graphics.Blit( null, m_outputPorts[ 1 ].OutputPreviewTexture, PreviewMaterial, m_previewMaterialPassId );
+			RenderTexture.active = temp;
 
 			PreviewIsDirty = m_continuousPreviewRefresh;
+
 			FinishPreviewRender = true;
 		}
 

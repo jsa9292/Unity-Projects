@@ -94,23 +94,20 @@ namespace AmplifyShaderEditor
 			if( m_proceduralMaterial == null )
 				return;
 
-			if( !Preferences.GlobalDisablePreviews )
+			Texture[] texs = m_proceduralMaterial.GetGeneratedTextures();
+			int count = m_outputPorts.Count;
+			for( int i = 0; i < count; i++ )
 			{
-				Texture[] texs = m_proceduralMaterial.GetGeneratedTextures();
-				int count = m_outputPorts.Count;
-				for( int i = 0 ; i < count ; i++ )
-				{
-					RenderTexture temp = RenderTexture.active;
-					RenderTexture.active = m_outputPorts[ i ].OutputPreviewTexture;
+				RenderTexture temp = RenderTexture.active;
+				RenderTexture.active = m_outputPorts[ i ].OutputPreviewTexture;
 
-					PreviewMaterial.SetTexture( "_GenTex" , texs[ i ] );
+				PreviewMaterial.SetTexture( "_GenTex", texs[ i ] );
 
-					if( m_autoNormal && m_textureTypes[ i ] == ProceduralOutputType.Normal )
-						Graphics.Blit( null , m_outputPorts[ i ].OutputPreviewTexture , PreviewMaterial , 1 );
-					else
-						Graphics.Blit( null , m_outputPorts[ i ].OutputPreviewTexture , PreviewMaterial , 0 );
-					RenderTexture.active = temp;
-				}
+				if( m_autoNormal && m_textureTypes[ i ] == ProceduralOutputType.Normal )
+					Graphics.Blit( null, m_outputPorts[ i ].OutputPreviewTexture, PreviewMaterial, 1 );
+				else
+					Graphics.Blit( null, m_outputPorts[ i ].OutputPreviewTexture, PreviewMaterial, 0 );
+				RenderTexture.active = temp;
 			}
 
 			PreviewIsDirty = m_continuousPreviewRefresh;
@@ -494,7 +491,7 @@ namespace AmplifyShaderEditor
 			string value = string.Format( "tex2D{0}({1}, {2})", ( isVertex ? "lod" : string.Empty ), textures[ outputId ].name, GetUVCoords( ref dataCollector, ignoreLocalvar, uvPropertyName ) );
 			if( m_autoNormal && m_textureTypes[ outputId ] == ProceduralOutputType.Normal )
 			{
-				value = GeneratorUtils.GenerateUnpackNormalStr( ref dataCollector, CurrentPrecisionType, UniqueId, OutputId, value, false, "1.0" , UnpackInputMode.Tangent );
+				value = GeneratorUtils.GenerateUnpackNormalStr( ref dataCollector, CurrentPrecisionType, UniqueId, OutputId, value, false, "1.0" );
 			}
 
 			dataCollector.AddPropertyNode( this );
@@ -1147,7 +1144,7 @@ namespace AmplifyShaderEditor
 			string value = string.Format( "tex2D{0}({1}, {2})", ( isVertex ? "lod" : string.Empty ), propertyName, GetUVCoords( ref dataCollector, ignoreLocalvar, uvPropertyName ) );
 			if( m_autoNormal && m_textureTypes[ outputId ] == ASEProceduralOutputType.Normal )
 			{
-				value = GeneratorUtils.GenerateUnpackNormalStr( ref dataCollector, CurrentPrecisionType, UniqueId, OutputId, value, false, "1.0",UnpackInputMode.Tangent );
+				value = GeneratorUtils.GenerateUnpackNormalStr( ref dataCollector, CurrentPrecisionType, UniqueId, OutputId, value, false, "1.0" );
 			}
 
 			dataCollector.AddPropertyNode( this );

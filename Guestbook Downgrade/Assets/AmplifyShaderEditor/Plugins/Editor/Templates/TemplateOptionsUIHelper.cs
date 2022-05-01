@@ -4,7 +4,6 @@
 using UnityEngine;
 using UnityEditor;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace AmplifyShaderEditor
@@ -12,12 +11,6 @@ namespace AmplifyShaderEditor
 	[Serializable]
 	public class TemplateOptionsUIHelper
 	{
-		public struct ReadOptions
-		{
-			public string Name;
-			public string Selection;
-			public Int64 Timestamp;
-		}
 		private const string CustomOptionsLabel = " Custom Options";
 
 		private bool m_isSubShader = false;
@@ -41,7 +34,10 @@ namespace AmplifyShaderEditor
 		private TemplateMultiPassMasterNode m_owner;
 
 		[NonSerialized]
-		private List<ReadOptions> m_readOptions = null;
+		private string[] m_readOptionNames;
+
+		[NonSerialized]
+		private string[] m_readOptionSelections;
 
 		[SerializeField]
 		private List<TemplateOptionPortItem> m_passCustomOptionsPorts = new List<TemplateOptionPortItem>();
@@ -103,7 +99,7 @@ namespace AmplifyShaderEditor
 			EditorGUIUtility.labelWidth = currWidth;
 		}
 
-		public void OnCustomOptionSelected( bool actionFromUser, bool isRefreshing, bool invertAction, TemplateMultiPassMasterNode owner, TemplateOptionUIItem uiItem, params TemplateActionItem[] validActions )
+		public void OnCustomOptionSelected( bool isRefreshing, bool invertAction, TemplateMultiPassMasterNode owner, TemplateOptionUIItem uiItem, params TemplateActionItem[] validActions )
 		{
 			uiItem.CheckOnExecute = false;
 			for( int i = 0; i < validActions.Length; i++ )
@@ -116,7 +112,6 @@ namespace AmplifyShaderEditor
 						continue;
 					}
 				}
-
 
 				switch( actionType )
 				{
@@ -141,7 +136,7 @@ namespace AmplifyShaderEditor
 							if( !invertAction && validActions[ i ].ActionDataIdx > -1 )
 								item.CurrentOption = validActions[ i ].ActionDataIdx;
 
-							item.CheckEnDisable( actionFromUser );
+							item.CheckEnDisable();
 						}
 						else
 						{
@@ -165,7 +160,7 @@ namespace AmplifyShaderEditor
 							if( !invertAction && validActions[ i ].ActionDataIdx > -1 )
 								item.CurrentOption = validActions[ i ].ActionDataIdx;
 
-							item.CheckEnDisable( actionFromUser );
+							item.CheckEnDisable();
 						}
 						else
 						{
@@ -309,11 +304,9 @@ namespace AmplifyShaderEditor
 						{
 							string actionData = validActions[ i ].ActionData;
 							string defineValue = string.Empty;
-							bool isPragma = false;
 							if( actionData.StartsWith( "pragma" ) )
 							{
 								defineValue = "#" + actionData;
-								isPragma = true;
 							}
 							else
 							{
@@ -327,7 +320,7 @@ namespace AmplifyShaderEditor
 							int count = nodes.Count;
 							for( int nodeIdx = 0; nodeIdx < count; nodeIdx++ )
 							{
-								nodes[ nodeIdx ].OptionsDefineContainer.AddDirective( defineValue, false, isPragma );
+								nodes[ nodeIdx ].OptionsDefineContainer.AddDefine( defineValue, false );
 							}
 						}
 						else if( !string.IsNullOrEmpty( validActions[ i ].PassName ) )
@@ -337,11 +330,9 @@ namespace AmplifyShaderEditor
 							{
 								string actionData = validActions[ i ].ActionData;
 								string defineValue = string.Empty;
-								bool isPragma = false;
 								if( actionData.StartsWith( "pragma" ) )
 								{
 									defineValue = "#" + actionData;
-									isPragma = true;
 								}
 								else
 								{
@@ -352,7 +343,7 @@ namespace AmplifyShaderEditor
 									string optionsId = validActions[ i ].PassName + defineValue;
 									owner.ContainerGraph.ParentWindow.TemplatesManagerInstance.SetOptionsValue( optionsId, true );
 								}
-								passMasterNode.OptionsDefineContainer.AddDirective( defineValue, false, isPragma );
+								passMasterNode.OptionsDefineContainer.AddDefine( defineValue, false );
 							}
 							else
 							{
@@ -393,7 +384,7 @@ namespace AmplifyShaderEditor
 								int count = nodes.Count;
 								for( int nodeIdx = 0; nodeIdx < count; nodeIdx++ )
 								{
-									nodes[ nodeIdx ].OptionsDefineContainer.RemoveDirective( defineValue );
+									nodes[ nodeIdx ].OptionsDefineContainer.RemoveDefine( defineValue );
 								}
 							}
 						}
@@ -420,7 +411,7 @@ namespace AmplifyShaderEditor
 								}
 								if( !flag )
 								{
-									passMasterNode.OptionsDefineContainer.RemoveDirective( defineValue );
+									passMasterNode.OptionsDefineContainer.RemoveDefine( defineValue );
 								}
 							}
 							else
@@ -453,7 +444,7 @@ namespace AmplifyShaderEditor
 							int count = nodes.Count;
 							for( int nodeIdx = 0; nodeIdx < count; nodeIdx++ )
 							{
-								nodes[ nodeIdx ].OptionsDefineContainer.AddDirective( defineValue, false );
+								nodes[ nodeIdx ].OptionsDefineContainer.AddDefine( defineValue, false );
 							}
 						}
 						else if( !string.IsNullOrEmpty( validActions[ i ].PassName ) )
@@ -467,7 +458,7 @@ namespace AmplifyShaderEditor
 									string optionsId = validActions[ i ].PassName + defineValue;
 									owner.ContainerGraph.ParentWindow.TemplatesManagerInstance.SetOptionsValue( optionsId, true );
 								}
-								passMasterNode.OptionsDefineContainer.AddDirective( defineValue, false );
+								passMasterNode.OptionsDefineContainer.AddDefine( defineValue, false );
 							}
 							else
 							{
@@ -497,7 +488,7 @@ namespace AmplifyShaderEditor
 								int count = nodes.Count;
 								for( int nodeIdx = 0; nodeIdx < count; nodeIdx++ )
 								{
-									nodes[ nodeIdx ].OptionsDefineContainer.RemoveDirective( defineValue );
+									nodes[ nodeIdx ].OptionsDefineContainer.RemoveDefine( defineValue );
 								}
 							}
 						}
@@ -516,7 +507,7 @@ namespace AmplifyShaderEditor
 
 								if( !flag )
 								{
-									passMasterNode.OptionsDefineContainer.RemoveDirective( defineValue );
+									passMasterNode.OptionsDefineContainer.RemoveDefine( defineValue );
 								}
 							}
 							else
@@ -533,15 +524,11 @@ namespace AmplifyShaderEditor
 					case AseOptionsActionType.ExcludePass:
 					{
 						string optionId = validActions[ i ].ActionData + "Pass";
-						//bool flag = isRefreshing ? owner.ContainerGraph.ParentWindow.TemplatesManagerInstance.SetOptionsValue( optionId, false ) : false;
-						//if( !flag )
-						//	owner.SetPassVisible( validActions[ i ].ActionData, false );
-						owner.ContainerGraph.ParentWindow.TemplatesManagerInstance.SetOptionsValue( optionId , false ) ;
-						owner.SetPassVisible( validActions[ i ].ActionData , false );
+						bool flag = isRefreshing ? owner.ContainerGraph.ParentWindow.TemplatesManagerInstance.SetOptionsValue( optionId, false ) : false;
+						if( !flag )
+							owner.SetPassVisible( validActions[ i ].ActionData, false );
 					}
 					break;
-
-
 					case AseOptionsActionType.IncludePass:
 					{
 						if( !uiItem.IsVisible )
@@ -565,7 +552,7 @@ namespace AmplifyShaderEditor
 							TemplateMultiPassMasterNode passMasterNode = owner.ContainerGraph.GetMasterNodeOfPass( validActions[ i ].PassName, owner.LODIndex );
 							if( passMasterNode != null )
 							{
-								passMasterNode.SetPropertyActionFromItem( actionFromUser, passMasterNode.PassModule, validActions[ i ] );
+								passMasterNode.SetPropertyActionFromItem( passMasterNode.PassModule, validActions[ i ] );
 							}
 							else
 							{
@@ -574,7 +561,7 @@ namespace AmplifyShaderEditor
 						}
 						else
 						{
-							owner.SetPropertyActionFromItem( actionFromUser, owner.PassModule, validActions[ i ] );
+							owner.SetPropertyActionFromItem( owner.PassModule, validActions[ i ] );
 						}
 					}
 					break;
@@ -585,19 +572,13 @@ namespace AmplifyShaderEditor
 						if( isRefreshing )
 							continue;
 
-						owner.SetPropertyActionFromItem( actionFromUser, owner.SubShaderModule, validActions[ i ] );
+						owner.SetPropertyActionFromItem( owner.SubShaderModule, validActions[ i ] );
 					}
 					break;
 					case AseOptionsActionType.SetShaderProperty:
 					{
 						//This action is only check when shader is compiled over 
 						//the TemplateMultiPassMasterNode via the on CheckPropertyChangesOnOptions() method
-					}
-					break;
-					case AseOptionsActionType.ExcludeAllPassesBut:
-					{
-						//This action is only check when shader is compiled over 
-						//the TemplateMultiPassMasterNode via the on CheckExcludeAllPassOptions() method
 					}
 					break;
 					case AseOptionsActionType.SetMaterialProperty:
@@ -797,62 +778,47 @@ namespace AmplifyShaderEditor
 		{
 			RefreshCustomOptionsDict();
 			int savedOptions = Convert.ToInt32( nodeParams[ index++ ] );
-			m_readOptions = new List<ReadOptions>();
+
+			m_readOptionNames = new string[ savedOptions ];
+			m_readOptionSelections = new string[ savedOptions ];
+
 			for( int i = 0; i < savedOptions; i++ )
 			{
 				string optionName = nodeParams[ index++ ];
 				string optionSelection = nodeParams[ index++ ];
-				Int64 optionTimestamp = ( UIUtils.CurrentShaderVersion() > 18929 ) ? Convert.ToInt64( nodeParams[ index++ ] ):0;
-				m_readOptions.Add( new ReadOptions() { Name = optionName , Selection = optionSelection , Timestamp = optionTimestamp });
+				m_readOptionNames[ i ] = optionName;
+				m_readOptionSelections[ i ] = optionSelection;
 
 			}
-		}
-
-		public void WriteToString( ref string nodeInfo )
-		{
-			int optionsCount = m_passCustomOptionsUI.Count;
-			IOUtils.AddFieldValueToString( ref nodeInfo , optionsCount );
-			for( int i = 0 ; i < optionsCount ; i++ )
-			{
-				IOUtils.AddFieldValueToString( ref nodeInfo , m_passCustomOptionsUI[ i ].Options.Id );
-				if( m_passCustomOptionsUI[ i ].Options.Type == AseOptionsType.Field )
-					IOUtils.AddFieldValueToString( ref nodeInfo , m_passCustomOptionsUI[ i ].FieldValue.WriteToSingle() );
-				else
-					IOUtils.AddFieldValueToString( ref nodeInfo , m_passCustomOptionsUI[ i ].CurrentOption );
-
-				IOUtils.AddFieldValueToString( ref nodeInfo , m_passCustomOptionsUI[ i ].LastClickedTimestamp );
-			}
-
 		}
 
 		public void SetReadOptions()
 		{
-			if( m_readOptions != null )
+			if( m_readOptionNames != null && m_readOptionSelections != null )
 			{
-				for( int i = 0 ; i < m_readOptions.Count ; i++ )
+				for( int i = 0; i < m_readOptionNames.Length; i++ )
 				{
-					if( m_passCustomOptionsUIDict.ContainsKey( m_readOptions[ i ].Name ) )
+					if( m_passCustomOptionsUIDict.ContainsKey( m_readOptionNames[ i ] ) )
 					{
-						m_passCustomOptionsUIDict[ m_readOptions[ i ].Name ].LastClickedTimestamp = m_readOptions[ i ].Timestamp;
-						if( m_passCustomOptionsUIDict[ m_readOptions[ i ].Name ].Options.Type == AseOptionsType.Field )
+						if( m_passCustomOptionsUIDict[ m_readOptionNames[ i ] ].Options.Type == AseOptionsType.Field )
 						{
-							m_passCustomOptionsUIDict[ m_readOptions[ i ].Name ].FieldValue.ReadFromSingle( m_readOptions[ i ].Selection );
-							foreach( var item in m_passCustomOptionsUIDict[ m_readOptions[ i ].Name ].Options.ActionsPerOption.Rows )
+							m_passCustomOptionsUIDict[ m_readOptionNames[ i ] ].FieldValue.ReadFromSingle( m_readOptionSelections[ i ] );
+							foreach( var item in m_passCustomOptionsUIDict[ m_readOptionNames[ i ] ].Options.ActionsPerOption.Rows )
 							{
-								if( item.Columns.Length > 0 && item.Columns[ 0 ].ActionType == AseOptionsActionType.SetMaterialProperty )
+								if( item.Columns.Length>0 && item.Columns[ 0 ].ActionType == AseOptionsActionType.SetMaterialProperty )
 								{
 									if( UIUtils.CurrentWindow.CurrentGraph.CurrentMaterial != null )
 									{
 										if( UIUtils.CurrentWindow.CurrentGraph.CurrentMaterial.HasProperty( item.Columns[ 0 ].ActionData ) )
 										{
-											m_passCustomOptionsUIDict[ m_readOptions[ i ].Name ].CurrentFieldValue = UIUtils.CurrentWindow.CurrentGraph.CurrentMaterial.GetFloat( item.Columns[ 0 ].ActionData );
+											m_passCustomOptionsUIDict[ m_readOptionNames[ i ] ].CurrentFieldValue = UIUtils.CurrentWindow.CurrentGraph.CurrentMaterial.GetFloat( item.Columns[ 0 ].ActionData );
 										}
 									}
 								}
 							}
 						}
 						else
-							m_passCustomOptionsUIDict[ m_readOptions[ i ].Name ].CurrentOptionIdx = Convert.ToInt32( m_readOptions[ i ].Selection );
+							m_passCustomOptionsUIDict[ m_readOptionNames[ i ] ].CurrentOptionIdx = Convert.ToInt32( m_readOptionSelections[ i ] );
 					}
 				}
 			}
@@ -860,16 +826,10 @@ namespace AmplifyShaderEditor
 
 		public void Refresh()
 		{
-			//int count = m_passCustomOptionsUI.Count;
-			//for( int i = 0; i < count; i++ )
-			//{
-			//	m_passCustomOptionsUI[ i ].Refresh();
-			//}
-			List<TemplateOptionUIItem> sortedList = m_passCustomOptionsUI.OrderBy( item => item.LastClickedTimestamp ).ToList();
-			int count = sortedList.Count;
-			for( int i = 0 ; i < count ; i++ )
+			int count = m_passCustomOptionsUI.Count;
+			for( int i = 0; i < count; i++ )
 			{
-				sortedList[ i ].Refresh();
+				m_passCustomOptionsUI[ i ].Refresh();
 			}
 		}
 
@@ -878,10 +838,25 @@ namespace AmplifyShaderEditor
 			int count = m_passCustomOptionsUI.Count;
 			for( int i = 0; i < count; i++ )
 			{
-				m_passCustomOptionsUI[ i ].CheckEnDisable(false);
+				m_passCustomOptionsUI[ i ].CheckEnDisable();
 			}
 		}
-	
+
+		public void WriteToString( ref string nodeInfo )
+		{
+			int optionsCount = m_passCustomOptionsUI.Count;
+			IOUtils.AddFieldValueToString( ref nodeInfo, optionsCount );
+			for( int i = 0; i < optionsCount; i++ )
+			{
+				IOUtils.AddFieldValueToString( ref nodeInfo, m_passCustomOptionsUI[ i ].Options.Id );
+				if( m_passCustomOptionsUI[ i ].Options.Type == AseOptionsType.Field )
+					IOUtils.AddFieldValueToString( ref nodeInfo, m_passCustomOptionsUI[ i ].FieldValue.WriteToSingle() );
+				else
+					IOUtils.AddFieldValueToString( ref nodeInfo, m_passCustomOptionsUI[ i ].CurrentOption );
+			}
+		}
+
 		public List<TemplateOptionUIItem> PassCustomOptionsUI { get { return m_passCustomOptionsUI; } }
+
 	}
 }

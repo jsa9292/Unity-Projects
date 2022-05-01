@@ -13,12 +13,8 @@ namespace AmplifyShaderEditor
 		{   "uint currInstanceId = 0;",
 			"#ifdef UNITY_INSTANCING_ENABLED",
 			"currInstanceId = unity_InstanceID;",
-			"#endif"
-		};
-
-		private const string TemplateSVInstanceIdVar = "instanceID";
+			"#endif"};
 		private const string InstancingInnerVariable = "currInstanceId";
-		private bool m_useSVSemantic = false;
 
 		protected override void CommonInit( int uniqueId )
 		{
@@ -27,32 +23,11 @@ namespace AmplifyShaderEditor
 			m_previewShaderGUID = "03febce56a8cf354b90e7d5180c1dbd7";
 		}
 
-		public override void OnNodeLogicUpdate( DrawInfo drawInfo )
-		{
-			base.OnNodeLogicUpdate( drawInfo );
-			m_autoWrapProperties = !m_containerGraph.IsStandardSurface;
-		}
-
-		public override void DrawProperties()
-		{
-			base.DrawProperties();
-
-			if( !m_containerGraph.IsStandardSurface )
-			{
-				m_useSVSemantic = EditorGUILayoutToggle( "Use SV semantic" , m_useSVSemantic );
-			}
-			
-		}
-
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalvar )
 		{
 			if( dataCollector.IsTemplate )
 			{
 				dataCollector.TemplateDataCollectorInstance.SetupInstancing();
-				if( m_useSVSemantic )
-				{
-					return dataCollector.TemplateDataCollectorInstance.GetSVInstanceId( ref dataCollector );
-				}
 			}
 
 			if( !dataCollector.HasLocalVariable( InstancingVariableAttrib[ 0 ] ) )
@@ -63,21 +38,6 @@ namespace AmplifyShaderEditor
 				dataCollector.AddLocalVariable( UniqueId, InstancingVariableAttrib[ 3 ] ,true );
 			}
 			return InstancingInnerVariable;
-		}
-
-		public override void ReadFromString( ref string[] nodeParams )
-		{
-			base.ReadFromString( ref nodeParams );
-			if( UIUtils.CurrentShaderVersion() > 18915 )
-			{
-				m_useSVSemantic = Convert.ToBoolean( GetCurrentParam( ref nodeParams ) );
-			}
-		}
-
-		public override void WriteToString( ref string nodeInfo , ref string connectionsInfo )
-		{
-			base.WriteToString( ref nodeInfo , ref connectionsInfo );
-			IOUtils.AddFieldValueToString( ref nodeInfo , m_useSVSemantic );
 		}
 	}
 }

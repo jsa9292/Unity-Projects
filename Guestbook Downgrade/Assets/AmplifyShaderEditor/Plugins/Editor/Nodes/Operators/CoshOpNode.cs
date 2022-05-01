@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Cosh", "Trigonometry Operators", "Hyperbolic cosine of scalars and vectors",tags: "hyperbolic cosine" )]
+	[NodeAttributes( "Cosh", "Trigonometry Operators", "Hyperbolic cosine of scalars and vectors" )]
 	public sealed class CoshOpNode : SingleInputOp
 	{
 		protected override void CommonInit( int uniqueId )

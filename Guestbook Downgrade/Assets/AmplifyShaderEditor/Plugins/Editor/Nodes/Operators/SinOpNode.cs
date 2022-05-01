@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Sin", "Trigonometry Operators", "Sine of scalars and vectors",tags: "sine" )]
+	[NodeAttributes( "Sin", "Trigonometry Operators", "Sine of scalars and vectors" )]
 	public sealed class SinOpNode : SingleInputOp
 	{
 		protected override void CommonInit( int uniqueId )

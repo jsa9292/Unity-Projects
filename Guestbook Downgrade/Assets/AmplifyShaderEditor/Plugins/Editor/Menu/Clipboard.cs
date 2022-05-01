@@ -42,17 +42,10 @@ namespace AmplifyShaderEditor
 			m_clipboardAuxData = new Dictionary<int, ClipboardData>();
 			m_multiPassMasterNodeData = new Dictionary<string, ClipboardData>();
 		}
-
-		public void ResetMultipassNodesData()
+		
+		public void AddMultiPassNodesToClipboard( List<TemplateMultiPassMasterNode> masterNodes )
 		{
 			m_multiPassMasterNodeData.Clear();
-		}
-
-		public void AddMultiPassNodesToClipboard( List<TemplateMultiPassMasterNode> masterNodes, bool resetList, int lodId )
-		{
-			if( resetList )
-				m_multiPassMasterNodeData.Clear();
-
 			int templatesAmount = masterNodes.Count;
 			for( int i = 0; i < templatesAmount; i++ )
 			{
@@ -64,20 +57,19 @@ namespace AmplifyShaderEditor
 					masterNodes[ i ].FullWriteToString( ref data, ref connection );
 					System.Threading.Thread.CurrentThread.CurrentCulture = System.Threading.Thread.CurrentThread.CurrentUICulture;
 					ClipboardData clipboardData = new ClipboardData( data, connection, masterNodes[ i ].UniqueId );
-					m_multiPassMasterNodeData.Add( masterNodes[ i ].PassUniqueName + lodId, clipboardData );
+					m_multiPassMasterNodeData.Add( masterNodes[ i ].PassUniqueName, clipboardData );
 				}
 			}
 		}
 
-		public void GetMultiPassNodesFromClipboard( List<TemplateMultiPassMasterNode> masterNodes, int lodId )
+		public void GetMultiPassNodesFromClipboard( List<TemplateMultiPassMasterNode> masterNodes )
 		{
 			int templatesAmount = masterNodes.Count;
 			for( int i = 0; i < templatesAmount; i++ )
 			{
-				string clipboardDataId = masterNodes[ i ].PassUniqueName + lodId;
-				if( m_multiPassMasterNodeData.ContainsKey( clipboardDataId ) )
+				if( m_multiPassMasterNodeData.ContainsKey( masterNodes[ i ].PassUniqueName ) )
 				{
-					ClipboardData nodeData = m_multiPassMasterNodeData[ clipboardDataId ];
+					ClipboardData nodeData = m_multiPassMasterNodeData[ masterNodes[ i ].PassUniqueName ];
 					string[] nodeParams = nodeData.Data.Split( IOUtils.FIELD_SEPARATOR );
 					System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
 					masterNodes[ i ].FullReadFromString( ref nodeParams );
@@ -87,14 +79,14 @@ namespace AmplifyShaderEditor
 
 			for( int i = 0; i < templatesAmount; i++ )
 			{
-				string clipboardDataId = masterNodes[ i ].PassUniqueName + lodId;
-				if( m_multiPassMasterNodeData.ContainsKey( clipboardDataId ) )
+				if( m_multiPassMasterNodeData.ContainsKey( masterNodes[ i ].PassUniqueName ) )
 				{
 					masterNodes[ i ].SetReadOptions();
 					masterNodes[ i ].ForceOptionsRefresh();
 				}
 			}
 
+			m_multiPassMasterNodeData.Clear();
 		}
 
 		public void AddToClipboard( List<ParentNode> selectedNodes , Vector3 initialPosition, ParentGraph graph )

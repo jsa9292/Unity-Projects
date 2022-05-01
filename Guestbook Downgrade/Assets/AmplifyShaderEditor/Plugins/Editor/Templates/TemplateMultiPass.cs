@@ -100,7 +100,7 @@ namespace AmplifyShaderEditor
 			string datapath = AssetDatabase.GUIDToAssetPath( guid );
 			string shaderBody = string.Empty;
 			shaderBody = IOUtils.LoadTextFileFromDisk( datapath );
-			shaderBody = UIUtils.ForceLFLineEnding( shaderBody );
+			shaderBody = shaderBody.Replace( "\r\n", "\n" );
 
 			// Insert Before Tag
 			MatchCollection col = Regex.Matches( shaderBody, TemplateHelperFunctions.BeforePragmaPattern, RegexOptions.Singleline );
@@ -516,11 +516,8 @@ namespace AmplifyShaderEditor
 				case TemplateModuleDataType.ModuleInputFrag:
 				{
 					m_templateIdManager.SetReplacementText( prefix + m_subShaders[ subShaderId ].Modules.InputsFragTag.Id, text );
-				}break;
-				case TemplateModuleDataType.ModuleRenderPlatforms:
-				{
-					m_templateIdManager.SetReplacementText( prefix + m_subShaders[ subShaderId ].Modules.RenderPlatformHelper.ID , text );
-				}break;
+				}
+				break;
 			}
 		}
 
@@ -918,12 +915,6 @@ namespace AmplifyShaderEditor
 					m_templateIdManager.SetReplacementText( prefix + TemplatesManager.TemplateAllModulesTag, text );
 				}
 				break;
-				case TemplateModuleDataType.ModuleRenderPlatforms:
-				{
-					prefix = m_subShaders[ subShaderId ].Passes[ passId ].Modules.UniquePrefix;
-					m_templateIdManager.SetReplacementText( prefix + m_subShaders[ subShaderId ].Passes[ passId ].Modules.RenderPlatformHelper.ID , text );
-				}
-				break;
 				case TemplateModuleDataType.ModuleShaderModel:
 				{
 					prefix = m_subShaders[ subShaderId ].Passes[ passId ].Modules.UniquePrefix;
@@ -1138,7 +1129,8 @@ namespace AmplifyShaderEditor
 				{
 					prefix = m_subShaders[ subShaderId ].Passes[ passId ].UniquePrefix;
 					m_templateIdManager.SetReplacementText( prefix + m_subShaders[ subShaderId ].Passes[ passId ].TessDomainData.Id, text );
-				}break;
+				}
+				break;
 			}
 		}
 

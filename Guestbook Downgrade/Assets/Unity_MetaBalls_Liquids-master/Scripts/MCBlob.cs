@@ -45,7 +45,7 @@ public class MCBlob : MonoBehaviour
     */
     int _dimX = 30;
     int _dimY = 30;
-    int _dimZ = 30;
+    int _dimZ = 10;
 
     public int dimX
     {
@@ -99,7 +99,7 @@ public class MCBlob : MonoBehaviour
     [SerializeField] private SphereCollider[] BlobObjectsLocations;
 
     //Unity and Sample Specific
-    void Start()
+    void Awake()
     {
         if (BlobObjectsLocations.Length == 0)
         {
@@ -107,6 +107,7 @@ public class MCBlob : MonoBehaviour
         }
         UpdateBlobs();
     }
+
 
     void UpdateBlobs()
     {
@@ -138,7 +139,7 @@ public class MCBlob : MonoBehaviour
 
 
     //Unity and Sample specific
-    void LateUpdate()
+    void FixedUpdate()
     {
         UpdateBlobs();
         doFrame();

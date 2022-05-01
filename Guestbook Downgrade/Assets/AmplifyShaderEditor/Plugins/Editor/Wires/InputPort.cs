@@ -739,7 +739,6 @@ namespace AmplifyShaderEditor
 					return (Mathf.Abs( m_previewInternalVec3.x ) < 0.001f &&
 							Mathf.Abs( m_previewInternalVec3.y ) < 0.001f &&
 							Mathf.Abs( m_previewInternalVec3.z ) < 0.001f );
-					case WirePortDataType.UINT4:
 					case WirePortDataType.FLOAT4:
 					return (Mathf.Abs( m_previewInternalVec4.x ) < 0.001f &&
 							Mathf.Abs( m_previewInternalVec4.y ) < 0.001f &&
@@ -1212,7 +1211,7 @@ namespace AmplifyShaderEditor
 		{
 			if( m_inputPreviewTexture == null )
 			{
-				m_inputPreviewTexture = new RenderTexture( Constants.PreviewSize , Constants.PreviewSize , 0, Constants.PreviewFormat , RenderTextureReadWrite.Linear );
+				m_inputPreviewTexture = new RenderTexture( 128, 128, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear );
 				m_inputPreviewTexture.wrapMode = TextureWrapMode.Repeat;
 			}
 
@@ -1341,10 +1340,7 @@ namespace AmplifyShaderEditor
 			//m_inputPreview = null;
 
 			if( m_inputPreviewTexture != null )
-			{
-				m_inputPreviewTexture.Release();
 				UnityEngine.ScriptableObject.DestroyImmediate( m_inputPreviewTexture );
-			}
 			m_inputPreviewTexture = null;
 
 			if( m_inputPreviewMaterial != null )

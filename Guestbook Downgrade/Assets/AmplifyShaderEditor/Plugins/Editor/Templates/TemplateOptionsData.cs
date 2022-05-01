@@ -74,8 +74,7 @@ namespace AmplifyShaderEditor
 		SetPropertyOnPass,
 		SetPropertyOnSubShader,
 		SetShaderProperty,
-		SetMaterialProperty,
-		ExcludeAllPassesBut
+		SetMaterialProperty
 	}
 
 	public enum PropertyActionsEnum
@@ -114,8 +113,7 @@ namespace AmplifyShaderEditor
 		StencilZFail,
 		RenderType,
 		RenderQueue,
-		DisableBatching,
-		ChangeTagValue
+		DisableBatching
 	}
 
 	public enum AseOptionsSetup
@@ -254,16 +252,6 @@ namespace AmplifyShaderEditor
 		public override string ToString()
 		{
 			return ActionType + " " + ActionData + " " + ActionDataIdx;
-		}
-
-		public bool GetIntValueFromActionBuffer( out int result )
-		{
-			return int.TryParse( ActionBuffer, out result );
-		}
-
-		public bool GetFloatValueFromActionBuffer( out float result )
-		{
-			return float.TryParse( ActionBuffer, out result );
 		}
 	}
 
@@ -475,8 +463,7 @@ namespace AmplifyShaderEditor
 			{"SetPropertyOnPass", AseOptionsActionType.SetPropertyOnPass },
 			{"SetPropertyOnSubShader", AseOptionsActionType.SetPropertyOnSubShader },
 			{"SetShaderProperty", AseOptionsActionType.SetShaderProperty },
-			{"SetMaterialProperty", AseOptionsActionType.SetMaterialProperty },
-			{"ExcludeAllPassesBut",AseOptionsActionType.ExcludeAllPassesBut}
+			{"SetMaterialProperty", AseOptionsActionType.SetMaterialProperty }
 		};
 
 		public static Dictionary<string, AseOptionItemSetup> AseOptionItemSetupDict = new Dictionary<string, AseOptionItemSetup>
@@ -877,7 +864,6 @@ namespace AmplifyShaderEditor
 					case AseOptionsActionType.RemoveUndefine:
 					case AseOptionsActionType.ExcludePass:
 					case AseOptionsActionType.IncludePass:
-					case AseOptionsActionType.ExcludeAllPassesBut:
 					break;
 					case AseOptionsActionType.SetShaderProperty:
 					{
@@ -1145,17 +1131,6 @@ namespace AmplifyShaderEditor
 								{
 									if( arr.Length > 1 )
 										actionItem.ActionData = arr[ 1 ];
-								}
-								break;
-								case PropertyActionsEnum.ChangeTagValue:
-								{
-									if( arr.Length > 2 )
-									{
-										//Tag Name
-										actionItem.ActionData = arr[ 1 ];
-										//Tag Value
-										actionItem.ActionBuffer = arr[ 2 ];
-									}
 								}
 								break;
 							}

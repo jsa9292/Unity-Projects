@@ -19,9 +19,6 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private string m_nodePropertyName = string.Empty;
 
-		[SerializeField]
-		private bool m_inlineButtonVisible = true;
-
 		public InlineProperty() { }
 
 		public InlineProperty( float val )
@@ -54,151 +51,148 @@ namespace AmplifyShaderEditor
 			m_active = m_nodeId != -1;
 		}
 
-		public void CheckInlineButton()
+		public void IntField( ref UndoParentNode owner, string content )
 		{
-			if( m_inlineButtonVisible )
+			if( !m_active )
 			{
-				if( GUILayout.Button( UIUtils.FloatIntIconON , UIUtils.FloatIntPickerONOFF , GUILayout.Width( 15 ) , GUILayout.Height( 15 ) ) )
+				EditorGUILayout.BeginHorizontal();
+				m_value = owner.EditorGUILayoutIntField( content, (int)m_value );
+				if( GUILayout.Button( UIUtils.FloatIntIconON, UIUtils.FloatIntPickerONOFF, GUILayout.Width( 15 ), GUILayout.Height( 15 ) ) )
 					m_active = !m_active;
-			}
-		}
-
-		public void IntField( ref UndoParentNode owner , string content )
-		{
-			if( !m_active )
-			{
-				EditorGUILayout.BeginHorizontal();
-				m_value = owner.EditorGUILayoutIntField( content , (int)m_value );
-				CheckInlineButton();
 				EditorGUILayout.EndHorizontal();
 			}
 			else
 			{
-				DrawPicker( ref owner , content );
+				DrawPicker( ref owner, content );
 			}
 		}
 
-		public void IntSlider( ref UndoParentNode owner , GUIContent content , int min , int max )
+		public void IntSlider( ref UndoParentNode owner, GUIContent content, int min, int max )
 		{
 			if( !m_active )
 			{
 				EditorGUILayout.BeginHorizontal();
-				m_value = owner.EditorGUILayoutIntSlider( content , (int)m_value , min , max );
-				CheckInlineButton();
+				m_value = owner.EditorGUILayoutIntSlider( content, (int)m_value, min, max );
+				if( GUILayout.Button( UIUtils.FloatIntIconON, UIUtils.FloatIntPickerONOFF, GUILayout.Width( 15 ), GUILayout.Height( 15 ) ) )
+					m_active = !m_active;
 				EditorGUILayout.EndHorizontal();
 			}
 			else
 			{
-				DrawPicker( ref owner , content );
+				DrawPicker( ref owner, content );
 			}
 		}
 
-		public void IntSlider( ref UndoParentNode owner , string content , int min , int max )
+		public void IntSlider( ref UndoParentNode owner, string content, int min, int max )
 		{
 			if( !m_active )
 			{
 				EditorGUILayout.BeginHorizontal();
-				m_value = owner.EditorGUILayoutIntSlider( content , (int)m_value , min , max );
-				CheckInlineButton();
+				m_value = owner.EditorGUILayoutIntSlider( content, (int)m_value, min, max );
+				if( GUILayout.Button( UIUtils.FloatIntIconON, UIUtils.FloatIntPickerONOFF, GUILayout.Width( 15 ), GUILayout.Height( 15 ) ) )
+					m_active = !m_active;
 				EditorGUILayout.EndHorizontal();
 			}
 			else
 			{
-				DrawPicker( ref owner , content );
+				DrawPicker( ref owner, content );
 			}
 		}
 
-		public void EnumTypePopup( ref UndoParentNode owner , string content , string[] displayOptions )
+		public void EnumTypePopup( ref UndoParentNode owner, string content, string[] displayOptions )
 		{
 			if( !m_active )
 			{
 				EditorGUILayout.BeginHorizontal();
-				m_value = owner.EditorGUILayoutPopup( content , (int)m_value , displayOptions );
-				CheckInlineButton();
+				m_value = owner.EditorGUILayoutPopup( content, (int)m_value, displayOptions );
+				if( GUILayout.Button( UIUtils.FloatIntIconON, UIUtils.FloatIntPickerONOFF, GUILayout.Width( 15 ), GUILayout.Height( 15 ) ) )
+					m_active = !m_active;
 				EditorGUILayout.EndHorizontal();
 
 			}
 			else
 			{
-				DrawPicker( ref owner , content );
+				DrawPicker( ref owner, content );
 			}
 		}
 
-		public void FloatField( ref UndoParentNode owner , string content )
+		public void FloatField( ref UndoParentNode owner, string content )
 		{
 			if( !m_active )
 			{
 				EditorGUILayout.BeginHorizontal();
-				m_value = owner.EditorGUILayoutFloatField( content , m_value );
-				CheckInlineButton();
+				m_value = owner.EditorGUILayoutFloatField( content, m_value );
+				if( GUILayout.Button( UIUtils.FloatIntIconON, UIUtils.FloatIntPickerONOFF, GUILayout.Width( 15 ), GUILayout.Height( 15 ) ) )
+					m_active = !m_active;
 				EditorGUILayout.EndHorizontal();
 			}
 			else
 			{
-				DrawPicker( ref owner , content );
+				DrawPicker( ref owner, content );
 			}
 		}
 
-		public void SliderField( ref UndoParentNode owner , string content , float min , float max )
+		public void SliderField( ref UndoParentNode owner, string content, float min, float max )
 		{
 			if( !m_active )
 			{
 				EditorGUILayout.BeginHorizontal();
-				m_value = owner.EditorGUILayoutSlider( content , m_value , min , max );
-				CheckInlineButton();
+				m_value = owner.EditorGUILayoutSlider( content, m_value, min, max );
+				if( GUILayout.Button( UIUtils.FloatIntIconON, UIUtils.FloatIntPickerONOFF, GUILayout.Width( 15 ), GUILayout.Height( 15 ) ) )
+					m_active = !m_active;
 				EditorGUILayout.EndHorizontal();
 			}
 			else
 			{
-				DrawPicker( ref owner , content );
+				DrawPicker( ref owner, content );
 			}
 		}
 
-		public void RangedFloatField( ref UndoParentNode owner , string content , float min , float max )
+		public void RangedFloatField( ref UndoParentNode owner, string content, float min, float max )
 		{
 			if( !m_active )
 			{
 				EditorGUILayout.BeginHorizontal();
-				m_value = owner.EditorGUILayoutRangedFloatField( content , m_value , min , max );
-				CheckInlineButton();
+				m_value = owner.EditorGUILayoutRangedFloatField( content, m_value, min, max );
+				if( GUILayout.Button( UIUtils.FloatIntIconON, UIUtils.FloatIntPickerONOFF, GUILayout.Width( 15 ), GUILayout.Height( 15 ) ) )
+					m_active = !m_active;
 				EditorGUILayout.EndHorizontal();
 			}
 			else
 			{
-				DrawPicker( ref owner , content );
+				DrawPicker( ref owner, content );
 			}
 		}
 
 
-		public void CustomDrawer( ref UndoParentNode owner , DrawPropertySection Drawer , string content )
+		public void CustomDrawer( ref UndoParentNode owner, DrawPropertySection Drawer, string content )
 		{
 			if( !m_active )
 			{
 				EditorGUILayout.BeginHorizontal();
 				Drawer( owner );
-				CheckInlineButton();
+				if( GUILayout.Button( UIUtils.FloatIntIconON, UIUtils.FloatIntPickerONOFF, GUILayout.Width( 15 ), GUILayout.Height( 15 ) ) )
+					m_active = !m_active;
 				EditorGUILayout.EndHorizontal();
 			}
 			else
 			{
-				DrawPicker( ref owner , content );
+				DrawPicker( ref owner, content );
 			}
 		}
 
 		public delegate void DrawPropertySection( UndoParentNode owner );
 
-		private void DrawPicker( ref UndoParentNode owner , GUIContent content )
+		private void DrawPicker( ref UndoParentNode owner, GUIContent content )
 		{
-			DrawPicker( ref owner , content.text );
+			DrawPicker( ref owner, content.text );
 		}
 
-		private void DrawPicker( ref UndoParentNode owner , string content )
+		private void DrawPicker( ref UndoParentNode owner, string content )
 		{
 			EditorGUILayout.BeginHorizontal();
-			string[] intArraysNames = owner.ContainerGraph.ParentWindow.CurrentGraph.FloatIntNodes.NodesArr;
-			int[] intIds = owner.ContainerGraph.ParentWindow.CurrentGraph.FloatIntNodes.NodeIds;
-			m_nodeId = owner.EditorGUILayoutIntPopup( content , m_nodeId , intArraysNames , intIds );
-			if( GUILayout.Button( UIUtils.FloatIntIconOFF , UIUtils.FloatIntPickerONOFF , GUILayout.Width( 15 ) , GUILayout.Height( 15 ) ) )
+			m_nodeId = owner.EditorGUILayoutIntPopup( content, m_nodeId, UIUtils.FloatIntNodeArr(), UIUtils.FloatIntNodeIds() );
+			if( GUILayout.Button( UIUtils.FloatIntIconOFF, UIUtils.FloatIntPickerONOFF, GUILayout.Width( 15 ), GUILayout.Height( 15 ) ) )
 				m_active = !m_active;
 			EditorGUILayout.EndHorizontal();
 		}
@@ -225,7 +219,7 @@ namespace AmplifyShaderEditor
 			}
 		}
 
-		public string GetValueOrProperty( string defaultValue , bool parentesis = true )
+		public string GetValueOrProperty( string defaultValue, bool parentesis = true )
 		{
 			if( m_active )
 			{
@@ -253,7 +247,7 @@ namespace AmplifyShaderEditor
 			}
 		}
 
-		public void ReadFromString( ref uint index , ref string[] nodeParams , bool isInt = true )
+		public void ReadFromString( ref uint index, ref string[] nodeParams, bool isInt = true )
 		{
 			m_value = isInt ? Convert.ToInt32( nodeParams[ index++ ] ) : Convert.ToSingle( nodeParams[ index++ ] );
 			m_active = Convert.ToBoolean( nodeParams[ index++ ] );
@@ -263,16 +257,16 @@ namespace AmplifyShaderEditor
 		public void ReadFromSingle( string singleLine )
 		{
 			string[] data = singleLine.Split( IOUtils.VECTOR_SEPARATOR );
-			m_value = Convert.ToSingle( data[ 0 ] , System.Globalization.CultureInfo.InvariantCulture );
+			m_value = Convert.ToSingle( data[ 0 ], System.Globalization.CultureInfo.InvariantCulture );
 			m_active = Convert.ToBoolean( data[ 1 ] );
 			m_nodeId = Convert.ToInt32( data[ 2 ] );
 		}
 
 		public void WriteToString( ref string nodeInfo )
 		{
-			IOUtils.AddFieldValueToString( ref nodeInfo , m_value );
-			IOUtils.AddFieldValueToString( ref nodeInfo , m_active );
-			IOUtils.AddFieldValueToString( ref nodeInfo , m_nodeId );
+			IOUtils.AddFieldValueToString( ref nodeInfo, m_value );
+			IOUtils.AddFieldValueToString( ref nodeInfo, m_active );
+			IOUtils.AddFieldValueToString( ref nodeInfo, m_nodeId );
 		}
 
 		public string WriteToSingle()
@@ -308,7 +302,7 @@ namespace AmplifyShaderEditor
 
 			if( m_nodeId < -1 )
 			{
-				if( !string.IsNullOrEmpty( m_nodePropertyName ) )
+				if(!string.IsNullOrEmpty(m_nodePropertyName))
 					return UIUtils.GetInternalTemplateNode( m_nodePropertyName );
 
 
@@ -316,11 +310,6 @@ namespace AmplifyShaderEditor
 			}
 
 			return null;
-		}
-
-		public void HideInlineButton()
-		{
-			m_inlineButtonVisible = false;
 		}
 
 		public int IntValue { get { return (int)m_value; } set { m_value = value; } }

@@ -25,9 +25,6 @@ namespace AmplifyShaderEditor
 		private const double TagNameCheckMaxInterval = 1.5;
 
 		[SerializeField]
-		private bool m_foldout = false;
-
-		[SerializeField]
 		private List<CustomTagData> m_availableTags = new List<CustomTagData>();
 
 		private Dictionary<string, CustomTagData> m_availableTagsDict = new Dictionary<string, CustomTagData>();
@@ -68,9 +65,9 @@ namespace AmplifyShaderEditor
 
 		public override void ShowUnreadableDataMessage( ParentNode owner )
 		{
-			//bool foldout = owner.ContainerGraph.ParentWindow.InnerWindowVariables.ExpandedCustomTags;
-			NodeUtils.DrawPropertyGroup( ref m_foldout, CustomTagsStr, base.ShowUnreadableDataMessage );
-			//owner.ContainerGraph.ParentWindow.InnerWindowVariables.ExpandedCustomTags = foldout;
+			bool foldout = owner.ContainerGraph.ParentWindow.InnerWindowVariables.ExpandedCustomTags;
+			NodeUtils.DrawPropertyGroup( ref foldout, CustomTagsStr, base.ShowUnreadableDataMessage );
+			owner.ContainerGraph.ParentWindow.InnerWindowVariables.ExpandedCustomTags = foldout;
 		}
 
 		public void OnLogicUpdate()
@@ -103,16 +100,16 @@ namespace AmplifyShaderEditor
 		public override void Draw( UndoParentNode owner, bool style = true )
 		{
 			m_currentOwner = owner;
-			//bool foldout = owner.ContainerGraph.ParentWindow.InnerWindowVariables.ExpandedCustomTags;
+			bool foldout = owner.ContainerGraph.ParentWindow.InnerWindowVariables.ExpandedCustomTags;
 			if( style )
 			{
-				NodeUtils.DrawPropertyGroup( ref m_foldout, CustomTagsStr, DrawMainBody, DrawButtons );
+				NodeUtils.DrawPropertyGroup( ref foldout, CustomTagsStr, DrawMainBody, DrawButtons );
 			}
 			else
 			{
-				NodeUtils.DrawNestedPropertyGroup( ref m_foldout, CustomTagsStr, DrawMainBody, DrawButtons );
+				NodeUtils.DrawNestedPropertyGroup( ref foldout, CustomTagsStr, DrawMainBody, DrawButtons );
 			}
-			//owner.ContainerGraph.ParentWindow.InnerWindowVariables.ExpandedCustomTags = foldout;
+			owner.ContainerGraph.ParentWindow.InnerWindowVariables.ExpandedCustomTags = foldout;
 		}
 
 		void DrawButtons()
@@ -329,7 +326,7 @@ namespace AmplifyShaderEditor
 
 				if( !m_availableTagsDict.ContainsKey( name ) )
 				{
-					CustomTagData tagData = new CustomTagData( data, m_availableTags.Count );
+					CustomTagData tagData = new CustomTagData( data, m_availableTags.Count - 1 );
 					m_availableTags.Add( tagData );
 					m_availableTagsDict.Add( name, tagData );
 				}
@@ -393,13 +390,6 @@ namespace AmplifyShaderEditor
 					IOUtils.AddFieldValueToString( ref nodeInfo, m_availableTags[ i ].ToString() );
 				}
 			}
-		}
-
-		public void ChangeTagValue( string name , string value )
-		{
-			CustomTagData tag = m_availableTags.Find( x => x.TagName.Equals( name ) );
-			if( tag != null )
-				tag.TagValue = value;
 		}
 
 		public string GenerateTags()

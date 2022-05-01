@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Degrees", "Trigonometry Operators", "Converts values of scalars and vectors from radians to degrees",tags: "radians" )]
+	[NodeAttributes( "Degrees", "Trigonometry Operators", "Converts values of scalars and vectors from radians to degrees" )]
 	public sealed class DegreesOpNode : SingleInputOp
 	{
 		protected override void CommonInit( int uniqueId )

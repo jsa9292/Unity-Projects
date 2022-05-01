@@ -256,14 +256,9 @@ namespace AmplifyShaderEditor
 		{
 			get
 			{
-				if( Preferences.GlobalDisablePreviews )
-				{
-					return UIUtils.DummyRT;
-				}
-
 				if( m_outputPreview == null )
 				{
-					m_outputPreview = new RenderTexture( Constants.PreviewSize , Constants.PreviewSize , 0 , Constants.PreviewFormat , RenderTextureReadWrite.Linear );
+					m_outputPreview = new RenderTexture( 128, 128, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear );
 					m_outputPreview.wrapMode = TextureWrapMode.Repeat;
 					if( OnNewPreviewRTCreatedEvent != null )
 						OnNewPreviewRTCreatedEvent();
@@ -284,10 +279,7 @@ namespace AmplifyShaderEditor
 		{
 			base.Destroy();
 			if( m_outputPreview != null )
-			{
-				m_outputPreview.Release();
 				UnityEngine.ScriptableObject.DestroyImmediate( m_outputPreview );
-			}
 			m_outputPreview = null;
 
 			if( m_outputMaskMaterial != null )

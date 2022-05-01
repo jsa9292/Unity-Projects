@@ -109,7 +109,6 @@ Shader /*ase_name*/ "Hidden/Legacy/Samples/DoublePassUnlit" /*end*/
 			}
 			ENDCG
 		}
-		/*ase_pass_end*/
 	}
 	CustomEditor "ASEMaterialInspector"
 }

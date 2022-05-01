@@ -43,6 +43,11 @@ namespace AmplifyShaderEditor
 			m_correctlyLoaded = RefreshNodes( currentGraph );
 		}
 
+		private Type[] GetTypesInNamespace( Assembly assembly, string nameSpace )
+		{
+			return assembly.GetTypes().Where( t => String.Equals( t.Namespace, nameSpace, StringComparison.Ordinal ) ).ToArray();
+		}
+
 		public bool RefreshNodes( ParentGraph currentGraph )
 		{
 			if( m_items != null )
@@ -87,7 +92,7 @@ namespace AmplifyShaderEditor
 			{
 				//IEnumerable<System.Type> availableTypes = AppDomain.CurrentDomain.GetAssemblies().ToList().SelectMany( type => type.GetTypes() );
 				var mainAssembly = Assembly.GetExecutingAssembly();
-				Type[] availableTypes = IOUtils.GetTypesInNamespace( mainAssembly, "AmplifyShaderEditor" );
+				Type[] availableTypes = GetTypesInNamespace( mainAssembly, "AmplifyShaderEditor" );
 
 #if UNITY_2017_3_OR_NEWER
 				try
@@ -95,7 +100,7 @@ namespace AmplifyShaderEditor
 					var editorAssembly = Assembly.Load( "Assembly-CSharp-Editor" );
 					if( mainAssembly != editorAssembly )
 					{
-						Type[] extraTypes = IOUtils.GetTypesInNamespace( editorAssembly, "AmplifyShaderEditor" );
+						Type[] extraTypes = GetTypesInNamespace( editorAssembly, "AmplifyShaderEditor" );
 						availableTypes = availableTypes.Concat<Type>( extraTypes ).ToArray();
 					}
 				}
@@ -105,74 +110,62 @@ namespace AmplifyShaderEditor
 				}
 #endif
 
-#if UNITY_2018_3_OR_NEWER
-				Type[] asmdefTypes = IOUtils.GetAssemblyTypesArray();
-				if( asmdefTypes != null && asmdefTypes.Length > 0 )
-				{
-					availableTypes = availableTypes.Concat<Type>( asmdefTypes ).ToArray();
-				}
-#endif
-
 				foreach( System.Type type in availableTypes )
 				{
-					if( !m_itemsDict.ContainsKey( type ) )
+					foreach( NodeAttributes attribute in Attribute.GetCustomAttributes( type ).OfType<NodeAttributes>() )
 					{
-						foreach( NodeAttributes attribute in Attribute.GetCustomAttributes( type ).OfType<NodeAttributes>() )
+						if( attribute.Available && !attribute.Deprecated )
 						{
-							if( attribute.Available && !attribute.Deprecated )
+							//if ( !UIUtils.CurrentWindow.IsShaderFunctionWindow && attribute.AvailableInFunctionsOnly )
+							//	continue;
+
+							if( !UIUtils.HasColorCategory( attribute.Category ) )
 							{
-								//if ( !UIUtils.CurrentWindow.IsShaderFunctionWindow && attribute.AvailableInFunctionsOnly )
-								//	continue;
-
-								if( !UIUtils.HasColorCategory( attribute.Category ) )
+								if( !String.IsNullOrEmpty( attribute.CustomCategoryColor ) )
 								{
-									if( !String.IsNullOrEmpty( attribute.CustomCategoryColor ) )
+									try
 									{
-										try
-										{
-											Color color = new Color();
-											ColorUtility.TryParseHtmlString( attribute.CustomCategoryColor , out color );
-											UIUtils.AddColorCategory( attribute.Category , color );
-										}
-										catch( Exception e )
-										{
-											Debug.LogException( e );
-											UIUtils.AddColorCategory( attribute.Category , Constants.DefaultCategoryColor );
-										}
+										Color color = new Color();
+										ColorUtility.TryParseHtmlString( attribute.CustomCategoryColor, out color );
+										UIUtils.AddColorCategory( attribute.Category, color );
 									}
-									//else
-									//{
-									//	UIUtils.AddColorCategory( attribute.Category, Constants.DefaultCategoryColor );
-									//}
-								}
-
-								if( attribute.CastType != null && attribute.CastType.Length > 0 && type != null )
-								{
-									for( int i = 0 ; i < attribute.CastType.Length ; i++ )
+									catch( Exception e )
 									{
-										m_castTypes.Add( attribute.CastType[ i ] , type );
+										Debug.LogException( e );
+										UIUtils.AddColorCategory( attribute.Category, Constants.DefaultCategoryColor );
 									}
 								}
-
-								if( attribute.ShortcutKey != KeyCode.None && type != null )
-									m_shortcutTypes.Add( attribute.ShortcutKey , new ShortcutKeyData( type , attribute.Name ) );
-
-								ContextMenuItem newItem = new ContextMenuItem( attribute , type , attribute.Name , attribute.Tags , attribute.Category , attribute.Description , null , attribute.ShortcutKey );
-								if( UIUtils.GetNodeAvailabilityInBitArray( attribute.NodeAvailabilityFlags , NodeAvailability.SurfaceShader ) )
-									m_items.Add( newItem );
-								else if( UIUtils.GetNodeAvailabilityInBitArray( attribute.NodeAvailabilityFlags , currentGraph.ParentWindow.CurrentNodeAvailability ) )
-									m_items.Add( newItem );
-								else if( UIUtils.GetNodeAvailabilityInBitArray( attribute.NodeAvailabilityFlags , currentGraph.CurrentCanvasMode ) )
-									m_items.Add( newItem );
-
-								m_itemsDict.Add( type , attribute );
-								m_itemFunctions.Add( newItem );
+								//else
+								//{
+								//	UIUtils.AddColorCategory( attribute.Category, Constants.DefaultCategoryColor );
+								//}
 							}
-							else
+
+							if( attribute.CastType != null && attribute.CastType.Length > 0 && type != null )
 							{
-								if( !m_deprecatedItemsDict.ContainsKey(type))
-									m_deprecatedItemsDict.Add( type , attribute );
+								for( int i = 0; i < attribute.CastType.Length; i++ )
+								{
+									m_castTypes.Add( attribute.CastType[ i ], type );
+								}
 							}
+
+							if( attribute.ShortcutKey != KeyCode.None && type != null )
+								m_shortcutTypes.Add( attribute.ShortcutKey, new ShortcutKeyData( type, attribute.Name ) );
+
+							ContextMenuItem newItem = new ContextMenuItem( attribute, type, attribute.Name, attribute.Tags, attribute.Category, attribute.Description, null, attribute.ShortcutKey );
+							if( UIUtils.GetNodeAvailabilityInBitArray( attribute.NodeAvailabilityFlags, NodeAvailability.SurfaceShader ) )
+								m_items.Add( newItem );
+							else if( UIUtils.GetNodeAvailabilityInBitArray( attribute.NodeAvailabilityFlags, currentGraph.ParentWindow.CurrentNodeAvailability ) )
+								m_items.Add( newItem );
+							else if( UIUtils.GetNodeAvailabilityInBitArray( attribute.NodeAvailabilityFlags, currentGraph.CurrentCanvasMode ) )
+								m_items.Add( newItem );
+
+							m_itemsDict.Add( type, attribute );
+							m_itemFunctions.Add( newItem );
+						}
+						else
+						{
+							m_deprecatedItemsDict.Add( type, attribute );
 						}
 					}
 				}

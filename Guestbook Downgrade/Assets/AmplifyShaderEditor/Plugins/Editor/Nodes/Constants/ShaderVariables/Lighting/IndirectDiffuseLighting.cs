@@ -16,7 +16,6 @@ namespace AmplifyShaderEditor
 
 		private int m_cachedIntensityId = -1;
 
-		private const string FwdBasePragma = "#pragma multi_compile_fwdbase";
 
 		private readonly string LWIndirectDiffuseHeader = "ASEIndirectDiffuse( {0}, {1})";
 		private readonly string[] LWIndirectDiffuseBody =
@@ -31,8 +30,7 @@ namespace AmplifyShaderEditor
 			"}\n"
 		};
 
-		//void MixRealtimeAndBakedGI(inout Light light, half3 normalWS, inout half3 bakedGI, half4 shadowMask)
-		private readonly string LWMixRealtimeWithGI = "MixRealtimeAndBakedGI({0}, {1}, {2}, half4(0,0,0,0));";
+
 
 		protected override void CommonInit( int uniqueId )
 		{
@@ -119,7 +117,7 @@ namespace AmplifyShaderEditor
 				if( !dataCollector.IsSRP )
 				{
 					dataCollector.AddToIncludes( UniqueId, Constants.UnityLightingLib );
-					dataCollector.AddToDirectives( FwdBasePragma );
+
 					string texcoord1 = string.Empty;
 					string texcoord2 = string.Empty;
 
@@ -195,7 +193,7 @@ namespace AmplifyShaderEditor
 					dataCollector.AddLocalVariable( UniqueId, "data" + OutputId + ".ambient = " + fInName + "." + shVarName + ";" );
 					dataCollector.AddLocalVariable( UniqueId, "#endif //fsh" + OutputId );
 
-					dataCollector.AddToFragmentLocalVariables( UniqueId, "UnityGI gi" + OutputId + " = UnityGI_Base(data" + OutputId + ", 1, " + fragWorldNormal + ");" );
+					dataCollector.AddToLocalVariables( UniqueId, "UnityGI gi" + OutputId + " = UnityGI_Base(data" + OutputId + ", 1, " + fragWorldNormal + ");" );
 
 					finalValue =  "gi" + OutputId + ".indirect.diffuse";
 					m_outputPorts[ 0 ].SetLocalValue( finalValue, dataCollector.PortCategory );
@@ -226,12 +224,6 @@ namespace AmplifyShaderEditor
 
 							dataCollector.AddToPragmas( UniqueId, "multi_compile _ DIRLIGHTMAP_COMBINED" );
 							dataCollector.AddToPragmas( UniqueId, "multi_compile _ LIGHTMAP_ON" );
-							dataCollector.AddToPragmas( UniqueId , "multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE" );
-
-							dataCollector.AddToPragmas( UniqueId , "multi_compile _ _MAIN_LIGHT_SHADOWS" );
-							dataCollector.AddToPragmas( UniqueId , "multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE" );
-							dataCollector.AddToPragmas( UniqueId , "multi_compile _ _SHADOWS_SOFT" );
-
 						}
 
 						string fragWorldNormal = string.Empty;
@@ -255,10 +247,6 @@ namespace AmplifyShaderEditor
 						finalValue = "bakedGI" + OutputId;
 						string result = string.Format( LWIndirectDiffuseHeader, fInName + ".lightmapUVOrVertexSH.xy", fragWorldNormal );
 						dataCollector.AddLocalVariable( UniqueId, CurrentPrecisionType, WirePortDataType.FLOAT3, finalValue, result );
-						string mainLight = dataCollector.TemplateDataCollectorInstance.GetURPMainLight(UniqueId);
-						dataCollector.AddLocalVariable( UniqueId , string.Format( LWMixRealtimeWithGI , mainLight , fragWorldNormal , finalValue ) );
-						
-
 
 						m_outputPorts[ 0 ].SetLocalValue( finalValue, dataCollector.PortCategory );
 						return finalValue;

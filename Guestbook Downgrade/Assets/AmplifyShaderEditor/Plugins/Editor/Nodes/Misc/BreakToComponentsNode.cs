@@ -3,15 +3,13 @@
 
 using System;
 using UnityEngine;
-using UnityEditor;
 
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Split", "Vector Operators", "Formerly known as Break To Components. Breaks the input data into its individual components", null, KeyCode.B, tags: "split Break To Components" )]
+	[NodeAttributes( "Break To Components", "Vector Operators", "Breaks the input data into its individual components", null, KeyCode.B, tags: "split" )]
 	public sealed class BreakToComponentsNode : ParentNode
 	{
-		private const string RenameInfo = "This node was formerly known as Break To Components and was renamed to Split to decrease its canvas size.";
 		private WirePortDataType m_currentType = WirePortDataType.FLOAT;
 		private readonly string[] ColorPortNames = { "R", "G", "B", "A" };
 		private readonly string[] VectorPortNames = { "X", "Y", "Z", "W" };
@@ -46,17 +44,16 @@ namespace AmplifyShaderEditor
 				return;
 
 			SetPreviewInputs();
-			if( !Preferences.GlobalDisablePreviews )
+
+			int count = m_outputPorts.Count;
+			for( int i = 0; i < count; i++ )
 			{
-				int count = m_outputPorts.Count;
-				for( int i = 0 ; i < count ; i++ )
-				{
-					RenderTexture temp = RenderTexture.active;
-					RenderTexture.active = m_outputPorts[ i ].OutputPreviewTexture;
-					Graphics.Blit( null , m_outputPorts[ i ].OutputPreviewTexture , PreviewMaterial , Mathf.Min( i , 3 ) );
-					RenderTexture.active = temp;
-				}
+				RenderTexture temp = RenderTexture.active;
+				RenderTexture.active = m_outputPorts[ i ].OutputPreviewTexture;
+				Graphics.Blit( null, m_outputPorts[ i ].OutputPreviewTexture, PreviewMaterial, Mathf.Min( i, 3 ) );
+				RenderTexture.active = temp;
 			}
+
 			PreviewIsDirty = m_continuousPreviewRefresh;
 		}
 
@@ -66,12 +63,6 @@ namespace AmplifyShaderEditor
 			{
 				return m_inputPorts[ 0 ].InputPreviewTexture( ContainerGraph );
 			}
-		}
-
-		public override void DrawProperties()
-		{
-			base.DrawProperties();
-			EditorGUILayout.HelpBox( RenameInfo, MessageType.Warning );
 		}
 
 		void UpdateOutputs( WirePortDataType newType )
@@ -194,10 +185,6 @@ namespace AmplifyShaderEditor
 		public override void OnConnectedOutputNodeChanges( int outputPortId, int otherNodeId, int otherPortId, string name, WirePortDataType type )
 		{
 			base.OnConnectedOutputNodeChanges( outputPortId, otherNodeId, otherPortId, name, type );
-
-			if(  UIUtils.IsLoading || m_isNodeBeingCopied )
-				return;
-
 			m_inputPorts[ 0 ].MatchPortToConnection();
 			UpdateOutputs( m_inputPorts[ 0 ].DataType );
 		}
@@ -205,10 +192,6 @@ namespace AmplifyShaderEditor
 		public override void OnInputPortConnected( int portId, int otherNodeId, int otherPortId, bool activateNode = true )
 		{
 			base.OnInputPortConnected( portId, otherNodeId, otherPortId, activateNode );
-
-			if( UIUtils.IsLoading || m_isNodeBeingCopied )
-				return;
-
 			m_inputPorts[ 0 ].MatchPortToConnection();
 			UpdateOutputs( m_inputPorts[ 0 ].DataType );
 		}

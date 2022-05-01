@@ -27,14 +27,10 @@ namespace AmplifyShaderEditor
 	{
 		public string Name;
 		public string Attribute;
-		public bool HasDeprecatedValue;
-		public string DeprecatedValue;
-		public PropertyAttributes( string name, string attribute , string deprecated = null )
+		public PropertyAttributes( string name, string attribute )
 		{
 			Name = name;
 			Attribute = attribute;
-			DeprecatedValue = deprecated;
-			HasDeprecatedValue = deprecated != null;
 		}
 	}
 
@@ -44,8 +40,7 @@ namespace AmplifyShaderEditor
 		private const string LongNameEnder = "... )";
 		protected int m_longNameSize = 200;
 		//private const string InstancedPropertyWarning = "Instanced Property option shouldn't be used on official SRP templates as all property variables are already declared as instanced inside a CBuffer.\nPlease consider changing to Property option.";
-		private const string TooltipFormatter = "{0}\n\nName: {1}\nValue: {2}";
-		private const string InvalidAttributeFormatter = "Attribute {0} not found on node {1}. Please click on this message to select node and review its attributes section";
+		private string TooltipFormatter = "{0}\n\nName: {1}\nValue: {2}";
 		protected string GlobalTypeWarningText = "Global variables must be set via a C# script using the Shader.SetGlobal{0}(...) method.\nPlease note that setting a global variable will affect all shaders which are using it.";
 		private const string HybridInstancedStr = "Hybrid Instanced";
 		private const string AutoRegisterStr = "Auto-Register";
@@ -55,7 +50,6 @@ namespace AmplifyShaderEditor
 		private const string PropertyInspectorStr = "Name";
 		protected const string EnumsStr = "Enums";
 		protected const string CustomAttrStr = "Custom Attributes";
-		protected const string HeaderAttrStr = "Headers";
 		protected const string ParameterTypeStr = "Type";
 		private const string PropertyTextfieldControlName = "PropertyName";
 		private const string PropertyInspTextfieldControlName = "PropertyInspectorName";
@@ -68,9 +62,6 @@ namespace AmplifyShaderEditor
 		protected readonly int[] EnumModeIntValues = { 0, 1 };
 		private const string FetchToCreateDuplicatesMsg = "Reverting property name from '{0}' to '{1}' as it is registered to another property node.";
 		private const string FetchToCreateOnDuplicateNodeMsg = "Setting new property name '{0}' as '{1}' is registered to another property node.";
-		private const string HeaderId = "Header";
-		private const string EnumId = "Enum";
-
 		[SerializeField]
 		protected PropertyType m_currentParameterType;
 
@@ -122,13 +113,6 @@ namespace AmplifyShaderEditor
 
 		[SerializeField]
 		private List<string> m_customAttr = new List<string>();
-
-		[SerializeField]
-		private bool m_hasHeaders = false;
-
-		[SerializeField]
-		private List<string> m_headerAttributeValues = new List<string>();
-
 
 		[SerializeField]
 		private string m_enumClassName = string.Empty;
@@ -185,7 +169,6 @@ namespace AmplifyShaderEditor
 		protected bool m_visibleAttribsFoldout;
 		protected bool m_visibleEnumsFoldout;
 		protected bool m_visibleCustomAttrFoldout;
-		protected bool m_visibleHeaderAttrFoldout;
 		protected List<PropertyAttributes> m_availableAttribs = new List<PropertyAttributes>();
 		private string[] m_availableAttribsArr;
 
@@ -228,7 +211,6 @@ namespace AmplifyShaderEditor
 			m_availableAttribs.Add( new PropertyAttributes( "HDR", "[HDR]" ) );
 			m_availableAttribs.Add( new PropertyAttributes( "Gamma", "[Gamma]" ) );
 			m_availableAttribs.Add( new PropertyAttributes( "Per Renderer Data", "[PerRendererData]" ) );
-			m_availableAttribs.Add( new PropertyAttributes( "Header", "[Header]" ) );
 		}
 
 		public override void AfterCommonInit()
@@ -294,7 +276,7 @@ namespace AmplifyShaderEditor
 
 				if( UIUtils.IsNumericName( m_propertyName ) )
 				{
-					UIUtils.ShowMessage( UniqueId, string.Format( "Invalid property name '{0}' as it cannot start with numbers. Reverting to previous name.", m_propertyName ), MessageSeverity.Warning );
+					UIUtils.ShowMessage( UniqueId, string.Format("Invalid property name '{0}' as it cannot start with numbers. Reverting to previous name.", m_propertyName ), MessageSeverity.Warning );
 					m_propertyName = m_oldName;
 					GUI.FocusControl( string.Empty );
 					return;
@@ -433,7 +415,7 @@ namespace AmplifyShaderEditor
 			}
 		}
 
-		protected virtual void OnAtrributesChanged() { CheckEnumAttribute(); CheckHeaderAttribute(); }
+		protected virtual void OnAtrributesChanged() { CheckEnumAttribute(); }
 		void DrawAttributesAddRemoveButtons()
 		{
 			if( m_availableAttribsArr == null )
@@ -470,21 +452,6 @@ namespace AmplifyShaderEditor
 					m_hasEnum = true;
 			}
 		}
-
-
-
-		protected void CheckHeaderAttribute()
-		{
-			m_hasHeaders = false;
-			foreach( var item in m_selectedAttribs )
-			{
-				if( m_availableAttribsArr[ item ].Equals( HeaderId ) )
-				{
-					m_hasHeaders = true;
-				}
-			}
-		}
-
 		void DrawEnumAddRemoveButtons()
 		{
 			// Add new port
@@ -621,55 +588,7 @@ namespace AmplifyShaderEditor
 			DrawCustomAttrAddRemoveButtons();
 			EditorGUILayout.EndHorizontal();
 		}
-		
-		protected void DrawHeaderAttrAddRemoveButtons()
-		{
-			// Add new port
-			if( GUILayout.Button( string.Empty, UIUtils.PlusStyle, GUILayout.Width( ButtonLayoutWidth ) ) )
-			{
-				m_headerAttributeValues.Add( "" );
-				m_visibleHeaderAttrFoldout = true;
-			}
 
-			//Remove port
-			if( GUILayout.Button( string.Empty, UIUtils.MinusStyle, GUILayout.Width( ButtonLayoutWidth ) ) )
-			{
-				if( m_headerAttributeValues.Count > 0 )
-				{
-					m_headerAttributeValues.RemoveAt( m_headerAttributeValues.Count - 1 );
-				}
-			}
-		}
-
-		protected void DrawHeaderAttributes()
-		{
-			int count = m_headerAttributeValues.Count;
-			for( int i = 0; i < count; i++ )
-			{
-				EditorGUI.BeginChangeCheck();
-				m_headerAttributeValues[ i ] = EditorGUILayoutTextField( "Header " + i, m_headerAttributeValues[ i ] );
-				if( EditorGUI.EndChangeCheck() )
-				{
-					m_headerAttributeValues[ i ] = UIUtils.RemoveHeaderAttrCharacters( m_headerAttributeValues[ i ] );
-				}
-			}
-
-
-
-
-			if( count <= 0 )
-			{
-				EditorGUILayout.HelpBox( "Your list is Empty!\nUse the plus button to add more.", MessageType.Info );
-				return;
-			}
-
-			EditorGUILayout.BeginHorizontal();
-			GUILayout.Label( " " );
-			DrawHeaderAttrAddRemoveButtons();
-			EditorGUILayout.EndHorizontal();
-		}
-
-		
 		public virtual void DrawAttributes()
 		{
 			int attribCount = m_selectedAttribs.Count;
@@ -872,15 +791,9 @@ namespace AmplifyShaderEditor
 						NodeUtils.DrawPropertyGroup( ref m_visibleEnumsFoldout, EnumsStr, DrawEnums );
 				}
 
-				if( m_drawAttributes )
-				{
-					if( m_hasHeaders )
-						NodeUtils.DrawPropertyGroup( ref m_visibleHeaderAttrFoldout, HeaderAttrStr, DrawHeaderAttributes, DrawHeaderAttrAddRemoveButtons );
+				if( m_drawAttributes && m_customAttrCount > 0 )
+					NodeUtils.DrawPropertyGroup( ref m_visibleCustomAttrFoldout, CustomAttrStr, DrawCustomAttributes, DrawCustomAttrAddRemoveButtons );
 
-					if( m_customAttrCount > 0 )
-						NodeUtils.DrawPropertyGroup( ref m_visibleCustomAttrFoldout, CustomAttrStr, DrawCustomAttributes, DrawCustomAttrAddRemoveButtons );
-				}
-				
 				CheckPropertyFromInspector();
 			}
 		}
@@ -1006,7 +919,7 @@ namespace AmplifyShaderEditor
 
 		public void ShowHybridInstanced()
 		{
-			if( m_showHybridInstancedUI && CurrentParameterType == PropertyType.Property && ( m_containerGraph.IsSRP || m_containerGraph.CurrentShaderFunction != null ) )
+			if( m_showHybridInstancedUI && CurrentParameterType == PropertyType.Property && (m_containerGraph.IsSRP || m_containerGraph.CurrentShaderFunction != null) )
 			{
 				m_hybridInstanced = EditorGUILayoutToggle( HybridInstancedStr, m_hybridInstanced );
 			}
@@ -1296,7 +1209,7 @@ namespace AmplifyShaderEditor
 		{
 			// Also testing inside shader function because node can be used indirectly over a custom expression and directly over a Function Output node 
 			// That isn't being used externaly making it to not be registered ( since m_connStatus it set to Connected by being connected to an output node
-			if( CurrentParameterType != PropertyType.Constant && m_autoRegister && ( m_connStatus != NodeConnectionStatus.Connected || InsideShaderFunction ) )
+			if( CurrentParameterType != PropertyType.Constant && m_autoRegister && (m_connStatus != NodeConnectionStatus.Connected || InsideShaderFunction ))
 			{
 				RegisterProperty( ref dataCollector );
 			}
@@ -1418,16 +1331,6 @@ namespace AmplifyShaderEditor
 
 			m_availableAttribs = null;
 		}
-		private const string HeaderFormatStr = "[Header({0})]";
-		string BuildHeader()
-		{
-			string result = string.Empty;
-			for( int i = 0; i < m_headerAttributeValues.Count; i++ )
-			{
-				result += string.Format( HeaderFormatStr, m_headerAttributeValues[ i ] );
-			}
-			return result;
-		}
 
 		string BuildEnum()
 		{
@@ -1463,8 +1366,6 @@ namespace AmplifyShaderEditor
 				{
 					if( m_availableAttribs[ m_selectedAttribs[ i ] ].Name.Equals( "Enum" ) )
 						attribs += BuildEnum();
-					else if( m_availableAttribs[ m_selectedAttribs[ i ] ].Name.Equals( HeaderId ) )
-						attribs += BuildHeader();
 					else
 						attribs += m_availableAttribs[ m_selectedAttribs[ i ] ].Attribute;
 				}
@@ -1569,12 +1470,6 @@ namespace AmplifyShaderEditor
 			IOUtils.AddFieldValueToString( ref nodeInfo, m_variableMode );
 			IOUtils.AddFieldValueToString( ref nodeInfo, m_autoGlobalName );
 
-			int headerCount = m_headerAttributeValues.Count;
-			IOUtils.AddFieldValueToString( ref nodeInfo, headerCount );
-			for( int i = 0; i < headerCount; i++ )
-			{
-				IOUtils.AddFieldValueToString( ref nodeInfo, m_headerAttributeValues[ i ] );
-			}
 
 			IOUtils.AddFieldValueToString( ref nodeInfo, m_enumCount );
 			for( int i = 0; i < m_enumCount; i++ )
@@ -1604,11 +1499,10 @@ namespace AmplifyShaderEditor
 			int attribCount = m_availableAttribs.Count;
 			for( int i = 0; i < attribCount; i++ )
 			{
-				if( m_availableAttribs[ i ].Attribute.Equals( name ) || 
-					(m_availableAttribs[ i ].HasDeprecatedValue && m_availableAttribs[ i ].DeprecatedValue.Equals( name ) ) )
+				if( m_availableAttribs[ i ].Attribute.Equals( name ) )
 					return i;
 			}
-			return -1;
+			return 0;
 		}
 
 		public override void ReadFromString( ref string[] nodeParams )
@@ -1650,16 +1544,7 @@ namespace AmplifyShaderEditor
 				{
 					for( int i = 0; i < attribAmount; i++ )
 					{
-						string attribute = GetCurrentParam( ref nodeParams );
-						int idForAttribute = IdForAttrib( attribute );
-						if( idForAttribute >= 0 )
-						{
-							m_selectedAttribs.Add( idForAttribute );
-						}
-						else
-						{
-							UIUtils.ShowMessage( UniqueId, string.Format( InvalidAttributeFormatter, attribute,m_propertyInspectorName ) , MessageSeverity.Warning );
-						}
+						m_selectedAttribs.Add( IdForAttrib( GetCurrentParam( ref nodeParams ) ) );
 					}
 
 					m_visibleAttribsFoldout = true;
@@ -1677,23 +1562,6 @@ namespace AmplifyShaderEditor
 			{
 				m_autoGlobalName = Convert.ToBoolean( GetCurrentParam( ref nodeParams ) );
 			}
-
-			if( UIUtils.CurrentShaderVersion() > 18707 )
-			{
-				if( UIUtils.CurrentShaderVersion() == 18708 )
-				{
-					m_headerAttributeValues.Add( GetCurrentParam( ref nodeParams ) );
-				}
-				else
-				{
-					int headerCount = Convert.ToInt32( GetCurrentParam( ref nodeParams ) );
-					for( int i = 0; i < headerCount; i++ )
-					{
-						m_headerAttributeValues.Add( GetCurrentParam( ref nodeParams ) );
-					}
-				}
-			}
-
 			if( UIUtils.CurrentShaderVersion() > 14403 )
 			{
 				m_enumCount = Convert.ToInt32( GetCurrentParam( ref nodeParams ) );
@@ -1729,7 +1597,6 @@ namespace AmplifyShaderEditor
 			}
 
 			CheckEnumAttribute();
-			CheckHeaderAttribute();
 			if( m_enumCount > 0 )
 				m_visibleEnumsFoldout = true;
 
@@ -1750,16 +1617,9 @@ namespace AmplifyShaderEditor
 				m_oldName = m_propertyName;
 			}
 
-			ReleaseRansomedProperty();
-			
-		}
-
-		public virtual void ReleaseRansomedProperty()
-		{
-			if( m_variableMode == VariableMode.Fetch/* && m_autoGlobalName */)
+			if( m_variableMode == VariableMode.Fetch && m_autoGlobalName )
 			{
-				//Fooling setter to have a different value 
-				m_variableMode = VariableMode.Create;
+				CurrentVariableMode = VariableMode.Create;
 				CurrentVariableMode = VariableMode.Fetch;
 			}
 		}
@@ -1825,11 +1685,6 @@ namespace AmplifyShaderEditor
 					m_variableMode = value;
 					if( value == VariableMode.Fetch )
 					{
-						// Release ownership on name
-						if( UIUtils.CheckUniformNameOwner( m_oldName ) == UniqueId )
-						{
-							UIUtils.ReleaseUniformName( UniqueId , m_oldName );
-						}
 						m_oldName = m_propertyName;
 					}
 					else
@@ -1849,24 +1704,17 @@ namespace AmplifyShaderEditor
 							m_propertyNameIsDirty = true;
 							OnPropertyNameChanged();
 						}
-						else
+						else if( UIUtils.CheckUniformNameOwner( m_propertyName ) != UniqueId )
 						{
-							if( UIUtils.IsUniformNameAvailable( m_propertyName ) )
-							{
-								UIUtils.RegisterUniformName( UniqueId , m_propertyName );
-							}
-							else if( UIUtils.CheckUniformNameOwner( m_propertyName ) != UniqueId )
-							{
-								string oldProperty = m_propertyName;
-								RegisterFirstAvailablePropertyName( false );
-								UIUtils.ShowMessage( UniqueId, string.Format( FetchToCreateOnDuplicateNodeMsg, m_propertyName, oldProperty ), MessageSeverity.Warning );
-							}
+							string oldProperty = m_propertyName;
+							RegisterFirstAvailablePropertyName( false );
+							UIUtils.ShowMessage( UniqueId, string.Format( FetchToCreateOnDuplicateNodeMsg, m_propertyName, oldProperty ), MessageSeverity.Warning );
 						}
 					}
 				}
 			}
 		}
-		
+
 		public string PropertyData( MasterNodePortCategory portCategory )
 		{
 			return ( m_currentParameterType == PropertyType.InstancedProperty ) ? m_outputPorts[ 0 ].LocalValue( portCategory ) : m_propertyName;

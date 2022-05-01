@@ -355,16 +355,11 @@ namespace AmplifyShaderEditor
 
 			if( dataCollector.IsTemplate )
 			{
-				dataCollector.TemplateDataCollectorInstance.SetUVUsage( m_textureCoordChannel , m_texcoordSize );
+				dataCollector.TemplateDataCollectorInstance.SetUVUsage( m_textureCoordChannel, m_texcoordSize );
 			}
-			else
+			else if( m_textureCoordChannel > 3 )
 			{
-				dataCollector.SetTextureChannelSize( m_textureCoordChannel , m_outputPorts[0].DataType );
-
-				if( m_textureCoordChannel > 3 )
-				{
-					dataCollector.AddCustomAppData( string.Format( TemplateHelperFunctions.TexUVFullSemantic , m_textureCoordChannel ) );
-				}
+				dataCollector.AddCustomAppData( string.Format( TemplateHelperFunctions.TexUVFullSemantic, m_textureCoordChannel ) );
 			}
 			UIUtils.SetCategoryInBitArray( ref m_category, nodeData.Category );
 

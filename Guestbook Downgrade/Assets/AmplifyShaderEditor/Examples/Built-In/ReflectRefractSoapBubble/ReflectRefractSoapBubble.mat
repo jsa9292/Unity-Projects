@@ -66,15 +66,15 @@ Material:
     - _Float1: 0.77
     - _Float2: 0
     - _Float3: 5
-    - _IndexofRefraction: 3
+    - _IndexofRefraction: 3.25
     - _Mirror: 0.5
     - _NormalScale: 0
-    - _Opacity: 1
+    - _Opacity: 0.2
     - _Smooth: 0.882
-    - _Smoothness: 0.372
+    - _Smoothness: 0.95
     - _SoapAmount: 0
     - _Spec: 1
-    - _Specular: 0.619
+    - _Specular: 0
     - __dirty: 0
     m_Colors:
     - _Albedo: {r: 0.034482718, g: 1, b: 0, a: 1}

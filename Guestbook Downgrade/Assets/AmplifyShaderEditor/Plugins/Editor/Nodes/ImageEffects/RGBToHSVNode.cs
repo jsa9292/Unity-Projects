@@ -48,7 +48,7 @@ namespace AmplifyShaderEditor
 			DrawPrecisionProperty();
 		}
 
-		public static void AddRGBToHSVFunction( ref MasterNodeDataCollector dataCollector, string precisionString )
+		public void AddRGBToHSVFunction( ref MasterNodeDataCollector dataCollector, string precisionString )
 		{
 			if( !dataCollector.HasFunction( RGBToHSVHeader ) )
 			{
