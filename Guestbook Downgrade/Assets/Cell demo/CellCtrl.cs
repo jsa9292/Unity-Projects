@@ -33,6 +33,7 @@ public class CellCtrl : MonoBehaviour
     private float axis_y;
     private float axis_z;
 
+    public string save_string = "";
     private com.rfilkov.components.SkeletonOverlayer skeleton;
 
     public void Setup_Cell() {
@@ -41,26 +42,25 @@ public class CellCtrl : MonoBehaviour
         skeleton = com.rfilkov.components.SkeletonOverlayer.instance;
 
         //audio
-        types[0] = Random.Range(0, 84);
-        types[1] = Random.Range(0, 84);
-        types[2] = Random.Range(0, 84);
+        types[0] = Random.Range(21, 63);
+        types[1] = Random.Range(21, 63);
+        types[2] = Random.Range(21, 63);
         //video
         qs[0] = Random.rotationUniform;
         qs[1] = Random.rotationUniform;
         qs[2] = Random.rotationUniform;
 
-        float sensitivity = 1000f;
+        float sensitivity = 10000000;
         dna_colors[0] = skeleton.features[9] * sensitivity; // Random.Range(0, 1f);
         dna_colors[1] = (skeleton.features[1])* sensitivity; // Random.Range(0, 1f);
         dna_colors[2] = (skeleton.features[2])* sensitivity; // Random.Range(0, 1f);
         n_color = (skeleton.features[3])* sensitivity; // Random.Range(0, 1f);
-        e_color = Random.Range(0, 1f);  //(skeleton.features[4])* sensitivity; //
+        e_color = (skeleton.features[4])* sensitivity; //
         e_extrusion = (skeleton.features[5])* sensitivity; // Random.Range(0, 1f);
         axis_x = (skeleton.features[6])* sensitivity; // Random.Range(0, 1f);
         axis_y = (skeleton.features[7])* sensitivity; // Random.Range(0, 1f);
         axis_z = (skeleton.features[8])*sensitivity; // Random.Range(0, 1f);
 
-        string save_string = "";
         //audio
         save_string += types[0].ToString() + ",";
         save_string += types[1].ToString() + ",";
@@ -79,7 +79,6 @@ public class CellCtrl : MonoBehaviour
         save_string += axis_y.ToString() + ",";
         save_string += axis_z.ToString();
 
-        RuntimeText.instance.WriteString(save_string);
         Update_Cell_Graphics();
     }
     public void Update_Cell_Graphics() {
@@ -91,18 +90,19 @@ public class CellCtrl : MonoBehaviour
         for (int i = 0; i < azs.Length; i++)
         {
             azs[i].soundType = types[i];
-            azs[i].color = Color.HSVToRGB(Mathf.Cos(dna_colors[i]), 1f, 1f);
+            azs[i].color = Color.HSVToRGB((Mathf.Cos(dna_colors[i]) + 1) / 2, 1f, 1f);
+            azs[i].delay = i * 0.2f;
             azs[i].Start();
             azs[i].transform.position = nucleus_mr.transform.position + Vector3.up * 0.2f;
             nucleus_mr.transform.rotation *= qs[i];
         }
-        nucleus_mr.material.SetColor("_Color", Color.HSVToRGB(Mathf.Cos(n_color), 1f, 1f));
-        ectoplasm_mr.material.SetColor("_Color", Color.HSVToRGB(Mathf.Cos(e_color), 1f, 1f));
-        ectoplasm_mr.material.SetFloat("_ExtrusionPoint", Mathf.Cos(e_extrusion)/10f + 0.01f);
+        nucleus_mr.material.SetColor("_Color", Color.HSVToRGB((Mathf.Cos(n_color)+1)/2, 1f, 1f));
+        ectoplasm_mr.material.SetColor("_Color", Color.HSVToRGB((Mathf.Cos(e_color) + 1) / 2, 1f, 1f));
+        ectoplasm_mr.material.SetFloat("_ExtrusionPoint", (Mathf.Cos(e_extrusion) + 1) / 10f + 0.01f);
 
-        ectoplasm_mr.material.SetFloat("_Axis_x", Mathf.Cos(axis_x));
-        ectoplasm_mr.material.SetFloat("_Axis_y", Mathf.Cos(axis_y));
-        ectoplasm_mr.material.SetFloat("_Axis_z", Mathf.Cos(axis_z));
+        ectoplasm_mr.material.SetFloat("_Axis_x", (Mathf.Cos(axis_x) + 1) / 2);
+        ectoplasm_mr.material.SetFloat("_Axis_y", (Mathf.Cos(axis_y) + 1) / 2);
+        ectoplasm_mr.material.SetFloat("_Axis_z", (Mathf.Cos(axis_z) + 1) / 2);
 
         jols = GetComponentsInChildren<com.rfilkov.components.JointOverlayer>();
         for (int i = 1; i < jols.Length; i++)

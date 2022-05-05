@@ -43,9 +43,9 @@ public class MCBlob : MonoBehaviour
     /*Amount of cubes in X/Y/Z directions, Dimension will always be from -.5f to .5f in XYZ
       remember to call Regen() if changing!
     */
-    int _dimX = 30;
-    int _dimY = 30;
-    int _dimZ = 10;
+    int _dimX = 32;
+    int _dimY = 32;
+    int _dimZ = 32;
 
     public int dimX
     {

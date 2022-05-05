@@ -9,28 +9,21 @@ public class RuntimeText : MonoBehaviour
     private void Start()
     {
         instance = this;
-        filename = System.DateTime.Today.ToShortDateString().Replace('/','_');
-        filePath = Application.streamingAssetsPath + "/" + filename + ".txt";
+        filePath = Application.streamingAssetsPath + "/data_dump.txt";
 
-        DirectoryInfo directoryInfo = new DirectoryInfo(Path.GetDirectoryName(filePath));
-        if (!directoryInfo.Exists) directoryInfo.Create();
-        
-        Debug.Log(filename);
     }
 
-    public void WriteString(string content)
+    public static void WriteString(string content)
     {
-        FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write);
-        StreamWriter writer = new StreamWriter(fileStream, System.Text.Encoding.Unicode);
+        StreamWriter writer = new StreamWriter(filePath,true);
         writer.WriteLine(content);
         writer.Close();
     }
 
     public void ReadString()
     {
-        string path = Application.streamingAssetsPath + "/" + filename + ".txt";
         //Read the text from directly from the test.txt file
-        StreamReader reader = new StreamReader(path);
+        StreamReader reader = new StreamReader(filePath);
         Debug.Log(reader.ReadToEnd());
         reader.Close();
     }

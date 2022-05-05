@@ -22,7 +22,7 @@ public class DetectPilot : MonoBehaviour
     private CellSpawner spawner;
     private KinectManager kinectManager;
     private UI_anim_control uac;
-    private bool attachToSpawner;
+    public bool attachToSpawner;
     private void Awake()
     {
         instance = this;
@@ -63,7 +63,12 @@ public class DetectPilot : MonoBehaviour
         if (currentCell)
         {
             currentCell.transform.position += Vector3.up * cell_y_offset;
-            if (attachToSpawner) currentCell.transform.position = spawner.transform.position;
+            Debug.Log(currentCell.transform.position);
+            if (attachToSpawner)
+            {
+                currentCell.transform.position = spawner.transform.position;
+                currentCell.transform.localEulerAngles += Vector3.up * 10f * Time.deltaTime;
+            }
         }
     }
     private void OnDrawGizmos()

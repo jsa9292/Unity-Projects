@@ -21,19 +21,26 @@ public class CellSpawner : MonoBehaviour
         instance = this;
         timer = 0;
     }
+    public GameObject go;
+    public Vector3 rand_dir;
+    private float juice;
     private void Update()
     {
         if (count > 0)
         {
             timer += Time.deltaTime;
-            if (cell_finished && (timer > interval))
+            if (cell_finished && timer > interval)
             {
                 timer -= interval;
                 count--;
-                GameObject go = GameObject.Instantiate(cell_finished, transform.position+new Vector3(Random.Range(0, noiseMag),Random.Range(0, noiseMag),Random.Range(0, noiseMag)), randRot? Random.rotation:transform.rotation);
-                if(sharingMesh) go.transform.GetChild(1).GetComponent<MeshFilter>().sharedMesh = sharedMesh;
-                
+                go = GameObject.Instantiate(cell_finished, transform.position, DetectPilot.instance.currentCell.transform.rotation);
+                if (sharingMesh) go.transform.GetChild(1).GetComponent<MeshFilter>().sharedMesh = sharedMesh;
+                rand_dir = new Vector3(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
+                juice = noiseMag;
+                RuntimeText.WriteString(System.DateTime.Now.ToString()+","+transform.position+","+rand_dir.ToString() + "," + go.GetComponent<CellCtrl>().save_string);       
             }
+
+
         }
         else
         {
@@ -42,6 +49,12 @@ public class CellSpawner : MonoBehaviour
             count = 0;
             interval = 0;
         }
-        transform.position +=  Vector3.up * move_mag* Time.deltaTime * Mathf.Sin(frequency*Time.timeSinceLevelLoad);
+
+        if (go)
+        {
+            go.transform.Translate(rand_dir * juice * Time.deltaTime);
+            go.transform.localEulerAngles += rand_dir* juice * Time.deltaTime;
+            juice -= Time.deltaTime;
+        }
     }
 }

@@ -140,6 +140,7 @@ public class UI_anim_control : MonoBehaviour
         cellLoaded = false;
         loadingUser = false;
         userDetected = false;
+        DetectPilot.instance.attachToSpawner = false;
         kinectManager.maxTrackedUsers = 0;
         Debug.Log("End Anim");
     }
