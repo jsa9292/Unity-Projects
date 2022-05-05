@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-
+[ExecuteInEditMode]
 public class ProgressBar : MonoBehaviour
 {
 
@@ -110,10 +110,10 @@ public class ProgressBar : MonoBehaviour
                 nextPlay = Time.time + RepeatRate;
                 audiosource.PlayOneShot(sound);
             }
+            float barVal = Mathf.Clamp(com.rfilkov.kinect.KinectManager.Instance.user_tracked_dur, 0, 2f);
+            if (barVal >= 2f) UI_anim_control.instance.LoadingUser();
+            UpdateValue(barVal / 2f * 100f);
         }
-        float barVal = Mathf.Clamp(com.rfilkov.kinect.KinectManager.Instance.user_tracked_dur, 0, 2f);
-        if (barVal >= 2f) UI_anim_control.instance.LoadingUser();
-        UpdateValue( barVal/ 2f * 100f);
     }
 
 }
