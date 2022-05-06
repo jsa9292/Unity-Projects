@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/CombinedDisplay/CombinedDisplay.unity
+    guid: 0ad9937b402560a41a4a8643073addc5
   m_configObjects: {}

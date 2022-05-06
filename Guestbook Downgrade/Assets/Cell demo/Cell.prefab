@@ -780,7 +780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc18e8b9b9c6457438a9f9f736f861be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isoLevel: 5.8
+  isoLevel: 5.39
   BlobObjectsLocations:
   - {fileID: 1935734739234406528}
   - {fileID: 1935734738299627288}
@@ -974,6 +974,7 @@ MonoBehaviour:
   panel_title: {fileID: 7590435343821240445}
   panel_content: {fileID: 4545521968879779736}
   cell_id: 0
+  save_string: 
 --- !u!114 &761940448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1000,7 +1001,7 @@ MonoBehaviour:
   forwardOffset: -0.009
   mr: {fileID: 0}
   pos_thres: 1
-  smoothing: 0.256
+  smoothing: 0.776
 --- !u!1 &1935734739750706679
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,19 +13,20 @@ public class AudioZone : MonoBehaviour
     public float length = 2.0f;
     public float freq = 440.0f;
     public int soundType = 0;
-    public AudioSource As;
-    private static AudioSource[] Ass = new AudioSource[0];
-    public GameObject Ass_go;
+    public float delay;
+    public AudioSource AS;
+    private static AudioSource[] ASs = new AudioSource[0];
+    public GameObject ASs_go;
     public void Start()
     {
         mr.material.color = color;
-        if (Ass.Length == 0)
+        if (ASs.Length == 0)
         {
-            Ass_go = GameObject.Find("Ass");
-            Ass = Ass_go.GetComponentsInChildren<AudioSource>();
+            ASs_go = GameObject.Find("ASs");
+            ASs = ASs_go.GetComponentsInChildren<AudioSource>();
         }
-        if (As) return;
-        As = Ass[soundType];
+        if (AS) return;
+        AS = ASs[soundType];
         //float[] pcm;
         //if (soundType == 0)
         //{
@@ -56,13 +57,17 @@ public class AudioZone : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        Invoke("PlayNDie", delay);
+
+    }
+    private void PlayNDie() {
         GameObject go = new GameObject();
         AudioSource aud = go.AddComponent<AudioSource>();
-        aud.clip = As.clip;
+        aud.clip = AS.clip;
         aud.time = 0.0f;
         aud.Play();
-        GameObject.Destroy(go, length + 0.5f);
-        
+        GameObject.Destroy(go, aud.clip.length + 0.3f);
+
     }
 
 

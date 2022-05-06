@@ -36,6 +36,6 @@ MonoBehaviour:
   featureEnabledDynamicOcclusion: 1
   featureEnabledMeshSkewing: 1
   featureEnabledShaderAccuracyHigh: 1
-  pluginVersion: 1981
-  _DummyMaterial: {fileID: 2100000, guid: b4a6d9303c30db34580a2a616c072a32, type: 2}
-  _BeamShader: {fileID: 4800000, guid: 7523d701183c7984cb3550c53783efb9, type: 3}
+  pluginVersion: 1990
+  _DummyMaterial: {fileID: 2100000, guid: 5a281be9dacab0d43934488cb52c8268, type: 2}
+  _BeamShader: {fileID: 4800000, guid: 1c524bf2b917ac84c81d49e66ff45623, type: 3}
