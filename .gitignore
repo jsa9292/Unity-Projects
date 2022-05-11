@@ -3,3 +3,4 @@ Temp/
 .vs/
 Logs/
 *.csproj
+Guestbook Downgrade/Assembly-CSharp.csproj
