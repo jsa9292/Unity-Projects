@@ -6,7 +6,7 @@ public class RuntimeText : MonoBehaviour
     public static string filename;
     public static string filePath;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
         filePath = Application.streamingAssetsPath + "/data_dump.txt";
@@ -20,11 +20,12 @@ public class RuntimeText : MonoBehaviour
         writer.Close();
     }
 
-    public void ReadString()
+    public static string ReadString()
     {
         //Read the text from directly from the test.txt file
         StreamReader reader = new StreamReader(filePath);
-        Debug.Log(reader.ReadToEnd());
+        string output =  reader.ReadLine(   );
         reader.Close();
+        return output;
     }
 }

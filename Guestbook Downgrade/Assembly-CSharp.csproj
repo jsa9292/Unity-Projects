@@ -180,6 +180,7 @@
     <Compile Include="Assets\CombinedDisplay\AudioZone.cs" />
     <Compile Include="Assets\CombinedDisplay\DetectPilot.cs" />
     <Compile Include="Assets\CombinedDisplay\SetupMeatBall.cs" />
+    <Compile Include="Assets\HistorySpawner.cs" />
     <Compile Include="Assets\LogVisualizer.cs" />
     <Compile Include="Assets\ProgressBar\Scene\Demo.cs" />
     <Compile Include="Assets\ProgressBar\Script\ProgressBar.cs" />

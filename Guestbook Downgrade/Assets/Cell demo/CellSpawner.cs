@@ -28,7 +28,7 @@ public class CellSpawner : MonoBehaviour
     {
         if (count > 0)
         {
-            timer += Time.deltaTime;
+            timer += Time.deltaTime; 
             if (cell_finished && timer > interval)
             {
                 timer -= interval;

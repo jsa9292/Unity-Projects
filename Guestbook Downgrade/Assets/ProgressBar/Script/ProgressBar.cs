@@ -72,7 +72,7 @@ public class ProgressBar : MonoBehaviour
 
     }
 
-    void UpdateValue(float val)
+    void UpdateValue(float val) 
     {
         bar.fillAmount = val / 100;
         txtTitle.text = Title + " " + val.ToString("F2") + "%";

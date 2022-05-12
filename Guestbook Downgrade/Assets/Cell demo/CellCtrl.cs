@@ -36,6 +36,32 @@ public class CellCtrl : MonoBehaviour
     public string save_string = "";
     private com.rfilkov.components.SkeletonOverlayer skeleton;
 
+    public void Setup_Cell(float[] data) {
+        cell_id = cell_count;
+        cell_count += 1;
+        skeleton = com.rfilkov.components.SkeletonOverlayer.instance;
+
+        //audio
+        types[0] = (int) data[7];
+        types[1] = (int) data[8];
+        types[2] = (int) data[9];
+        //video
+        qs[0] = new Quaternion(data[10], data[11], data[12], data[13]);
+        qs[1] = new Quaternion(data[14], data[15], data[16], data[17]);
+        qs[2] = new Quaternion(data[18], data[19], data[20], data[21]);
+        
+        dna_colors[0] = data[22]; // Random.Range(0, 1f);
+        dna_colors[1] = data[23]; // Random.Range(0, 1f);
+        dna_colors[2] = data[24]; // Random.Range(0, 1f);
+        n_color = data[25]; // Random.Range(0, 1f);
+        e_color = data[26]; //
+        e_extrusion = data[27]; // Random.Range(0, 1f);
+        axis_x = data[28]; // Random.Range(0, 1f);
+        axis_y = data[29]; // Random.Range(0, 1f);
+        axis_z = data[30]; // Random.Range(0, 1f);
+
+        Update_Cell_Graphics();
+    }
     public void Setup_Cell() {
         cell_id = cell_count;
         cell_count += 1;
@@ -96,13 +122,13 @@ public class CellCtrl : MonoBehaviour
             azs[i].transform.position = nucleus_mr.transform.position + Vector3.up * 0.2f;
             nucleus_mr.transform.rotation *= qs[i];
         }
-        nucleus_mr.material.SetColor("_Color", Color.HSVToRGB((Mathf.Cos(n_color)+1)/2, 1f, 1f));
-        ectoplasm_mr.material.SetColor("_Color", Color.HSVToRGB((Mathf.Cos(e_color) + 1) / 2, 1f, 1f));
-        ectoplasm_mr.material.SetFloat("_ExtrusionPoint", (Mathf.Cos(e_extrusion) + 1) / 10f + 0.01f);
-
-        ectoplasm_mr.material.SetFloat("_Axis_x", (Mathf.Cos(axis_x) + 1) / 2);
-        ectoplasm_mr.material.SetFloat("_Axis_y", (Mathf.Cos(axis_y) + 1) / 2);
-        ectoplasm_mr.material.SetFloat("_Axis_z", (Mathf.Cos(axis_z) + 1) / 2);
+        nucleus_mr.material.SetColor("_Color", Color.HSVToRGB((n_color % 1 + 1)/2, 1f, 1f));
+        ectoplasm_mr.material.SetColor("_Color", Color.HSVToRGB((e_color % 1 + 1) / 2, 1f, 1f));
+        ectoplasm_mr.material.SetFloat("_ExtrusionPoint", (e_extrusion % 1 + 1) / 10f + 0.01f);
+        
+        ectoplasm_mr.material.SetFloat("_Axis_x", (axis_x % 1 + 1) / 2);
+        ectoplasm_mr.material.SetFloat("_Axis_y", (axis_y % 1 + 1) / 2);
+        ectoplasm_mr.material.SetFloat("_Axis_z", (axis_z % 1 + 1) / 2);
 
         jols = GetComponentsInChildren<com.rfilkov.components.JointOverlayer>();
         for (int i = 1; i < jols.Length; i++)
@@ -123,7 +149,7 @@ public class CellCtrl : MonoBehaviour
         }
         //disable mcblob
         ectoplasm_mesh = ectoplasm_mr.GetComponent<MeshFilter>().sharedMesh;
-        Destroy(mcb);
+        Destroy(mcb,1f);
         cv.enabled = false;
 
         gameObject.isStatic = true;
