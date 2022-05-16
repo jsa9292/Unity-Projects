@@ -17,7 +17,6 @@ public class UI_anim_control : MonoBehaviour
     public Text blue_visitor;
     public Text loading_visitor;
     public Text loading_visitor_ko;
-    public GameObject UI_Title;
     private com.rfilkov.kinect.KinectManager kinectManager;
     private DetectPilot detectPilot;
     // Start is called before the first frame update
@@ -92,7 +91,7 @@ public class UI_anim_control : MonoBehaviour
         loadingUser = false;
         phase = 1;
         kinectManager.maxTrackedUsers = 1;
-        Debug.Log("Start Phase");
+        LogVisualizer.instance.BottomLog("Start Phase");
     }
     public void Loadingbar_phase()
     {
@@ -104,10 +103,10 @@ public class UI_anim_control : MonoBehaviour
             string visitor_string = "HELLO,\nVISITOR #" + detectPilot.currentCell_CellCtrl.cell_id.ToString().PadLeft(4, '0'); ;
             orange_visitor.text = visitor_string;
             blue_visitor.text = visitor_string;
-            loading_visitor.text = visitor_string + "\n";
-            loading_visitor_ko.text += "안녕하세요,\n#" + detectPilot.currentCell_CellCtrl.cell_id.ToString().PadLeft(4, '0')+" 방문객님!";
+            loading_visitor.text = visitor_string;
+            loading_visitor_ko.text = "안녕하세요,\n#" + detectPilot.currentCell_CellCtrl.cell_id.ToString().PadLeft(4, '0')+" 방문객님!";
 
-            Debug.Log("Loading Bar");
+            LogVisualizer.instance.BottomLog("Loading Bar");
         }
     }
     public void Orangebubble_phase() {
@@ -118,7 +117,7 @@ public class UI_anim_control : MonoBehaviour
             StartCoroutine("LoadCell");
             Invoke("Start_anim", 4f);
             phase = 3;
-            Debug.Log("Orange Bubble");
+            LogVisualizer.instance.BottomLog("Orange Bubble");
         }
     }
     public void Bluebubble_phase() {
@@ -128,7 +127,7 @@ public class UI_anim_control : MonoBehaviour
             InvokeRepeating("SpawnCell", 0, spawning_freq);
             Invoke("Start_anim", 3f);
             phase = 4;
-            Debug.Log("Blue Bubble");
+            LogVisualizer.instance.BottomLog("Blue Bubble");
         }
     }
     public void Getout_phase() {
@@ -137,7 +136,6 @@ public class UI_anim_control : MonoBehaviour
             anim.SetFloat("speed", 0f);
             phase = 5;
         }
-        Enable_Title();
     }
     public void End_phase() {
         CancelInvoke();
@@ -148,14 +146,6 @@ public class UI_anim_control : MonoBehaviour
         userDetected = false;
         DetectPilot.instance.attachToSpawner = false;
         kinectManager.maxTrackedUsers = 0;
-        Debug.Log("End Anim");
-    }
-    public void Disable_Title()
-    {
-        UI_Title.SetActive(false);
-    }
-    public void Enable_Title()
-    {
-        UI_Title.SetActive(true);
+        LogVisualizer.instance.BottomLog("End Phase");
     }
 }
