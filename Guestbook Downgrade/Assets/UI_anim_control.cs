@@ -15,6 +15,8 @@ public class UI_anim_control : MonoBehaviour
     public Camera cam;
     public Text orange_visitor;
     public Text blue_visitor;
+    public Text loading_visitor;
+    public Text loading_visitor_ko;
     public GameObject UI_Title;
     private com.rfilkov.kinect.KinectManager kinectManager;
     private DetectPilot detectPilot;
@@ -102,6 +104,9 @@ public class UI_anim_control : MonoBehaviour
             string visitor_string = "HELLO,\nVISITOR #" + detectPilot.currentCell_CellCtrl.cell_id.ToString().PadLeft(4, '0'); ;
             orange_visitor.text = visitor_string;
             blue_visitor.text = visitor_string;
+            loading_visitor.text = visitor_string + "\n";
+            loading_visitor_ko.text += "안녕하세요,\n#" + detectPilot.currentCell_CellCtrl.cell_id.ToString().PadLeft(4, '0')+" 방문객님!";
+
             Debug.Log("Loading Bar");
         }
     }
