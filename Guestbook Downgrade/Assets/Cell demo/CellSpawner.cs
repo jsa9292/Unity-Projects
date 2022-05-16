@@ -37,9 +37,10 @@ public class CellSpawner : MonoBehaviour
                 if (sharingMesh) go.transform.GetChild(1).GetComponent<MeshFilter>().sharedMesh = sharedMesh;
                 rand_dir = new Vector3(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
                 juice = noiseMag;
-                RuntimeText.WriteString(System.DateTime.Now.ToString()+","+transform.position+","+rand_dir.ToString() + "," + go.GetComponent<CellCtrl>().save_string);       
+                LogVisualizer.instance.BottomLog("Cell ID " + CellCtrl.cell_count+" Spawned.");
+                LogVisualizer.instance.TopLog();
+                //RuntimeText.WriteString(System.DateTime.Now.ToString()+","+transform.position+","+rand_dir.ToString() + "," + go.GetComponent<CellCtrl>().save_string);       
             }
-
 
         }
         else
@@ -50,7 +51,7 @@ public class CellSpawner : MonoBehaviour
             interval = 0;
         }
 
-        if (go)
+        if (go & juice >0)
         {
             go.transform.Translate(rand_dir * juice * Time.deltaTime);
             go.transform.localEulerAngles += rand_dir* juice * Time.deltaTime;

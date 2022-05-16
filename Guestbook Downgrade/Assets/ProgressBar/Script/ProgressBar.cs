@@ -75,7 +75,7 @@ public class ProgressBar : MonoBehaviour
     void UpdateValue(float val) 
     {
         bar.fillAmount = val / 100;
-        txtTitle.text = Title + " " + val.ToString("F2") + "%";
+        //txtTitle.text = Title + " " + val.ToString("F2") + "%";
 
         if (Alert >= val)
         {
@@ -93,7 +93,7 @@ public class ProgressBar : MonoBehaviour
     {
         if (!Application.isPlaying)
         {           
-            UpdateValue(50);
+            UpdateValue(20);
             txtTitle.color = TitleColor;
             txtTitle.font = TitleFont;
             txtTitle.fontSize = TitleFontSize;
@@ -112,7 +112,7 @@ public class ProgressBar : MonoBehaviour
             }
             float barVal = Mathf.Clamp(com.rfilkov.kinect.KinectManager.Instance.user_tracked_dur, 0, 2f);
             if (barVal >= 2f) UI_anim_control.instance.LoadingUser();
-            UpdateValue(barVal / 2f * 100f);
+            UpdateValue(barVal / 2f * 20f);
         }
     }
 

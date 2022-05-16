@@ -63,7 +63,7 @@ public class DetectPilot : MonoBehaviour
         if (currentCell)
         {
             currentCell.transform.position += Vector3.up * cell_y_offset;
-            Debug.Log(currentCell.transform.position);
+            //Debug.Log(currentCell.transform.position);
             if (attachToSpawner)
             {
                 currentCell.transform.position = spawner.transform.position;

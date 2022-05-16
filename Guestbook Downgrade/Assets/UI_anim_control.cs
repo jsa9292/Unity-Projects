@@ -15,7 +15,7 @@ public class UI_anim_control : MonoBehaviour
     public Camera cam;
     public Text orange_visitor;
     public Text blue_visitor;
-
+    public GameObject UI_Title;
     private com.rfilkov.kinect.KinectManager kinectManager;
     private DetectPilot detectPilot;
     // Start is called before the first frame update
@@ -132,6 +132,7 @@ public class UI_anim_control : MonoBehaviour
             anim.SetFloat("speed", 0f);
             phase = 5;
         }
+        Enable_Title();
     }
     public void End_phase() {
         CancelInvoke();
@@ -144,5 +145,12 @@ public class UI_anim_control : MonoBehaviour
         kinectManager.maxTrackedUsers = 0;
         Debug.Log("End Anim");
     }
-
+    public void Disable_Title()
+    {
+        UI_Title.SetActive(false);
+    }
+    public void Enable_Title()
+    {
+        UI_Title.SetActive(true);
+    }
 }

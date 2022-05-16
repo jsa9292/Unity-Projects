@@ -94,6 +94,11 @@ namespace com.rfilkov.components
             //    foregroundCamera = Camera.main;
             //}
         }
+        private string save_string = "";
+        private void FixedUpdate()
+        {
+            if (save_string.Length > 1) RuntimeText.WriteString(save_string);
+        }
         void Update()
         {
             if (kinectManager && kinectManager.IsInitialized())
@@ -121,8 +126,8 @@ namespace com.rfilkov.components
                     }
                     else kinectManager.user_tracked_dur = 0;
                     //Debug.Log("Displaying user " + playerIndex + ", ID: " + userId + 
-                    //    ", body: " + kinectManager.GetBodyIndexByUserId(userId) + ", pos: " + kinectManager.GetJointKinectPosition(userId, 0));
-
+                    //    ", body: " + ksinectManager.GetBodyIndexByUserId(userId) + ", pos: " + kinectManager.GetJointKinectPosition(userId, 0));
+                    save_string = "";
                     for (int i = 0; i < jointsCount; i++)
                     {
                         int joint = i;
@@ -131,7 +136,8 @@ namespace com.rfilkov.components
                         {
                             Vector3 posJoint = GetJointPosition(userId, joint);
                             //Debug.Log("U " + userId + " " + (KinectInterop.JointType)joint + " - pos: " + posJoint);
-
+                            save_string += i.ToString() + ":" + posJoint.x.ToString("F4") + "," + posJoint.y.ToString("F4") + "," + posJoint.z.ToString("F4") + ";";
+                            
                             if (sensorTransform)
                             {
                                 posJoint = sensorTransform.TransformPoint(posJoint) + offset;
