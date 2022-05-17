@@ -16,6 +16,8 @@ public class LogVisualizer : MonoBehaviour
     public void BottomLog(string logString) {
         output = logString;
         texts.Insert(0, output);
+        texts.RemoveAt(10);
+        if (texts.Count > 100) texts.Clear();
         t.text = "";
         for (int i = 0; i < texts.Count; i++) {
             t.text += texts[i] + "\n";
