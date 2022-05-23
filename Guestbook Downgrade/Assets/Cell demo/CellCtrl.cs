@@ -38,7 +38,7 @@ public class CellCtrl : MonoBehaviour
         cell_id = cell_count;
         cell_count += 1;
 
-        float sensitivity = 1000f;
+        float sensitivity = 100f;
         dna_colors[0] = features[9] * sensitivity; // Random.Range(0, 1f);
         dna_colors[1] = (features[1])* sensitivity; // Random.Range(0, 1f);
         dna_colors[2] = (features[2])* sensitivity; // Random.Range(0, 1f);
@@ -50,9 +50,10 @@ public class CellCtrl : MonoBehaviour
         axis_z = (features[8])*sensitivity; // Random.Range(0, 1f);
 
         //audio
-        types[0] = Random.Range(21, 63);
-        types[1] = Random.Range(21, 63);
-        types[2] = Random.Range(21, 63);
+        types[0] = ((int)Mathf.Floor(features[11]*sensitivity))%43+21;
+        types[1] = ((int)Mathf.Floor(features[12] * sensitivity))%43+21;
+        types[2] = ((int)Mathf.Floor(features[13] * sensitivity))%43+21;
+        Debug.Log(types[0].ToString()+","+ types[1].ToString()+","+types[2].ToString());
         //video
         qs[0] = Random.rotationUniform;
         qs[1] = Random.rotationUniform;
@@ -61,7 +62,8 @@ public class CellCtrl : MonoBehaviour
         sjols = GetComponentsInChildren<SkeletonJointOverlayer>();
         for (int i = 1; i < sjols.Length; i++)
         {
-            sjols[i].trackedJointInt = Random.Range(0, 23); // this is upto foot right without facials;
+            sjols[i].trackedJointInt = (int) Mathf.Floor((features[i]*sensitivity)%23); // this is upto foot right without facials;
+            sjols[i].offset = new Vector3(features[i], features[i + 1], features[i + 2]);
         }
 
         Update_Cell_Graphics();
@@ -85,9 +87,9 @@ public class CellCtrl : MonoBehaviour
         ectoplasm_mr.material.SetColor("_Color", Color.HSVToRGB((e_color % 1), 1f, 1f));
         ectoplasm_mr.material.SetFloat("_ExtrusionPoint", (e_extrusion % 1)*2 + 0.01f);
 
-        ectoplasm_mr.material.SetFloat("_Axis_x", (axis_x % 1) / 10f);
-        ectoplasm_mr.material.SetFloat("_Axis_y", (axis_y % 1) / 10f);
-        ectoplasm_mr.material.SetFloat("_Axis_z", (axis_z % 1) / 10f);
+        ectoplasm_mr.material.SetFloat("_Axis_x", (axis_x % 1) );
+        ectoplasm_mr.material.SetFloat("_Axis_y", (axis_y % 1) );
+        ectoplasm_mr.material.SetFloat("_Axis_z", (axis_z % 1) );
 
     }
 

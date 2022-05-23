@@ -87,6 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedJointInt: 0
   offset: {x: 0, y: 0, z: 0}
+  Pilot: 0
 --- !u!1 &1218500419
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedJointInt: 0
   offset: {x: 0, y: 0, z: 0}
+  Pilot: 0
 --- !u!1 &1742225455
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedJointInt: 0
   offset: {x: 0, y: 0, z: 0}
+  Pilot: 0
 --- !u!1 &1964575379
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,6 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedJointInt: 0
   offset: {x: 0, y: 0, z: 0}
+  Pilot: 0
 --- !u!1 &191913465852491982
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,6 +581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedJointInt: 0
   offset: {x: 0, y: 0, z: 0}
+  Pilot: 0
 --- !u!54 &6071580601495969181
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -696,6 +701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedJointInt: 0
   offset: {x: 0, y: 0, z: 0}
+  Pilot: 0
 --- !u!1 &1935734738299627268
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,6 +789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedJointInt: 0
   offset: {x: 0, y: 0, z: 0}
+  Pilot: 0
 --- !u!1 &1935734738340606849
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,7 +892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc18e8b9b9c6457438a9f9f736f861be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isoLevel: 3.93
+  isoLevel: 3.5
   BlobObjectsLocations:
   - {fileID: 1935734739234406528}
   - {fileID: 1935734738299627288}
@@ -1122,6 +1129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedJointInt: 4
   offset: {x: 0, y: 0.134, z: -0.11}
+  Pilot: 0
 --- !u!1 &1935734739750706679
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,6 +1217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedJointInt: 0
   offset: {x: 0, y: 0, z: 0}
+  Pilot: 0
 --- !u!1 &1935734740149287442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,6 +1305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trackedJointInt: 0
   offset: {x: 0, y: 0, z: 0}
+  Pilot: 0
 --- !u!1 &2885438146065718839
 GameObject:
   m_ObjectHideFlags: 0

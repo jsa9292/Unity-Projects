@@ -27,12 +27,12 @@ public class SkeletonJointOverlayer : MonoBehaviour
         if (skeleton_past.historyRepeating)
         {
             joints = skeleton_past.joints;
-            mr.material.color = Color.black;
+            if(mr) mr.material.color = new Vector4(208/255f,212/255f,227/255f,0.8f);
         }
         else
         {
             joints = skeleton.joints;
-            mr.material.color = Color.clear;
+            if(mr) mr.material.color = Color.clear;
         }
         transform.position = joints[trackedJointInt].transform.position + offset;
         if (Pilot) detectPilot.pilotPos = transform.position;

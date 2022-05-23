@@ -39,7 +39,9 @@ public class DetectPilot : MonoBehaviour
     private void Update()
     {
         if (pilotPos == Vector3.zero) return;
-        pilot_inside = (transform.position - pilotPos).magnitude < pilot_r;
+        pilotPos = Vector3.ProjectOnPlane(pilotPos, Vector3.up);
+        Vector3 boothPos = Vector3.ProjectOnPlane(transform.position, Vector3.up);
+        pilot_inside = (boothPos - pilotPos).magnitude < pilot_r;
         if (pilot_inside && uac.phase != 6)
         {
             uac.UserDetected();
@@ -47,10 +49,11 @@ public class DetectPilot : MonoBehaviour
         }
         else
         {
-            if(uac.phase == 5) uac.End_phase();
             pilot_timer -= Time.deltaTime;
         }
 
+        if (uac.phase == 5) uac.End_phase();
+        pilot_timer = Mathf.Clamp(pilot_timer, 0f, 2f);
         cell_y_offset += uac.cellLoaded ? -0.05f : 0.1f;
         cell_y_offset = Mathf.Clamp(cell_y_offset, 0f, 3f);
 

@@ -203,7 +203,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\AzureKinectExamples\SDK\RealSenseSDK2.0\RealSenseSDK_License.txt" />
     <None Include="Assets\AzureKinectExamples\Resources\BackgroundRenderShader.shader" />
-    <None Include="Assets\StreamingAssets\data_dump.txt" />
+    <None Include="Assets\StreamingAssets\history.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\AzureKinectExamples\Resources\ColorInfraredShaderK2.compute" />
     <None Include="Assets\AzureKinectExamples\Resources\DepthIrFilterShader.shader" />

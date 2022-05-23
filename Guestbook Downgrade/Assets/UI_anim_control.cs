@@ -96,11 +96,19 @@ public class UI_anim_control : MonoBehaviour
             anim.SetFloat("speed", 0f);
             detectPilot.GetNewCell();
             phase = 2;
-            string visitor_string = "HELLO,\nVISITOR #" + detectPilot.currentCell_CellCtrl.cell_id.ToString().PadLeft(4, '0'); ;
-            orange_visitor.text = blue_visitor.text = loading_visitor.text = visitor_string;
-            string visitor_string_ko = "안녕하세요,\n#" + detectPilot.currentCell_CellCtrl.cell_id.ToString().PadLeft(4, '0') + " 방문객님!";
-            orange_visitor_ko.text = blue_visitor_ko.text = loading_visitor_ko.text = visitor_string_ko;
-
+            string vn = detectPilot.currentCell_CellCtrl.cell_id.ToString().PadLeft(4, '0');
+            string visitor_string = "HELLO,\nVISITOR #" + vn;
+            loading_visitor.text = visitor_string;
+            string visitor_string_ko = "안녕하세요,\n#" + vn + " 방문자님!";
+            loading_visitor_ko.text = visitor_string_ko;
+            string orange_string = "ANALZING\nVISITOR #" + vn;
+            orange_visitor.text = orange_string;
+            string orange_string_ko = "#" + vn + " 방문자님을\n분석중입니다!";
+            orange_visitor_ko.text = orange_string_ko;
+            string blue_string = "I'M THE SOFT CELL\nOF VISITOR #" + vn;
+            blue_visitor.text = blue_string;
+            string blue_string_ko = "저는 #" + vn + " 방문자님의\n소프트 셀입니다!";
+            blue_visitor_ko.text = blue_string_ko;
             LogVisualizer.instance.BottomLog("Loading Bar");
         }
     }
@@ -127,7 +135,6 @@ public class UI_anim_control : MonoBehaviour
     public void Getout_phase() {
         if (anim.GetFloat("speed") > 0f && phase != 6)
         {
-            anim.SetFloat("speed", 0f);
             phase = 5;
         }
     }
