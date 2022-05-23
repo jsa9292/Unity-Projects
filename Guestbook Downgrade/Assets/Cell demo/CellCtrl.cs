@@ -151,7 +151,7 @@ public class CellCtrl : MonoBehaviour
         }
         //disable mcblob
         ectoplasm_mesh = ectoplasm_mr.GetComponent<MeshFilter>().sharedMesh;
-        Destroy(mcb,1f);
+        Destroy(mcb);
         cv.enabled = false;
 
         gameObject.isStatic = true;
