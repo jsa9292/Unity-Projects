@@ -55,9 +55,10 @@ public class ProgressBar : MonoBehaviour
         barBackground = transform.Find("BarBackground").GetComponent<Image>();
         audiosource = GetComponent<AudioSource>();
     }
-
+    private com.rfilkov.components.SkeletonFromPast skeleton_past;
     private void Start()
     {
+        skeleton_past = com.rfilkov.components.SkeletonFromPast.instance;
         txtTitle.text = Title;
         txtTitle.color = TitleColor;
         txtTitle.font = TitleFont;
@@ -88,12 +89,12 @@ public class ProgressBar : MonoBehaviour
 
     }
 
-
+    public float barMax;
     private void Update()
     {
         if (!Application.isPlaying)
         {           
-            UpdateValue(20);
+            UpdateValue(barMax);
             txtTitle.color = TitleColor;
             txtTitle.font = TitleFont;
             txtTitle.fontSize = TitleFontSize;
@@ -110,9 +111,9 @@ public class ProgressBar : MonoBehaviour
                 nextPlay = Time.time + RepeatRate;
                 audiosource.PlayOneShot(sound);
             }
-            float barVal = Mathf.Clamp(com.rfilkov.kinect.KinectManager.Instance.user_tracked_dur, 0, 2f);
+            float barVal = Mathf.Clamp(DetectPilot.instance.pilot_timer, 0, 2f);
             if (barVal >= 2f) UI_anim_control.instance.LoadingUser();
-            UpdateValue(barVal / 2f * 20f);
+            UpdateValue(barVal / 2f * barMax);
         }
     }
 

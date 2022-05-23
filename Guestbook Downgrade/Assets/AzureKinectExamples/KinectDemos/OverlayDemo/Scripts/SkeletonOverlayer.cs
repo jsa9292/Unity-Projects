@@ -31,7 +31,7 @@ namespace com.rfilkov.components
 
         //public UnityEngine.UI.Text debugText;
 
-        private GameObject[] joints = null;
+        public GameObject[] joints = null;
         private LineRenderer[] lines = null;
 
         // initial body rotation
@@ -58,32 +58,27 @@ namespace com.rfilkov.components
         private void Awake()
         {
             instance = this;
-            features = new float[40];
+            features = new float[23];
         }
         void Start()
         {
-            kinectManager = KinectManager.Instance;
-            if (kinectManager && kinectManager.IsInitialized())
+            int jointsCount = 23;
+            if (jointPrefab)
             {
-                int jointsCount = kinectManager.GetJointCount();
+                // array holding the skeleton joints
+                joints = new GameObject[jointsCount];
 
-                if (jointPrefab)
+                for (int i = 0; i < joints.Length; i++)
                 {
-                    // array holding the skeleton joints
-                    joints = new GameObject[jointsCount];
-
-                    for (int i = 0; i < joints.Length; i++)
-                    {
-                        joints[i] = Instantiate(jointPrefab) as GameObject;
-                        joints[i].transform.parent = transform;
-                        joints[i].name = ((KinectInterop.JointType)i).ToString();
-                        joints[i].SetActive(false);
-                    }
+                    joints[i] = Instantiate(jointPrefab) as GameObject;
+                    joints[i].transform.parent = transform;
+                    joints[i].name = ((KinectInterop.JointType)i).ToString();
+                    joints[i].SetActive(false);
                 }
-
-                // array holding the skeleton lines
-                lines = new LineRenderer[jointsCount];
             }
+
+            // array holding the skeleton lines
+            lines = new LineRenderer[jointsCount];
 
             // always mirrored
             initialRotation = Quaternion.Euler(new Vector3(0f, 180f, 0f));
@@ -192,9 +187,9 @@ namespace com.rfilkov.components
                                     Vector3 line_start = lines[i].GetPosition(0);
                                     Vector3 line_end = lines[i].GetPosition(1);
                                     features[i] = (line_start - line_end).magnitude;
-                                    if (i == 9) leftHand = line_end;
+                                    if  (i == 1) pilotPos = line_end; 
                                     else if (i == 14) rightHand = line_end;
-                                    else if (i == 1) pilotPos = line_end;
+                                    else if (i == 9) leftHand = line_end;
                                     Vector3 line_start_delta = posParent - line_start;
                                     Vector3 line_end_delta = posJoint - line_end;
 

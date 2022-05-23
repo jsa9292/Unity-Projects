@@ -180,7 +180,6 @@
     <Compile Include="Assets\CombinedDisplay\AudioZone.cs" />
     <Compile Include="Assets\CombinedDisplay\DetectPilot.cs" />
     <Compile Include="Assets\CombinedDisplay\SetupMeatBall.cs" />
-    <Compile Include="Assets\HistorySpawner.cs" />
     <Compile Include="Assets\LogVisualizer.cs" />
     <Compile Include="Assets\ProgressBar\Scene\Demo.cs" />
     <Compile Include="Assets\ProgressBar\Script\ProgressBar.cs" />
@@ -188,6 +187,8 @@
     <Compile Include="Assets\Rotate_Sine.cs" />
     <Compile Include="Assets\RuntimeText.cs" />
     <Compile Include="Assets\SimpleLook.cs" />
+    <Compile Include="Assets\SkeletonFromPast.cs" />
+    <Compile Include="Assets\SkeletonJointOverlayer.cs" />
     <Compile Include="Assets\TrackBuilder.cs" />
     <Compile Include="Assets\UI_anim_control.cs" />
     <Compile Include="Assets\Unity_MetaBalls_Liquids-master\Scripts\MCBlob.cs" />

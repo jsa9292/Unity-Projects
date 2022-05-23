@@ -6,19 +6,17 @@ using com.rfilkov.kinect;
 public class DetectPilot : MonoBehaviour
 {
     public static DetectPilot instance;
-    private Vector3 leftHand;
-    private Vector3 rightHand;
-    private Vector3 pilotPos;
-    public float pilot_r;
-    public float hand_r;
-    public bool testing;
+    public Vector3 pilotPos;
     public bool pilot_inside;
+    public float pilot_r;
+    public float pilot_timer = 0f;
     public GameObject cell_prefab;
     public GameObject currentCell;
     public CellCtrl currentCell_CellCtrl;
     public float cell_y_offset;
 
     private com.rfilkov.components.SkeletonOverlayer skeleton;
+    private com.rfilkov.components.SkeletonFromPast skeleton_past;
     private CellSpawner spawner;
     private KinectManager kinectManager;
     private UI_anim_control uac;
@@ -32,6 +30,7 @@ public class DetectPilot : MonoBehaviour
     {
         kinectManager = KinectManager.Instance;
         skeleton = com.rfilkov.components.SkeletonOverlayer.instance;
+        skeleton_past = com.rfilkov.components.SkeletonFromPast.instance;
         spawner = CellSpawner.instance;
         uac = UI_anim_control.instance;
         //currentCell = GameObject.Instantiate(cell_prefab);
@@ -39,18 +38,17 @@ public class DetectPilot : MonoBehaviour
 
     private void Update()
     {
-        leftHand = skeleton.leftHand;
-        rightHand = skeleton.rightHand;
-        pilotPos = skeleton.pilotPos;
-        
+        if (pilotPos == Vector3.zero) return;
         pilot_inside = (transform.position - pilotPos).magnitude < pilot_r;
         if (pilot_inside && uac.phase != 6)
         {
             uac.UserDetected();
+            pilot_timer += Time.deltaTime;
         }
         else
         {
             if(uac.phase == 5) uac.End_phase();
+            pilot_timer -= Time.deltaTime;
         }
 
         cell_y_offset += uac.cellLoaded ? -0.05f : 0.1f;
@@ -71,21 +69,14 @@ public class DetectPilot : MonoBehaviour
             }
         }
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = pilot_inside ? Color.green : Color.red;
-        Gizmos.DrawWireSphere(transform.position, pilot_r);
-
-        Gizmos.DrawSphere(leftHand, hand_r / 2);
-        Gizmos.DrawSphere(rightHand, hand_r / 2);
-        Gizmos.DrawSphere(pilotPos, hand_r / 2);
-        
-    }
+    private float[] features;
     public void GetNewCell() {
         attachToSpawner = false;
         currentCell = Instantiate(cell_prefab);
         currentCell_CellCtrl = currentCell.GetComponent<CellCtrl>();
-        currentCell_CellCtrl.Setup_Cell();
+        if (skeleton_past.historyRepeating) features = skeleton_past.features;
+        else features = skeleton.features;
+        currentCell_CellCtrl.Setup_Cell(features);
     }
     public void SpawnCell(int count, float interval) {
         //parameters for spawning

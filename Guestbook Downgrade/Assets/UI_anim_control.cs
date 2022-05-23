@@ -14,7 +14,9 @@ public class UI_anim_control : MonoBehaviour
     public float spawning_freq = 1f;
     public Camera cam;
     public Text orange_visitor;
+    public Text orange_visitor_ko;
     public Text blue_visitor;
+    public Text blue_visitor_ko;
     public Text loading_visitor;
     public Text loading_visitor_ko;
     private com.rfilkov.kinect.KinectManager kinectManager;
@@ -41,7 +43,7 @@ public class UI_anim_control : MonoBehaviour
     public bool cellLoaded = false;
     public void UserDetected() {
         if (userDetected) return;
-        Debug.Log("User Detected");
+        //Debug.Log("User Detected");
 
         phase = 2;
         ac.SampleAnimation(gameObject, 0f);
@@ -61,7 +63,7 @@ public class UI_anim_control : MonoBehaviour
     public bool loadingUser = false;
     public void LoadingUser()
     {
-        if (loadingUser) return;
+        if (phase != 2 && loadingUser) return;
         anim.SetFloat("speed", 1f);
         loadingUser = true;
 
@@ -71,16 +73,10 @@ public class UI_anim_control : MonoBehaviour
         anim.SetFloat("speed", 1f);
         //anim.StartPlayback();
     }
-    public void LoadCell()
-    {
-
-        spawning_dur = Random.Range(5, 10f);
-        spawning_freq = Random.Range(1, 2f);
-    }
 
     public void SpawnCell()
     {
-        Debug.Log("Spawn");
+        //Debug.Log("Spawn");
         detectPilot.SpawnCell(1, 0f);
     }
 
@@ -101,10 +97,9 @@ public class UI_anim_control : MonoBehaviour
             detectPilot.GetNewCell();
             phase = 2;
             string visitor_string = "HELLO,\nVISITOR #" + detectPilot.currentCell_CellCtrl.cell_id.ToString().PadLeft(4, '0'); ;
-            orange_visitor.text = visitor_string;
-            blue_visitor.text = visitor_string;
-            loading_visitor.text = visitor_string;
-            loading_visitor_ko.text = "안녕하세요,\n#" + detectPilot.currentCell_CellCtrl.cell_id.ToString().PadLeft(4, '0')+" 방문객님!";
+            orange_visitor.text = blue_visitor.text = loading_visitor.text = visitor_string;
+            string visitor_string_ko = "안녕하세요,\n#" + detectPilot.currentCell_CellCtrl.cell_id.ToString().PadLeft(4, '0') + " 방문객님!";
+            orange_visitor_ko.text = blue_visitor_ko.text = loading_visitor_ko.text = visitor_string_ko;
 
             LogVisualizer.instance.BottomLog("Loading Bar");
         }
@@ -114,7 +109,6 @@ public class UI_anim_control : MonoBehaviour
         {
             anim.SetFloat("speed", 0f);
             cellLoaded = true;
-            StartCoroutine("LoadCell");
             Invoke("Start_anim", 4f);
             phase = 3;
             LogVisualizer.instance.BottomLog("Orange Bubble");
