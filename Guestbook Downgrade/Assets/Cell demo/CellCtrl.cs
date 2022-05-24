@@ -53,7 +53,7 @@ public class CellCtrl : MonoBehaviour
         types[0] = ((int)Mathf.Floor(features[11]*sensitivity))%43+21;
         types[1] = ((int)Mathf.Floor(features[12] * sensitivity))%43+21;
         types[2] = ((int)Mathf.Floor(features[13] * sensitivity))%43+21;
-        Debug.Log(types[0].ToString()+","+ types[1].ToString()+","+types[2].ToString());
+        //Debug.Log(types[0].ToString()+","+ types[1].ToString()+","+types[2].ToString());
         //video
         qs[0] = Random.rotationUniform;
         qs[1] = Random.rotationUniform;

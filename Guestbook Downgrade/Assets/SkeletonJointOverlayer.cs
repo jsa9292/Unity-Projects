@@ -22,17 +22,18 @@ public class SkeletonJointOverlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (skeleton_past.historyRepeating)
         {
             joints = skeleton_past.joints;
-            if(mr) mr.material.color = new Vector4(208/255f,212/255f,227/255f,0.8f);
+            if (mr) mr.material.SetColor("_ASEOutlineColor", Color.black);
         }
         else
         {
             joints = skeleton.joints;
-            if(mr) mr.material.color = Color.clear;
+
+            if (mr) mr.material.SetColor("_ASEOutlineColor", Color.white);
         }
         transform.position = joints[trackedJointInt].transform.position + offset;
         if (Pilot) detectPilot.pilotPos = transform.position;

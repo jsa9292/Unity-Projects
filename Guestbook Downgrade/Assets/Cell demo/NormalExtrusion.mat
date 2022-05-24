@@ -112,7 +112,7 @@ Material:
     - _Ext: 10.62
     - _Extr: 10.62
     - _Extrs: 10.62
-    - _ExtrusionAmount: 15
+    - _ExtrusionAmount: 30.34
     - _ExtrusionPoint: 0.33
     - _ExtrxusionPo: 10.62
     - _ExtrxusionPoi: 10.62
@@ -173,7 +173,7 @@ Material:
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 0
-    - __dirty: 1
+    - __dirty: 0
     m_Colors:
     - _ASEOutlineColor: {r: 1, g: 1, b: 1, a: 0}
     - _Axis: {r: 0, g: 0, b: 0, a: 0}

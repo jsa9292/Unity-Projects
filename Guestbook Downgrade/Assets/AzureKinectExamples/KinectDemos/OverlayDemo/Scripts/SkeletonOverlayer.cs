@@ -62,6 +62,7 @@ namespace com.rfilkov.components
         }
         void Start()
         {
+            kinectManager = KinectManager.Instance;
             int jointsCount = 23;
             if (jointPrefab)
             {
@@ -98,7 +99,8 @@ namespace com.rfilkov.components
         {
             if (kinectManager && kinectManager.IsInitialized())
             {
-                if(foregroundCamera)
+                //Debug.Log("test");
+                if (foregroundCamera)
                 {
                     // get the background rectangle (use the portrait background, if available)
                     backgroundRect = foregroundCamera.pixelRect;
@@ -114,7 +116,6 @@ namespace com.rfilkov.components
                 {
                     ulong userId = kinectManager.GetUserIdByIndex(playerIndex);
                     int jointsCount = kinectManager.GetJointCount();
-
                     if (kinectManager.IsJointTracked(userId, 1))
                     {
                         kinectManager.user_tracked_dur += Time.deltaTime;
@@ -138,30 +139,30 @@ namespace com.rfilkov.components
                                 posJoint = sensorTransform.TransformPoint(posJoint) + offset;
                             }
 
-                            //if (joints != null)
-                            //{
-                            //    // overlay the joint
-                            //    if (posJoint != Vector3.zero)
-                            //    {
-                            //        joints[i].SetActive(true);
-                            //        joints[i].transform.position = posJoint+offset;
+                            if (joints != null)
+                            {
+                                // overlay the joint
+                                if (posJoint != Vector3.zero)
+                                {
+                                    joints[i].SetActive(true);
+                                    joints[i].transform.position = posJoint + offset;
 
-                            //        Quaternion rotJoint = kinectManager.GetJointOrientation(userId, joint, false);
-                            //        rotJoint = initialRotation * rotJoint;
-                            //        joints[i].transform.rotation = rotJoint;
+                                    Quaternion rotJoint = kinectManager.GetJointOrientation(userId, joint, false);
+                                    rotJoint = initialRotation * rotJoint;
+                                    joints[i].transform.rotation = rotJoint;
 
-                            //        //if(i == (int)KinectInterop.JointType.WristLeft)
-                            //        //{
-                            //        //    Debug.Log(string.Format("USO {0:F3} {1} user: {2}, state: {3}\npos: {4}, rot: {5}", Time.time, (KinectInterop.JointType)i,
-                            //        //        userId, kinectManager.GetJointTrackingState(userId, joint),
-                            //        //        kinectManager.GetJointPosition(userId, joint), kinectManager.GetJointOrientation(userId, joint, false).eulerAngles));
-                            //        //}
-                            //    }
-                            //    else
-                            //    {
-                            //        joints[i].SetActive(false);
-                            //    }
-                            //}
+                                    //if(i == (int)KinectInterop.JointType.WristLeft)
+                                    //{
+                                    //    Debug.Log(string.Format("USO {0:F3} {1} user: {2}, state: {3}\npos: {4}, rot: {5}", Time.time, (KinectInterop.JointType)i,
+                                    //        userId, kinectManager.GetJointTrackingState(userId, joint),
+                                    //        kinectManager.GetJointPosition(userId, joint), kinectManager.GetJointOrientation(userId, joint, false).eulerAngles));
+                                    //}
+                                }
+                                else
+                                {
+                                    joints[i].SetActive(false);
+                                }
+                            }
 
                             if (lines[i] == null && linePrefab != null)
                             {
@@ -225,7 +226,7 @@ namespace com.rfilkov.components
                 else
                 {
                     // disable the skeleton
-                    int jointsCount = kinectManager.GetJointCount();
+                    int jointsCount = 23;// kinectManager.GetJointCount();
 
                     for (int i = 0; i < jointsCount; i++)
                     {

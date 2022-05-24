@@ -80,7 +80,7 @@ namespace com.rfilkov.components
         public Transform sensorTransform;
         private void FixedUpdate()
         {
-            if (kinectManager.IsUserDetected(playerIndex)&& uac.phase == 1)
+            if (kinectManager.IsUserDetected(playerIndex))
             {
                 historyRepeating = false;
             }
