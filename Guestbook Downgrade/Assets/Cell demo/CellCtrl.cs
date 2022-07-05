@@ -85,7 +85,7 @@ public class CellCtrl : MonoBehaviour
         }
         nucleus_mr.material.SetColor("_Color", Color.HSVToRGB((n_color % 1), 1f, 1f));
         ectoplasm_mr.material.SetColor("_Color", Color.HSVToRGB((e_color % 1), 1f, 1f));
-        ectoplasm_mr.material.SetFloat("_ExtrusionPoint", (e_extrusion % 1)*2 + 0.01f);
+        ectoplasm_mr.material.SetFloat("_ExtrusionPoint", (e_extrusion % 0.05f)+0.02f);
 
         ectoplasm_mr.material.SetFloat("_Axis_x", (axis_x % 1) );
         ectoplasm_mr.material.SetFloat("_Axis_y", (axis_y % 1) );

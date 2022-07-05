@@ -15,6 +15,7 @@ public class CellSpawner : MonoBehaviour
     public bool sharingMesh;
     public bool randRot;
     public float noiseMag;
+    public Camera spawn_cam;
     // Update is called once per frame
     void Start()
     {
@@ -35,7 +36,7 @@ public class CellSpawner : MonoBehaviour
                 count--;
                 go = GameObject.Instantiate(cell_finished, transform.position, DetectPilot.instance.currentCell.transform.rotation);
                 if (sharingMesh) go.transform.GetChild(1).GetComponent<MeshFilter>().sharedMesh = sharedMesh;
-                rand_dir = new Vector3(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f));
+                rand_dir = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), Random.Range(-2f, 2f));
                 juice = noiseMag;
                 LogVisualizer.instance.BottomLog("Cell ID " + CellCtrl.cell_count+" Spawned.");
                 LogVisualizer.instance.TopLog();
@@ -53,7 +54,8 @@ public class CellSpawner : MonoBehaviour
 
         if (go & juice >0)
         {
-            go.transform.Translate(rand_dir * juice * Time.deltaTime);
+            Vector3 dir = Vector3.ProjectOnPlane(spawn_cam.transform.forward,Vector3.up)+Vector3.up*rand_dir.y;
+            go.transform.Translate(dir *juice * Time.deltaTime);
             go.transform.localEulerAngles += rand_dir* juice * Time.deltaTime;
             juice -= Time.deltaTime;
         }
