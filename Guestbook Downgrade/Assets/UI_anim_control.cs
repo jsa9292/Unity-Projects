@@ -35,7 +35,7 @@ public class UI_anim_control : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (phase == 2 && kinectManager.user_tracked_dur > 2f) LoadingUser();
+        if (phase == 2 && kinectManager.user_tracked_dur >= 2f) LoadingUser();
     }
     //kinect detects user
     //go to stop 1
@@ -86,7 +86,7 @@ public class UI_anim_control : MonoBehaviour
         cellLoaded = false;
         loadingUser = false;
         phase = 1;
-        kinectManager.maxTrackedUsers = 1;
+        kinectManager.maxTrackedUsers = 5;
         LogVisualizer.instance.BottomLog("Start Phase");
     }
     public void Loadingbar_phase()
@@ -136,17 +136,17 @@ public class UI_anim_control : MonoBehaviour
         if (anim.GetFloat("speed") > 0f && phase != 6)
         {
             phase = 5;
+        CancelInvoke();
+        cellLoaded = false;
+        userDetected = false;
+        LogVisualizer.instance.BottomLog("End Phase");
         }
     }
     public void End_phase() {
-        CancelInvoke();
         phase = 6;
         Start_anim();
-        cellLoaded = false;
         loadingUser = false;
-        userDetected = false;
         DetectPilot.instance.attachToSpawner = false;
         kinectManager.maxTrackedUsers = 0;
-        LogVisualizer.instance.BottomLog("End Phase");
     }
 }

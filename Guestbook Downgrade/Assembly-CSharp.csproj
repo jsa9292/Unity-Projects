@@ -196,6 +196,7 @@
     <Compile Include="Assets\Unity_MetaBalls_Liquids-master\Scripts\OriginalMCBlob.cs" />
     <Compile Include="Assets\cam_buffer.cs" />
     <Compile Include="Assets\panelControl.cs" />
+    <Compile Include="Assets\skeletonHeadCtrl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AzureKinectExamples\Resources\UserHistImageShader.shader" />

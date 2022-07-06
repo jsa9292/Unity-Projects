@@ -1127,7 +1127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9286156a93acd6341aa81e8c3b25e88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackedJointInt: 4
+  trackedJointInt: 2
   offset: {x: 0, y: 0.134, z: -0.11}
   Pilot: 0
 --- !u!1 &1935734739750706679

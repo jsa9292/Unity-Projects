@@ -39,6 +39,7 @@ namespace com.rfilkov.components
         private KinectManager kinectManager;
         private UI_anim_control uac;
         private int jointsCount;
+        private DetectPilot dp;
         public int sr_position;
         public Vector3 offset;
         private void Awake()
@@ -59,7 +60,7 @@ namespace com.rfilkov.components
         private StreamReader sr;
         void Start()
         {
-
+            dp = DetectPilot.instance;
             jointsCount = 23;
             kinectManager = KinectManager.Instance;
             uac = UI_anim_control.instance;
@@ -90,8 +91,9 @@ namespace com.rfilkov.components
         private string[] dataString;
         private string[] data;
         private string[] data_pos_string;
-        private Vector3 data_pos;
+        private Vector3[] data_pos = new Vector3[40];
         public Transform sensorTransform;
+        public bool showSkeleton;
         public float start_time;
         private void FixedUpdate()
         {
@@ -103,10 +105,6 @@ namespace com.rfilkov.components
             else
             {
                 dataString = sr.ReadLine().Split(';');
-                for (int i = 0; i < joints.Length; i++)
-                {
-                    joints[i].transform.position = Vector3.zero;
-                }
                 for (int i = 0; i < dataString.Length; i++)
                 {
                     data = dataString[i].Split(':');
@@ -117,13 +115,19 @@ namespace com.rfilkov.components
                         float x = float.Parse(data_pos_string[0]);
                         float y = float.Parse(data_pos_string[1]);
                         float z = float.Parse(data_pos_string[2]);
-                        data_pos = new Vector3(x, y, z);
+                        Vector3 v = new Vector3(x, y, z);
                         if (sensorTransform)
                         {
-                            data_pos = sensorTransform.TransformPoint(data_pos);
+                            data_pos[i] = sensorTransform.TransformPoint(v);
                         }
+                        else data_pos[i] = v;
                         joints[data_i].transform.position = data_pos+offset;
 
+                        //if (data_i == 4) {
+                        //    Vector3 pilotPos = Vector3.ProjectOnPlane(data_pos, Vector3.up);
+                        //    Vector3 boothPos = Vector3.ProjectOnPlane(transform.position, Vector3.up);
+                        //    if((pilotPos - boothPos).magnitude > dp.pilot_r) return;
+                        //}
                         historyRepeating = true;
 
 
@@ -133,6 +137,10 @@ namespace com.rfilkov.components
                         //Debug.Log(data[0]);
                     }
                 }
+                for (int i = 0; i < joints.Length; i++)
+                {
+                    joints[i].transform.position = Vector3.zero;
+                }
                 for (int i = 0; i < 23; i++)
                 {
                     if (lines[i] == null && linePrefab != null)
@@ -141,7 +149,25 @@ namespace com.rfilkov.components
                         lines[i].transform.parent = transform;
                         lines[i].gameObject.SetActive(false);
                     }
-
+                }
+                float dist2booth = (Vector3.ProjectOnPlane(data_pos[4], Vector3.up) - Vector3.ProjectOnPlane(dp.transform.position, Vector3.up)).magnitude;
+                showSkeleton = dist2booth > dp.pilot_r;
+                SkeletonHeadCtrl.instance.headPos[0] = data_pos[4];
+                if (showSkeleton)
+                {
+                    for (int i = 0; i < 23; i++)
+                    {
+                        lines[i].gameObject.SetActive(false);
+                    }
+                    return;
+                }
+                for (int i = 0; i < joints.Length; i++)
+                {
+                    joints[i].transform.position = data_pos[i];
+                    
+                }
+                for (int i = 0; i < 23; i++)
+                {
                     int jointParent = (int)kinectManager.GetParentJoint((KinectInterop.JointType)i);
                     Vector3 line_start = joints[i].transform.position;
                     Vector3 line_end = joints[jointParent].transform.position;

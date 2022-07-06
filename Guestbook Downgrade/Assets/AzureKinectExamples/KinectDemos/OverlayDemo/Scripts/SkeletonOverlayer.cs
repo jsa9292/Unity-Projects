@@ -93,7 +93,18 @@ namespace com.rfilkov.components
         private string save_string = "";
         private void FixedUpdate()
         {
-            if (save_string.Length > 1) RuntimeText.WriteString(save_string);
+            if (save_string.Length > 1 && DetectPilot.instance.pilot_inside)
+            {
+                RuntimeText.WriteString(save_string);
+                save_string = "";
+            }
+            if (kinectManager.IsUserDetected(playerIndex))
+            {
+                SkeletonHeadCtrl.instance.headPos[playerIndex + 1] = joints[4].transform.position;
+            }
+            else {
+                SkeletonHeadCtrl.instance.headPos[playerIndex + 1] = Vector3.zero;
+            }
         }
         void Update()
         {
