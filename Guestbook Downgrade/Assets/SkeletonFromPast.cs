@@ -40,10 +40,22 @@ namespace com.rfilkov.components
         private UI_anim_control uac;
         private int jointsCount;
         private DetectPilot dp;
+        public int sr_position;
+        public Vector3 offset;
         private void Awake()
         {
             instance = this;
             features = new float[23];
+            sr = new StreamReader(Application.streamingAssetsPath + "/" + filepath);
+            sr_position = Random.Range(0, 5000);
+            if (sr_position > 0)
+            {
+                for (int i = 0; i < sr_position; i++)
+                {
+                    sr.ReadLine();
+                }
+
+            }
         }
         private StreamReader sr;
         void Start()
@@ -52,20 +64,20 @@ namespace com.rfilkov.components
             jointsCount = 23;
             kinectManager = KinectManager.Instance;
             uac = UI_anim_control.instance;
-            sr = new StreamReader(Application.streamingAssetsPath + "/" + filepath);
+           
             if (jointPrefab)
-                {
-                    // array holding the skeleton joints
-                    joints = new GameObject[jointsCount];
+            {
+                // array holding the skeleton joints
+                joints = new GameObject[jointsCount];
 
-                    for (int i = 0; i < joints.Length; i++)
-                    {
-                        joints[i] = Instantiate(jointPrefab) as GameObject;
-                        joints[i].transform.parent = transform;
-                        joints[i].name = ((KinectInterop.JointType)i).ToString();
-                        joints[i].SetActive(true);
-                    }
+                for (int i = 0; i < joints.Length; i++)
+                {
+                    joints[i] = Instantiate(jointPrefab) as GameObject;
+                    joints[i].transform.parent = transform;
+                    joints[i].name = ((KinectInterop.JointType)i).ToString();
+                    joints[i].SetActive(true);
                 }
+            }
 
                 // array holding the skeleton lines
                 lines = new LineRenderer[jointsCount];
@@ -73,6 +85,8 @@ namespace com.rfilkov.components
             // always mirrored
             initialRotation = Quaternion.Euler(new Vector3(0f, 180f, 0f));
             historyRepeating = false;
+            joints[4].transform.localScale = Vector3.one/4;
+            joints[4].GetComponent<MeshRenderer>().enabled = true;
         }
         private string[] dataString;
         private string[] data;
@@ -80,8 +94,10 @@ namespace com.rfilkov.components
         private Vector3[] data_pos = new Vector3[40];
         public Transform sensorTransform;
         public bool showSkeleton;
+        public float start_time;
         private void FixedUpdate()
         {
+            if (Time.realtimeSinceStartup < start_time) return;
             if (kinectManager.IsUserDetected(playerIndex))
             {
                 historyRepeating = false;
@@ -105,6 +121,7 @@ namespace com.rfilkov.components
                             data_pos[i] = sensorTransform.TransformPoint(v);
                         }
                         else data_pos[i] = v;
+                        joints[data_i].transform.position = data_pos+offset;
 
                         //if (data_i == 4) {
                         //    Vector3 pilotPos = Vector3.ProjectOnPlane(data_pos, Vector3.up);
@@ -163,10 +180,14 @@ namespace com.rfilkov.components
                         lines[i].SetPosition(1, line_end);
                     }
                 }
+                Vector3 head = joints[4].transform.position;
+                Vector3 neck = joints[3].transform.position;
+                joints[4].transform.position += (head - neck)*1.5f;
                 if (sr.Peek() < 0)
                 {
                     sr.Close();
                     historyRepeating = false;
+                    Destroy(gameObject);
                 }
             }
         }
